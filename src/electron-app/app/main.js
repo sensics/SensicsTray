@@ -8,7 +8,7 @@ var backendProcess = null;
 
 function startBackend(next) {
     if(backendProcess == null) {
-        backendProcess = spawn('ConfigUtil.exe', {
+        backendProcess = spawn('SensicsTray.exe', {
             "cwd": "resources/app/bin",
         });
         backendProcess.stdout.on('data', function(data) {

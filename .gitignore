@@ -21,7 +21,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
-dist/
+src/electron-app/dist/
 artifacts/
 generated/
 
