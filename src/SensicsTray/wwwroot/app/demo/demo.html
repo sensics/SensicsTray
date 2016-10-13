@@ -1,0 +1,58 @@
+﻿<!-- Start Server -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" data-translate="demo.startServer.title"></h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p data-translate="demo.startServer.description"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" class="btn btn-primary"
+								ng-click="vm.startServer()"
+								data-translate="demo.startServer.launchServer">							
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Tracker viewer -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" data-translate="demo.trackerViewer.title"></h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p data-translate="demo.trackerViewer.description"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								   placeholder="{{'demo.trackerViewer.pathPlaceholder' | translate}}"
+								   ng-model="vm.trackerViewerPath" />
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"
+										ng-click="vm.startTrackerViewer()"
+										data-translate="demo.trackerViewer.launchTrackerViewer">
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

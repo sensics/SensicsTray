@@ -1,0 +1,21 @@
+﻿<div class="jumbotron">
+	<h1 data-translate="landingPage.jumboTron.title"></h1>
+	<p data-translate="landingPage.jumboTron.description"></p>
+	<p><a class="btn btn-primary brn-lg" href="http://www.osvr.org/" target="_blank"
+		  data-translate="landingPage.jumboTron.learnMore"></a>
+</div>
+<div class="panel panel-default"
+	 ng-repeat="navbarItem in vm.navbarItems">
+	<div class="panel-heading">
+		<p class="panel-title"><a ui-sref="{{navbarItem.state}}">{{navbarItem.labelTranslateKey | translate}}<span class="glyphicon glyphicon-arrow-right" style="margin-left:2px" aria-hidden="true"></span></a></p>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<p data-translate="{{navbarItem.descriptionTranslateKey}}"></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<p data-translate="landingPage.copyright"></p>

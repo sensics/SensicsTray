@@ -1,0 +1,10 @@
+{
+  "name": "sensics_tray",
+  "version": "0.0.0",
+  "devDependencies": {
+    "gulp-typescript": "2.12.1",
+    "gulp": "3.9.1",
+    "gulp-sourcemaps": "1.6.0",
+    "rimraf": "2.2.8"
+  }
+}
