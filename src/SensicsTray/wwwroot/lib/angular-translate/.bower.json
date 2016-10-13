@@ -16,8 +16,7 @@
     "tag": "2.8.0",
     "commit": "8e94a1bfeb50581c4be8f2814ba95a50d82cf280"
   },
-  "_source": "git://github.com/PascalPrecht/bower-angular-translate.git",
+  "_source": "https://github.com/PascalPrecht/bower-angular-translate.git",
   "_target": "2.8.0",
-  "_originalSource": "angular-translate",
-  "_direct": true
+  "_originalSource": "angular-translate"
 }
