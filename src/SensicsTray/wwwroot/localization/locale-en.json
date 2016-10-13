@@ -1,0 +1,39 @@
+﻿{
+  "index": {
+    "toggleNavigation": "Toggle navigation",
+    "navHome": "Sensics Tray",
+    "currentServerLocation": "Config Directory",
+    "navBarItems": {
+      "demo": "Demo",
+      "demoDescription": "A proof of concept collection of OSVR tools and functionality."
+    }
+  },
+  "landingPage": {
+    "jumboTron": {
+      "title": "Sensics Tray",
+      "description": "This utility will help you configure Sensics Home.",
+      "learnMore": "Learn more",
+      "source": "Source"
+    },
+    "copyright": "Sensics Tray is Copyright 2016 Sensics, Inc."
+  },
+  "serverRootNotDefined": {
+    "panelTitle": "Could not find your OSVR Server directory.",
+    "panelDescription": "Could not find the OSVR Server directory. Typically this is configured when you run the OSVR SDK or Runtime installers, but can be configured manually by setting the OSVR_SERVER_ROOT environment variable.",
+    "downloadOSVRRuntime": "Download OSVR Runtime",
+    "downloadOSVRSDK": "Download OSVR SDK"
+  },
+  "demo": {
+    "startServer": {
+      "title": "Launch OSVR Server",
+      "description": "Launch the OSVR Server on this machine, if not already running.",
+      "launchServer": "Launch Server"
+    },
+    "trackerViewer": {
+      "title": "Tracker Viewer",
+      "description": "The Tracker Viewer utility visualizes OSVR trackers and can be useful to check if an OSVR device is working properly.",
+      "pathPlaceholder": "OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each.",
+      "launchTrackerViewer": "Launch Tracker Viewer"
+    }
+  }
+}

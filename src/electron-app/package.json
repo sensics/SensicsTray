@@ -1,0 +1,20 @@
+{
+  "name": "SensicsTray",
+  "version": "0.2.0",
+  "scripts": {
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "devDependencies": {
+    "electron": "^1.4.3",
+    "electron-builder": "^7.11.4"
+  },
+  "build": {
+    "appId": "com.sensics.sensicsTray",
+    "asar": false,
+    "win": {
+      "target": "zip",
+      "iconUrl": "https://github.com/OSVR/OSVR-Config/blob/master/src/Launcher/assets/osvrconfig.ico?raw=true"
+    }
+  }
+}

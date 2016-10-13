@@ -1,0 +1,9 @@
+﻿{
+  "compilerOptions": {
+    "target": "es5",
+    "noImplicitAny": true,
+    "outFile": "generated/ts.js",
+    "inlineSourceMap": true,
+    "inlineSources": true
+  }
+}
