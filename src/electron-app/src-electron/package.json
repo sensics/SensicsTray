@@ -3,7 +3,7 @@
   "description": "Sensics Tray Utility",
   "author": "Sensics, Inc.",
   "version": "0.2.0",
-  "main": "./main.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
     "package": "electron-packager . --platform=all"
