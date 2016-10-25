@@ -8,120 +8,118 @@ const gulp = require('gulp'),
     rename = require('gulp-rename'),
     electron = require('gulp-atom-electron'),
     uglify = require('gulp-uglify'),
-    symdest = require('gulp-symdest');
+    symdest = require('gulp-symdest'),
+    watch = require('gulp-watch');
 
-gulp.task('clean-dist', () => {
+gulp.task('clean:dist', () => {
     return del(['dist/**/*'], { force: true });
 });
 
-gulp.task('copy-angular2', function () {
-    return gulp.src('./node_modules/@angular/**/*.umd.min.js')
-        .pipe(gulp.dest('dist/app/renderer/vendor/@angular'));
+gulp.task('clean', ['clean:dist']);
+
+gulp.task('copy:angular2', () => {
+	return gulp.src('./node_modules/@angular/**/*.umd.min.js')
+        .pipe(gulp.dest('dist/app/vendor/@angular'));
 });
 
-gulp.task('copy-rxjs', function () {
-    return gulp.src('./node_modules/rxjs/**/*.js')
-        .pipe(gulp.dest('dist/app/renderer/vendor/rxjs'));
+gulp.task('copy:rxjs', () => {
+	return gulp.src('./node_modules/rxjs/**/*.js')
+        .pipe(gulp.dest('dist/app/vendor/rxjs'));
 });
 
-gulp.task('copy-app-styles', function () {
-    return gulp.src(['./node_modules/bootstrap/dist/css/bootstrap.min.css', './src/styles/app.css'])
-        .pipe(concat('all.css'))
-        .pipe(gulp.dest('dist/app/renderer/styles'));
+gulp.task('copy:styles', () => {
+	return gulp.src(['./node_modules/bootstrap/dist/css/bootstrap.min.css'])
+		.pipe(gulp.dest('dist/app/vendor/bootstrap'));
 });
 
-gulp.task('bundle-js-dependencies', function () {
-    return gulp.src([
-        'node_modules/core-js/client/shim.min.js',
+gulp.task('copy:otherDependencies', () => {
+	return gulp.src([
+		'node_modules/core-js/client/shim.min.js',
         'node_modules/zone.js/dist/zone.min.js',
         'node_modules/reflect-metadata/Reflect.js',
         'node_modules/systemjs/dist/system.js',
         'src/systemjs.config.js'
-    ])
-        // .pipe(uglify())
-        // .pipe(concat('vendor.min.js'))
-        .pipe(gulp.dest('dist/app/renderer/vendor'));
+	])
+	.pipe(gulp.dest('dist/app/vendor'));
 });
 
-gulp.task('bundle-app', function () {
+gulp.task('copy:systemJSConfig', () => {
+	return gulp.src([
+		'./app/systemjs.config.js'
+	])
+	.pipe(gulp.dest('dist/app'));
+});
+
+gulp.task('copy:frontend', () => {
+	return gulp.src([
+		'./app/index.html',
+		'./app/**/*.html',
+		'./app/*.ts',
+		'./app/**/*.ts',
+		'./app/*.js',
+		'./app/*.json'
+	])
+	.pipe(gulp.dest('dist/app'));
+});
+
+gulp.task('copy', ['clean'], (done) => {
+	run(['copy:angular2', 'copy:rxjs', 'copy:styles', 'copy:otherDependencies', 'copy:systemJSConfig', 'copy:frontend'], done);
+});
+
+gulp.task('tsc', ['copy'], () => {
     var tsProject = ts.createProject('./tsconfig.json', {
         typescript: require('typescript')
     });
     var tsResult = tsProject.src()
         .pipe(tsProject());
-    return tsResult.js.pipe(gulp.dest('dist/app/renderer/app'));
+    return tsResult.js.pipe(gulp.dest('./dist'));
 });
 
-gulp.task('build-index-html', function () {
-    var sources = gulp.src(['dist/app/renderer/vendor/vendor.min.js',
-        'dist/app/renderer/styles/all.css']);
+gulp.task('build:frontend', ['tsc']);
 
-    return gulp.src('src/index.html')
-        .pipe(inject(sources, { ignorePath: 'dist/app/renderer', addRootSlash: false }))
-        .pipe(gulp.dest('dist/app/renderer'));
-});
-
-gulp.task('copy-angular-templates', function () {
-    return gulp.src('src/app/**/*.html')
-        .pipe(gulp.dest('dist/app/renderer/app'));
-});
-
-gulp.task('copy-electron-src', function () {
-    return gulp.src('src-electron/**/*')
-        .pipe(gulp.dest('dist/app'));
-});
-
-gulp.task('bundle-desktop-all', function () {
+gulp.task('build:electronPackage', () => {
     var platforms = [
         // { platform: 'darwin', slug: 'osx' },
         { platform: 'win32', slug: 'windows' }//,
         // { platform: 'linux', slug: 'linux' }
     ];
-    platforms.map(function (p) {
-        buildApp(p.platform, p.slug);
+    platforms.map((p) => {
+    	gulp.src(['dist/app/**/*'])
+			.pipe(electron({
+				version: '1.4.0',
+				platform: p.platform,
+				winIcon: path.join(__dirname, 'build', 'icon.ico')
+			}))
+			.pipe(symdest('dist/output/ng2-electron-' + p.slug));
     });
 });
 
-gulp.task('default', function (done) {
-    run(
-        'clean-dist',
-        [
-            'copy-angular2',
-            'copy-rxjs',
-            'copy-app-styles',
-            'bundle-js-dependencies',
-            'bundle-app'
-        ],
-        'build-index-html',
-        [
-            'copy-angular-templates',
-            'copy-electron-src'
-        ],
-        'bundle-desktop-all',
+gulp.task('default', (done) => {
+	run(
+		'build:frontend',
+		'build:electronPackage',
         done);
 });
 
+gulp.task('watch:frontend', (done) => {
+	var files = [
+		'./app/*.ts',
+		'./app/*.js',
+		'./app/*.html',
+		'./app/**/*.ts',
+		'./app/**/*.css',
+		'./app/**/*.html'
+	];
 
-gulp.task('build-web', function (done) {
-    run(
-        'clean-dist',
-        [
-            'copy-angular2',
-            'copy-rxjs',
-            'copy-app-styles',
-            'bundle-js-dependencies',
-            'bundle-app'
-        ],
-        ['build-index-html', 'copy-angular-templates'],
-        done);
+	var options = {
+		ignoreInitial: true,
+		read: false
+	};
+
+	var callback = () => {
+		run('build:frontend');
+	};
+
+	return watch(files, options, callback);
 });
 
-var buildApp = function (platform, slug) {
-    gulp.src(['dist/app/**/*'])
-        .pipe(electron({
-            version: '1.4.0',
-            platform: platform,
-            winIcon: path.join(__dirname, 'build', 'icon.ico')
-        }))
-        .pipe(symdest('dist/output/ng2-electron-' + slug));
-};

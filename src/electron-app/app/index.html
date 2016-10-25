@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html >
     <head>
         <meta charset="utf-8">
@@ -11,11 +11,11 @@
         <ts-app>Loading Sensics Tray...</ts-app>
         <script src="vendor/shim.min.js"></script>
         <script src="vendor/system.js"></script>
-        <script src="vendor/systemjs.config.js"></script>
         <script src="vendor/zone.min.js"></script>
         <script src="vendor/Reflect.js"></script>
+        <script src="systemjs.config.js"></script>
         <script>
-            System.import('app/boot').catch(function (err) {
+            System.import('boot').catch(function (err) {
                 console.error(err);
             });
         </script>

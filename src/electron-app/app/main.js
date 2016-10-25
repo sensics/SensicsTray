@@ -9,7 +9,7 @@ function createWindow() {
         fullscreenable: true,
     });
 
-    win.loadURL(`file://${__dirname}/renderer/index.html`);
+    win.loadURL(`file://${__dirname}/index.html`);
 
     globalShortcut.register('CmdOrCtrl+Shift+D', ()=> {
         win.webContents.toggleDevTools();
