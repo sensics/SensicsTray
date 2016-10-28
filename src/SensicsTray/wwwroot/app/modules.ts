@@ -23,6 +23,10 @@ module modules {
             "app.main",
             "app.landingPage",
             "app.demo",
+            "app.devices",
+            "app.plugins",
+            "app.settings",
+            "app.help",
             "app.serverRootNotDefined",
             "pascalprecht.translate"
         ])
