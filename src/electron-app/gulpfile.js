@@ -38,7 +38,8 @@ gulp.task('copy:otherDependencies', () => {
         'node_modules/zone.js/dist/zone.min.js',
         'node_modules/reflect-metadata/Reflect.js',
         'node_modules/systemjs/dist/system.js',
-        'src/systemjs.config.js'
+        'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.umd.min.js',
+		'node_modules/moment/moment.js'
 	])
 	.pipe(gulp.dest('dist/app/vendor'));
 });
