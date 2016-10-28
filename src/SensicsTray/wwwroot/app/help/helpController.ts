@@ -15,10 +15,10 @@
 /// See the License for the specific language governing permissions and
 /// limitations under the License.
 /// </copyright>
-/// 
+///
 module app.help {
     class HelpController {
-        
+
         openDocs() {
             this.$http.post("/api/opendocs", {}).then(
                 success => {
@@ -38,7 +38,7 @@ module app.help {
                     console.log("createsysreport call failed.");
                 });
         }
-        
+
         openSupportTicket() {
             this.$http.post("/api/openticket", {}).then(
                 success => {

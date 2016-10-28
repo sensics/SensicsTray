@@ -15,10 +15,10 @@
 /// See the License for the specific language governing permissions and
 /// limitations under the License.
 /// </copyright>
-/// 
+///
 module app.devices {
     class DevicesController {
-        
+
         startDeviceMonitor() {
             this.$http.post("/api/startdevmonitor", {}).then(
                 success => {
