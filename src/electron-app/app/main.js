@@ -1,35 +1,101 @@
-const { app, BrowserWindow, globalShortcut } = require('electron');
+"use strict";
 
-let win;
+const {app, Tray, Menu, BrowserWindow} = require("electron");
+const {spawn} = require("child_process");
+const path = require('path');
+
+const iconPath = path.join(__dirname, 'icon.ico');
+let appIcon = null;
+
+var mainWindow = null;
+var backendProcess = null;
+
+function startBackend(next) {
+    if(backendProcess == null) {
+        backendProcess = spawn('SensicsTray.exe', {
+            "cwd": "resources/app/bin",
+        });
+        backendProcess.stdout.on('data', function(data) {
+            console.log("stdout: " + data);
+        });
+        backendProcess.stderr.on("data", function(data) {
+            console.log("stdout: " + data);
+        });
+        backendProcess.on("close", function(code) {
+            console.log("Closing code: " + code);
+        })
+        setTimeout(next, 2000);
+    } else {
+        next();
+    }
+}
 
 function createWindow() {
-    win = new BrowserWindow({
-        width: 800,
-        height: 800,
-        fullscreenable: true,
-    });
 
-    win.loadURL(`file://${__dirname}/index.html`);
+    startBackend(function() {
+        mainWindow = new BrowserWindow({
+            height: 600,
+            width: 800
+        });
 
-    globalShortcut.register('CmdOrCtrl+Shift+D', ()=> {
-        win.webContents.toggleDevTools();
-    });
+        mainWindow.loadURL("http://localhost:5000");
 
-    win.on('closed', () => {
-        win = null;
+        // this opens the dev tools when the window opens.
+        // @todo: can we figure something out where we can open them after
+        // the app starts, if we need to?
+        //mainWindow.webContents.openDevTools();
+
+        mainWindow.on("closed", () => {
+            mainWindow = null;
+            console.log("Killing process from mainWindow.on('closed')");
+            if(backendProcess !== null) {
+                backendProcess.kill();
+                backendProcess = null;
+            }
+        });
+        
+        appIcon = new Tray(iconPath);
+        var contextMenu = Menu.buildFromTemplate([
+        {   
+            label: 'Devices'
+        },
+        {
+            label: 'Create System Report'
+        },
+        {
+            label: 'Settings'
+        },
+        {
+            label: 'Help',
+            submenu: [
+            { label: 'Open Support Ticket' },
+            { label: 'OSVR Documentation' },
+            { label: 'About OSVR'}
+            ]
+        },
+        {   label: 'Quit',
+            accelerator : 'Command+Q',
+            selector: 'terminate:'
+        }
+        ]);
+        appIcon.setToolTip('OSVR Tray App');
+        appIcon.setContextMenu(contextMenu);
     });
 }
-app.on('ready', createWindow);
 
-app.on('window-all-closed', () => {
-    globalShortcut.unregisterAll();
-    if (process.platform !== 'darwin') {
-        app.quit()
+app.on("ready", createWindow);
+
+app.on("window-all-closed", () => {
+    // leave menu-bar open on MacOS per convention
+    if (process.platform !== "darwin") {
+        app.quit();
     }
 });
 
-app.on('activate', () => {
-    if (win === null) {
+app.on("activate", () => {
+    // mac convention: clicking on the dock opens the window
+    // if not already open.
+    if(mainWindow === null) {
         createWindow();
     }
 });

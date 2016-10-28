@@ -5,7 +5,15 @@
     "currentServerLocation": "Config Directory",
     "navBarItems": {
       "demo": "Demo",
-      "demoDescription": "A proof of concept collection of OSVR tools and functionality."
+      "devices": "Devices",
+      "plugins": "Plugins",
+      "settings": "Settings",
+      "help": "Help",
+      "demoDescription": "A proof of concept collection of OSVR tools and functionality.",
+      "devicesDescription": "Contains a list of connected and disconnected devices and available devices.",
+      "pluginsDescription": "Contains a list OSVR plugins that are installed on the system and available to download/purchase",
+      "settingsDescription": "Configuration page for users to adjust global OSVR settings",
+      "helpDescription": "A help page to get in touch with support team, open documentation, and collect system information"
     }
   },
   "landingPage": {
@@ -34,6 +42,44 @@
       "description": "The Tracker Viewer utility visualizes OSVR trackers and can be useful to check if an OSVR device is working properly.",
       "pathPlaceholder": "OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each.",
       "launchTrackerViewer": "Launch Tracker Viewer"
+    }
+  },
+  "devices": {
+    "startDeviceMonitor": {
+      "title": "Start Monitoring USB Devices",
+      "description": "Will start the service to monitor USB Device events",
+      "launchDeviceMonitor": "Launch USB Device Monitor"
+    }
+  },
+  "plugins": {
+    "downloadPlugins": {
+      "title": "Downloads selected plugins",
+      "description": "Downloads plugins that were selected",
+      "getPlugins": "Download Manager"
+    }
+  },
+  "settings": {
+    "saveSettings": {
+      "title": "Saves the OSVR global settings",
+      "description": "Edit and save global settings",
+      "commitSettings": "Save Changes"
+    }
+  },
+  "help": {
+    "openDocs": {
+      "title": "OSVR Documentation",
+      "description": "Opens a new page with OSVR documentation",
+      "openDocumentation": "OSVR Documentation"
+    },
+    "createSysReport": {
+      "title": "Create System Report",
+      "description": "Collects system information and saves it to a file",
+      "fileReport": "Create System Report"
+    },
+    "openSupportTicket": {
+      "title": "Open OSVR Support Ticket",
+      "description": "Files a zendesk tiket",
+      "openTicket": "Open OSVR Support Ticket"
     }
   }
 }
