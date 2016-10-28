@@ -15,7 +15,7 @@
 /// See the License for the specific language governing permissions and
 /// limitations under the License.
 /// </copyright>
-/// 
+///
 module modules {
     angular.module("app",
         [
@@ -23,6 +23,10 @@ module modules {
             "app.main",
             "app.landingPage",
             "app.demo",
+            "app.devices",
+            "app.plugins",
+            "app.settings",
+            "app.help",
             "app.serverRootNotDefined",
             "pascalprecht.translate"
         ])

@@ -37,6 +37,26 @@ module app.common {
                     labelTranslateKey: "index.navBarItems.demo",
                     descriptionTranslateKey: "index.navBarItems.demoDescription",
                     state: "demo"
+                },
+                {
+                    labelTranslateKey: "index.navBarItems.devices",
+                    descriptionTranslateKey: "index.navBarItems.devicesDescription",
+                    state: "devices"
+                },
+                {
+                    labelTranslateKey: "index.navBarItems.plugins",
+                    descriptionTranslateKey: "index.navBarItems.pluginsDescription",
+                    state: "plugins"
+                },
+                {
+                    labelTranslateKey: "index.navBarItems.settings",
+                    descriptionTranslateKey: "index.navBarItems.settingsDescription",
+                    state: "settings"
+                },
+                {
+                    labelTranslateKey: "index.navBarItems.help",
+                    descriptionTranslateKey: "index.navBarItems.helpDescription",
+                    state: "help"
                 }
             ];
         }
