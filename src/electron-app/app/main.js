@@ -1,7 +1,11 @@
 "use strict";
 
-const {app, BrowserWindow} = require("electron");
+const {app, Tray, Menu, BrowserWindow} = require("electron");
 const {spawn} = require("child_process");
+const path = require('path');
+
+const iconPath = path.join(__dirname, 'icon.ico');
+let appIcon = null;
 
 var mainWindow = null;
 var backendProcess = null;
@@ -49,6 +53,33 @@ function createWindow() {
                 backendProcess = null;
             }
         });
+        
+        appIcon = new Tray(iconPath);
+        var contextMenu = Menu.buildFromTemplate([
+        {   
+            label: 'Devices'
+        },
+        {
+            label: 'Create System Report'
+        },
+        {
+            label: 'Settings'
+        },
+        {
+            label: 'Help',
+            submenu: [
+            { label: 'Open Support Ticket' },
+            { label: 'OSVR Documentation' },
+            { label: 'About OSVR'}
+            ]
+        },
+        {   label: 'Quit',
+            accelerator : 'Command+Q',
+            selector: 'terminate:'
+        }
+        ]);
+        appIcon.setToolTip('OSVR Tray App');
+        appIcon.setContextMenu(contextMenu);
     });
 }
 
