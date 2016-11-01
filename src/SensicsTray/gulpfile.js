@@ -63,4 +63,4 @@ gulp.task('clean:libs', (cb) => {
 
 gulp.task('clean', ['clean:libs']);
 
-gulp.task('build', ['tsc']);
+gulp.task('build', ['tsc', 'copy']);
