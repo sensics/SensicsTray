@@ -30,6 +30,14 @@ function startBackend(next) {
     }
 }
 
+function goToStateFunc(state) {
+	return (item, focusedWindow) => {
+		if(typeof mainWindow !== 'undefined' && mainWindow !== null) {
+			mainWindow.loadURL("http://localhost:5000/#/" + state);
+		}
+	};
+}
+
 function createWindow() {
 
     startBackend(function() {
@@ -56,13 +64,19 @@ function createWindow() {
         appIcon = new Tray(iconPath);
         var contextMenu = Menu.buildFromTemplate([
         {   
-            label: 'Devices'
+        	label: 'Devices',
+        	click: goToStateFunc('devices')
         },
         {
             label: 'Create System Report'
         },
+		{
+			label: 'Plugins',
+			click: goToStateFunc('plugins')
+		},
         {
-            label: 'Settings'
+        	label: 'Settings',
+		    click: goToStateFunc('settings')
         },
         {
             label: 'Help',
