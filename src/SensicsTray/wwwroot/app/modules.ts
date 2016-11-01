@@ -16,36 +16,36 @@
 /// limitations under the License.
 /// </copyright>
 ///
-module modules {
-    angular.module("app",
-        [
-            "ui.router",
-            "app.main",
-            "app.landingPage",
-            "app.demo",
-            "app.devices",
-            "app.plugins",
-            "app.settings",
-            "app.help",
-            "app.serverRootNotDefined",
-            "pascalprecht.translate"
-        ])
-        .config(["$stateProvider", "$urlRouterProvider", "$translateProvider", "$compileProvider",
-            (
-                $stateProvider: ng.ui.IStateProvider,
-                $urlRouterProvider: ng.ui.IUrlRouterProvider,
-                $translateProvider: ng.translate.ITranslateProvider,
-                $compileProvider: ng.ICompileProvider) => {
+//module modules {
+//    angular.module("app",
+//        [
+//            "ui.router",
+//            "app.main",
+//            "app.landingPage",
+//            "app.demo",
+//            "app.devices",
+//            "app.plugins",
+//            "app.settings",
+//            "app.help",
+//            "app.serverRootNotDefined",
+//            "pascalprecht.translate"
+//        ])
+//        .config(["$stateProvider", "$urlRouterProvider", "$translateProvider", "$compileProvider",
+//            (
+//                $stateProvider: ng.ui.IStateProvider,
+//                $urlRouterProvider: ng.ui.IUrlRouterProvider,
+//                $translateProvider: ng.translate.ITranslateProvider,
+//                $compileProvider: ng.ICompileProvider) => {
 
-                $urlRouterProvider.otherwise("/");
-                $translateProvider.useStaticFilesLoader({
-                    prefix: "localization/locale-",
-                    suffix: ".json"
-                });
-                $translateProvider.useSanitizeValueStrategy('escape');
-                $translateProvider.preferredLanguage("en");
+//                $urlRouterProvider.otherwise("/");
+//                $translateProvider.useStaticFilesLoader({
+//                    prefix: "localization/locale-",
+//                    suffix: ".json"
+//                });
+//                $translateProvider.useSanitizeValueStrategy('escape');
+//                $translateProvider.preferredLanguage("en");
 
-                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);
-            }]);
+//                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);
+//            }]);
 
-}
+//}

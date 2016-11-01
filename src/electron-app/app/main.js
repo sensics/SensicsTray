@@ -40,10 +40,9 @@ function createWindow() {
 
         mainWindow.loadURL("http://localhost:5000");
 
-        // this opens the dev tools when the window opens.
-        // @todo: can we figure something out where we can open them after
-        // the app starts, if we need to?
-        //mainWindow.webContents.openDevTools();
+        globalShortcut.register('CmdOrCtrl+Shift+D', ()=> {
+        	win.webContents.toggleDevTools();
+        });
 
         mainWindow.on("closed", () => {
             mainWindow = null;

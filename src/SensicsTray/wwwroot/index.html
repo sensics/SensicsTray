@@ -4,57 +4,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta charset="utf-8" />
     <title></title>
-	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css" />
 </head>
-<body ng-controller="app.main.MainController as vm">
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" 
-						class="navbar-toggle collapsed" 
-						data-toggle="collapse" 
-						data-target="#bs-example-navbar-collapse-1" 
-						area-expanded="false">
-					<span class="sr-only" data-translate="index.toggleNavigation"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#/" data-translate="index.navHome"></a>
-			</div>
-
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li ng-repeat="navItem in vm.navbarItems" ng-class="{active: vm.isActive(navItem)}"
-						uib-tooltip="{{navItem.descriptionTranslateKey | translate}}">
-						<a ui-sref="{{navItem.state}}" data-translate="{{navItem.labelTranslateKey}}"
-						   ></a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<div class="container-fluid">
-		<!--<form class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-sm-2"
-					   data-translate="index.currentServerLocation"></label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><a href="{{vm.configSaveAsURL}}" download="osvr_server_config.json">{{vm.serverRoot}}</a></p>
-				</div>
-			</div>
-		</form>-->
-		<div ui-view></div>
-	</div>
-
-	<script src="lib/jquery/dist/jquery.js"></script>
-	<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-	<script src="lib/angular/angular.js"></script>
-	<script src="lib/angular-animate/angular-animate.js"></script>
-	<script src="lib/angular-translate/angular-translate.js"></script>
-	<script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-	<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-	<script src="lib/ui-router/release/angular-ui-router.js"></script>
-	<script src="generated/ts.js"></script>
+<body>
+	<ts-app>Loading Sensics Tray...</ts-app>
+	<script src="libs/shim.min.js"></script>
+	<script src="libs/system.js"></script>
+	<script src="libs/zone.min.js"></script>
+	<script src="libs/Reflect.js"></script>
+	<script src="systemjs.config.js"></script>
+	<script>
+            System.import('app/boot').catch(function (err) {
+                console.error(err);
+            });
+	</script>
 </body>
 </html>
