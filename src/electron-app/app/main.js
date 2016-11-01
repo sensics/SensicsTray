@@ -1,6 +1,6 @@
 "use strict";
 
-const {app, Tray, Menu, BrowserWindow} = require("electron");
+const {app, globalShortcut, Tray, Menu, BrowserWindow} = require("electron");
 const {spawn} = require("child_process");
 const path = require('path');
 
@@ -41,8 +41,8 @@ function createWindow() {
         mainWindow.loadURL("http://localhost:5000");
 
         globalShortcut.register('CmdOrCtrl+Shift+D', ()=> {
-        	win.webContents.toggleDevTools();
-        });
+        	mainWindow.webContents.toggleDevTools();
+    	});
 
         mainWindow.on("closed", () => {
             mainWindow = null;
