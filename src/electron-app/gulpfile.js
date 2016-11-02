@@ -1,8 +1,8 @@
-const gulp = require('gulp'),
-    del = require('del'),
-	path = require('path'),
-    electron = require('gulp-atom-electron'),
-    symdest = require('gulp-symdest');
+const gulp = require('gulp');
+const del = require('del');
+const path = require('path');
+const builder = require('electron-builder');
+const Platform = builder.Platform;
 
 gulp.task('clean:dist', () => {
     return del(['dist/**/*'], { force: true });
@@ -10,21 +10,30 @@ gulp.task('clean:dist', () => {
 
 gulp.task('clean', ['clean:dist']);
 
-gulp.task('build:electronPackage', ['clean:dist'], () => {
-    var platforms = [
-        // { platform: 'darwin', slug: 'osx' },
-        { platform: 'win32', slug: 'windows' }//,
-        // { platform: 'linux', slug: 'linux' }
-    ];
-    platforms.map((p) => {
-    	gulp.src(['dist/app/**/*'])
-			.pipe(electron({
-				version: '1.4.0',
-				platform: p.platform,
-				winIcon: path.join(__dirname, 'build', 'icon.ico')
-			}))
-			.pipe(symdest('dist/output/ng2-electron-' + p.slug));
-    });
+gulp.task('build:electronPackage', ['clean'], (cb) => {
+	builder.build({
+		targets: Platform.WINDOWS.createTarget(),
+		devMetadata: {
+			"directories": {
+				"app": "app",
+				"output": "dist"
+			},
+			"build": {
+				"appId": "com.sensics.sensicsTray",
+				"asar": false,
+				"win": {
+					"target": "zip",
+					"iconUrl": "https://github.com/OSVR/OSVR-Config/blob/master/src/Launcher/assets/osvrconfig.ico?raw=true"
+				}
+			}
+		}
+	})
+	.then(() => {
+		cb();
+	})
+	.catch((error) => {
+		cb(error);
+	});
 });
 
 gulp.task('default', ['build:electronPackage']);
