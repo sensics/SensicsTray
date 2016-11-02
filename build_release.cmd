@@ -9,6 +9,6 @@ xcopy artifacts\bin ..\electron-app\app\bin\ /Y /E
 popd
 pushd "%~dp0"
 cd src/electron-app
-call npm run-script dist
+call gulp
 popd
 endlocal
