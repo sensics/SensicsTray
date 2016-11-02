@@ -19,13 +19,13 @@
     "gulp-electron": "^0.1.3",
     "live-server": "^1.1.0"
   },
+  "directories": {
+    "app": "app",
+    "output": "dist"
+  },
   "build": {
     "appId": "com.sensics.sensicsTray",
     "asar": false,
-    "directories": {
-      "app": "dist/app",
-      "output": "dist/output"
-    },
     "win": {
       "target": "zip",
       "iconUrl": "https://github.com/OSVR/OSVR-Config/blob/master/src/Launcher/assets/osvrconfig.ico?raw=true"
