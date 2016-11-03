@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // third party imports
@@ -17,10 +19,16 @@ import { PluginsComponent } from './components/plugins/plugins.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HelpComponent } from './components/help/help.component';
 
+// Application service imports
+import { OSVRServerService } from './services/osvr-server.service';
+import { TrackerViewerService } from './services/tracker-viewer.service';
+import { UserNotificationsService } from './services/user-notifications.service';
+
 @NgModule({
     imports: [ 
         BrowserModule,
         FormsModule,
+        HttpModule,
         //Ng2BootstrapModule,
         RouterModule.forRoot([
             {
@@ -65,6 +73,9 @@ import { HelpComponent } from './components/help/help.component';
     ],
     bootstrap: [ AppComponent ],
     providers: [
+        OSVRServerService,
+        TrackerViewerService,
+        UserNotificationsService,
         { provide: LocationStrategy, useClass: HashLocationStrategy}
     ]
 })

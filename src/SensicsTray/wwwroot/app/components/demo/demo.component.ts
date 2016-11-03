@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { OSVRServerService } from '../../services/osvr-server.service';
+import { TrackerViewerService } from '../../services/tracker-viewer.service';
 
 @Component({
     moduleId: module.id,
@@ -8,14 +10,13 @@ import { Component } from '@angular/core';
 export class DemoComponent {
     trackerViewerPath = "";
 
-    startTrackerViewer() {
-        var paths = (typeof this.trackerViewerPath !== "undefined" && this.trackerViewerPath !== null) ?
-            this.trackerViewerPath.split(" ") : [];
+    constructor(private osvrServer: OSVRServerService, private trackerViewer: TrackerViewerService) { }
 
-        console.log("[STUB] DemoComponent.startTrackerViewer(), paths: " + paths.join(","));
+    startTrackerViewer() {
+        this.trackerViewer.startTrackerViewer(this.trackerViewerPath);
     }
 
     startServer() {
-        console.log("[STUB] DemoComponent.startServer()");
+        this.osvrServer.startServer();
     }
 }
