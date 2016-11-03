@@ -50,6 +50,8 @@ gulp.task('copy:otherDependencies', () => {
 	.pipe(gulp.dest(paths.libs));
 });
 
+// this task should only be run manually, not as part of the 'build' task
+// this avoids git mistakingly marking libs as touched when no change is made.
 gulp.task('copy', [
 	'copy:angular2',
 	'copy:rxjs',
@@ -57,10 +59,11 @@ gulp.task('copy', [
 	'copy:otherDependencies'
 ]);
 
+// This task should only be run manually, not as part of the 'clean' task
 gulp.task('clean:libs', (cb) => {
 	rimraf(paths.libs, cb);
 });
 
-gulp.task('clean', ['clean:libs']);
+gulp.task('clean', []);
 
-gulp.task('build', ['tsc', 'copy']);
+gulp.task('build', ['tsc']);
