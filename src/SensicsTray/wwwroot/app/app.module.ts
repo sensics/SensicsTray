@@ -19,10 +19,14 @@ import { PluginsComponent } from './components/plugins/plugins.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HelpComponent } from './components/help/help.component';
 
+// not yet used
+import { ServerRootNotDefinedComponent } from './components/server-root-not-defined/server-root-not-defined.component';
+
 // Application service imports
 import { OSVRServerService } from './services/osvr-server.service';
 import { TrackerViewerService } from './services/tracker-viewer.service';
 import { UserNotificationsService } from './services/user-notifications.service';
+import { OSVRConfigService } from './services/osvr-config.service';
 
 @NgModule({
     imports: [ 
@@ -69,13 +73,15 @@ import { UserNotificationsService } from './services/user-notifications.service'
         DevicesComponent,
         PluginsComponent,
         HelpComponent,
-        SettingsComponent
+        SettingsComponent,
+        ServerRootNotDefinedComponent // not yet used
     ],
     bootstrap: [ AppComponent ],
     providers: [
         OSVRServerService,
         TrackerViewerService,
         UserNotificationsService,
+        OSVRConfigService,
         { provide: LocationStrategy, useClass: HashLocationStrategy}
     ]
 })

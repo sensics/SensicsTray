@@ -52,7 +52,12 @@ export class UserNotificationsService {
         this.statusMessages.next(message);
     }
 
-    wrapPromise<T>(promise: Promise<T>, successMessage?: string): Promise<T> {
+    wrapPromise<T>(promise: Promise<T>, successMessage?: string, throwError?: boolean): Promise<T> {
+        // since we are "handling" the error, we don't throw it again by default,
+        // but the caller can ask us to propagate the error if they need to.
+        if (typeof throwError === 'undefined' || throwError === null) {
+            throwError = false;
+        }
         return promise.then(
             value => {
                 if (typeof successMessage !== 'undefined' && successMessage !== null) {
@@ -61,10 +66,17 @@ export class UserNotificationsService {
                 return value;
             },
             error => {
-                if (typeof error === 'string') {
-                    this.showError(error.toString());
+                if (typeof error !== 'string') {
+                    error = "An unknown error occurred.";
                 }
-                throw error;
+                this.showError(error.toString());
+                if (throwError) {
+                    throw error;
+                }
+
+                // on failure, caller will get a promise that resolves to undefined.
+                // unless they pass true for throwError
+                return Promise.resolve();
             });
     }
 }
