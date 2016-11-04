@@ -11,16 +11,20 @@ var paths = {
 };
 
 paths.libs = paths.webroot + "libs/";
+paths.app = paths.webroot + "app/";
 
 var tsProject = ts.createProject("tsconfig.json");
 
 gulp.task('tsc', function () {
-	var tsResult = tsProject.src({ cwd: paths.webroot })
+	var tsResult = tsProject.src({
+		cwd: paths.webroot,
+		rootDir: paths.webroot
+	})
 		.pipe(sourcemaps.init())
-		.pipe(ts(tsProject));
+		.pipe(tsProject());
 	return tsResult.js
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(""))
+		.pipe(gulp.dest(paths.app))
 });
 
 gulp.task('copy:angular2', () => {
