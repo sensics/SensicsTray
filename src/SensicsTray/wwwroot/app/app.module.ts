@@ -27,6 +27,9 @@ import { OSVRServerService } from './services/osvr-server.service';
 import { TrackerViewerService } from './services/tracker-viewer.service';
 import { UserNotificationsService } from './services/user-notifications.service';
 import { OSVRConfigService } from './services/osvr-config.service';
+import { PluginsService } from './services/plugins.service';
+import { HelpService } from './services/help.service';
+import { DevicesService } from './services/devices.service';
 
 @NgModule({
     imports: [ 
@@ -82,6 +85,9 @@ import { OSVRConfigService } from './services/osvr-config.service';
         TrackerViewerService,
         UserNotificationsService,
         OSVRConfigService,
+        PluginsService,
+        HelpService,
+        DevicesService,
         { provide: LocationStrategy, useClass: HashLocationStrategy}
     ]
 })

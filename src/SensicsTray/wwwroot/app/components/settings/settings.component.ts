@@ -10,7 +10,7 @@ import * as OSVRConfig from '../../models/osvr-config.model';
     templateUrl: 'settings.html'
 })
 export class SettingsComponent {
-    private config: OSVRConfig.IOSVRConfig = null;
+    public config: OSVRConfig.IOSVRConfig = null;
 
     constructor(
         private osvrConfig: OSVRConfigService,
@@ -20,9 +20,13 @@ export class SettingsComponent {
         });
     }
 
+    canSaveSettings() {
+        return typeof this.config !== 'undefined' && this.config !== null;
+    }
+
     saveSettings() {
         // "/api/savesettings"
-        if (typeof this.config == 'undefined' || this.config == null) {
+        if (!this.canSaveSettings()) {
             this.userNotifications.showError("Could not save current configuration.");
         } else {
             console.log("[STUB] SettingsComponent.saveSettings()");

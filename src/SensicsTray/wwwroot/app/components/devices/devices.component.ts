@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import { DevicesService } from '../../services/devices.service';
 
 @Component({
     moduleId: module.id,
@@ -6,8 +7,8 @@
     templateUrl: 'devices.html'
 })
 export class DevicesComponent {
+    constructor(private devices: DevicesService) { }
     startDeviceMonitor() {
-        // "/api/startdevmonitor"
-        console.log("[STUB] DevicesComponent.startDeviceMonitor()");
+        this.devices.startDeviceMonitor();
     }
 }
