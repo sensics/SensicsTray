@@ -14,16 +14,19 @@ export class OSVRServerService {
         private http: Http,
         private userNotifications: UserNotificationsService) { }
 
-    startServer(): Promise<void> {
-        var ret = this.http.get(this.startServerURL)
-            .toPromise() as any;
+    startServer(): Promise<any> {
+        var promise = this.http.post(this.startServerURL, {}).toPromise().then(
+            response => response.json() as any);
 
-        return this.userNotifications.wrapPromise<void>(ret,
+        return this.userNotifications.wrapPromise(promise,
             "OSVRServerService.startServer() - success!");
     }
 
-    stopServer(): Promise<void> {
-        return this.userNotifications.wrapPromise(Promise.resolve(),
+    stopServer(): Promise<any> {
+        var promise = this.http.post(this.stopServerURL, {}).toPromise().then(
+            response => response.json() as any);
+
+        return this.userNotifications.wrapPromise(promise,
             "OSVRServerService.stopServer() - success!");
     }
 }

@@ -3,6 +3,25 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				<h3 class="panel-title" i18n>Current configuration</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12" *ngIf="!canSaveSettings()">
+						<p i18n>No current configuration.</p>
+					</div>
+					<div class="col-md-12" *ngIf="canSaveSettings()">
+						<pre>{{config | json}}</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
 				<h3 class="panel-title" i18n>Saves the OSVR global settings</h3>
 			</div>
 			<div class="panel-body">
@@ -15,6 +34,7 @@
 					<div class="col-md-12">
 						<button type="button" class="btn btn-primary"
 								(click)="saveSettings()"
+								[disabled]="!canSaveSettings()"
 								i18n>Save Changes</button>
 					</div>
 				</div>

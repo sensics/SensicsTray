@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import { PluginsService } from '../../services/plugins.service';
 
 @Component({
     moduleId: module.id,
@@ -6,7 +7,8 @@
     templateUrl: 'plugins.html'
 })
 export class PluginsComponent {
+    constructor(private plugins: PluginsService) { }
     downloadPlugins() {
-        console.log("[STUB] PluginsComponent.downloadPlugins()");
+        this.plugins.downloadPlugins();
     }
 }

@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import { HelpService } from '../../services/help.service';
 
 @Component({
     moduleId: module.id,
@@ -6,18 +7,17 @@
     templateUrl: 'help.html'
 })
 export class HelpComponent {
+    constructor(private help: HelpService) { }
+
     openDocs() {
-        // "/api/opendocs"
-        console.log("[STUB] HelpComponent.openDocs()");
+        this.help.openDocs();
     }
 
     createSysReport() {
-        // "/api/createsysreport"
-        console.log("[STUB] HelpComponent.createSysReport()");
+        this.help.createSysReport();
     }
 
     openSupportTicket() {
-        // "/api/openticket"
-        console.log("[STUB] HelpComponent.openSupportTicket()");
+        this.help.openSupportTicket();
     }
 }
