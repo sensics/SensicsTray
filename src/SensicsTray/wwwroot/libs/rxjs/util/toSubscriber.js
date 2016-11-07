@@ -1,7 +1,6 @@
 "use strict";
 var Subscriber_1 = require('../Subscriber');
 var rxSubscriber_1 = require('../symbol/rxSubscriber');
-var Observer_1 = require('../Observer');
 function toSubscriber(nextOrObserver, error, complete) {
     if (nextOrObserver) {
         if (nextOrObserver instanceof Subscriber_1.Subscriber) {
@@ -12,7 +11,7 @@ function toSubscriber(nextOrObserver, error, complete) {
         }
     }
     if (!nextOrObserver && !error && !complete) {
-        return new Subscriber_1.Subscriber(Observer_1.empty);
+        return new Subscriber_1.Subscriber();
     }
     return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
 }

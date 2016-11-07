@@ -8,7 +8,14 @@ var isArray_1 = require('../util/isArray');
 var ArrayObservable_1 = require('../observable/ArrayObservable');
 var OuterSubscriber_1 = require('../OuterSubscriber');
 var subscribeToResult_1 = require('../util/subscribeToResult');
-/* tslint:disable:max-line-length */
+/**
+ * Returns an Observable that mirrors the first source Observable to emit an item
+ * from the combination of this Observable and supplied Observables
+ * @param {...Observables} ...observables sources used to race for which Observable emits first.
+ * @return {Observable} an Observable that mirrors the output of the first Observable to emit an item.
+ * @method race
+ * @owner Observable
+ */
 function race() {
     var observables = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -19,7 +26,8 @@ function race() {
     if (observables.length === 1 && isArray_1.isArray(observables[0])) {
         observables = observables[0];
     }
-    return this.lift.call(raceStatic.apply(void 0, [this].concat(observables)));
+    observables.unshift(this);
+    return raceStatic.apply(this, observables);
 }
 exports.race = race;
 function raceStatic() {
