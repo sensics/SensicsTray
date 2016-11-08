@@ -10,14 +10,14 @@ var AsapScheduler = (function (_super) {
     function AsapScheduler() {
         _super.apply(this, arguments);
     }
-    AsapScheduler.prototype.flush = function (action) {
+    AsapScheduler.prototype.flush = function () {
         this.active = true;
         this.scheduled = undefined;
         var actions = this.actions;
         var error;
         var index = -1;
         var count = actions.length;
-        action = action || actions.shift();
+        var action = actions.shift();
         do {
             if (error = action.execute(action.state, action.delay)) {
                 break;

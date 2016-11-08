@@ -5,7 +5,6 @@
 // definition
 var Subject_1 = require('./Subject');
 exports.Subject = Subject_1.Subject;
-exports.AnonymousSubject = Subject_1.AnonymousSubject;
 /* tslint:enable:no-unused-variable */
 var Observable_1 = require('./Observable');
 exports.Observable = Observable_1.Observable;
@@ -45,6 +44,7 @@ require('./add/operator/bufferCount');
 require('./add/operator/bufferTime');
 require('./add/operator/bufferToggle');
 require('./add/operator/bufferWhen');
+require('./add/operator/cache');
 require('./add/operator/catch');
 require('./add/operator/combineAll');
 require('./add/operator/combineLatest');
@@ -152,6 +152,8 @@ var ReplaySubject_1 = require('./ReplaySubject');
 exports.ReplaySubject = ReplaySubject_1.ReplaySubject;
 var BehaviorSubject_1 = require('./BehaviorSubject');
 exports.BehaviorSubject = BehaviorSubject_1.BehaviorSubject;
+var MulticastObservable_1 = require('./observable/MulticastObservable');
+exports.MulticastObservable = MulticastObservable_1.MulticastObservable;
 var ConnectableObservable_1 = require('./observable/ConnectableObservable');
 exports.ConnectableObservable = ConnectableObservable_1.ConnectableObservable;
 var Notification_1 = require('./Notification');
@@ -162,8 +164,6 @@ var ArgumentOutOfRangeError_1 = require('./util/ArgumentOutOfRangeError');
 exports.ArgumentOutOfRangeError = ArgumentOutOfRangeError_1.ArgumentOutOfRangeError;
 var ObjectUnsubscribedError_1 = require('./util/ObjectUnsubscribedError');
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError_1.ObjectUnsubscribedError;
-var TimeoutError_1 = require('./util/TimeoutError');
-exports.TimeoutError = TimeoutError_1.TimeoutError;
 var UnsubscriptionError_1 = require('./util/UnsubscriptionError');
 exports.UnsubscriptionError = UnsubscriptionError_1.UnsubscriptionError;
 var timeInterval_1 = require('./operator/timeInterval');

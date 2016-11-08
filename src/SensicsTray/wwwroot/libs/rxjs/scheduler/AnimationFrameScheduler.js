@@ -10,14 +10,14 @@ var AnimationFrameScheduler = (function (_super) {
     function AnimationFrameScheduler() {
         _super.apply(this, arguments);
     }
-    AnimationFrameScheduler.prototype.flush = function (action) {
+    AnimationFrameScheduler.prototype.flush = function () {
         this.active = true;
         this.scheduled = undefined;
         var actions = this.actions;
         var error;
         var index = -1;
         var count = actions.length;
-        action = action || actions.shift();
+        var action = actions.shift();
         do {
             if (error = action.execute(action.state, action.delay)) {
                 break;
