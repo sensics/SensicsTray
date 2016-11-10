@@ -37,9 +37,16 @@ gulp.task('copy:rxjs', () => {
         .pipe(gulp.dest(paths.libs + 'rxjs'));
 });
 
-gulp.task('copy:bootstrap', () => {
-	return gulp.src(['./node_modules/bootstrap/dist/css/bootstrap.min.css'])
-		.pipe(gulp.dest(paths.libs + 'bootstrap'));
+gulp.task('copy:bootstrap-fonts', () => {
+	return gulp.src([
+		'./node_modules/bootstrap/dist/fonts/*.*'
+	]).pipe(gulp.dest(paths.libs + 'fonts'));
+});
+
+gulp.task('copy:bootstrap', ['copy:bootstrap-fonts'], () => {
+	return gulp.src([
+		'./node_modules/bootstrap/dist/css/bootstrap.min.css'
+	]).pipe(gulp.dest(paths.libs + 'bootstrap'));
 });
 
 gulp.task('copy:otherDependencies', () => {
