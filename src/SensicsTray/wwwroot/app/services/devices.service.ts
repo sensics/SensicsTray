@@ -15,6 +15,6 @@ export class DevicesService {
     startDeviceMonitor(): Promise<any> {
         var promise = this.http.post(this.startDeviceMonitorUrl, {}).toPromise().then(
             response => response.json() as any);
-        return this.userNotifications.wrapPromise(promise, "Device monitor started!");
+        return this.userNotifications.wrapPromise(promise, "Device monitor started!", "Could not start device monitor.");
     }
 }

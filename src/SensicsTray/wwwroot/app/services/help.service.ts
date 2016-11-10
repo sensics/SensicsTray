@@ -18,18 +18,18 @@ export class HelpService {
     openDocs(): Promise<any> {
         var promise = this.http.post(this.openDocsUrl, {}).toPromise().then(
             response => response.json() as any);
-        return this.userNotifications.wrapPromise(promise, "Docs opened!");
+        return this.userNotifications.wrapPromise(promise, "Docs opened!", "Could not open docs.");
     }
 
     createSysReport(): Promise<any> {
         var promise = this.http.post(this.createSysReportUrl, {}).toPromise().then(
             response => response.json() as any);
-        return this.userNotifications.wrapPromise(promise, "System report created!");
+        return this.userNotifications.wrapPromise(promise, "System report created!", "Could not create system report.");
     }
 
     openSupportTicket() {
         var promise = this.http.post(this.openSupportTicketUrl, {}).toPromise().then(
             response => response.json() as any);
-        return this.userNotifications.wrapPromise(promise, "Support ticket opened!");
+        return this.userNotifications.wrapPromise(promise, "Support ticket opened!", "Could not open support ticket.");
     }
 }

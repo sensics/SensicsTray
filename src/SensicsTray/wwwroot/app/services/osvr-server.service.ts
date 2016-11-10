@@ -19,7 +19,7 @@ export class OSVRServerService {
             response => response.json() as any);
 
         return this.userNotifications.wrapPromise(promise,
-            "OSVRServerService.startServer() - success!");
+            "OSVRServerService.startServer() - success!", "Could not start the OSVR server.");
     }
 
     stopServer(): Promise<any> {
@@ -27,6 +27,6 @@ export class OSVRServerService {
             response => response.json() as any);
 
         return this.userNotifications.wrapPromise(promise,
-            "OSVRServerService.stopServer() - success!");
+            "OSVRServerService.stopServer() - success!", "Could not stop the OSVR server.");
     }
 }
