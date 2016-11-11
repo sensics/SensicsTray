@@ -1,9 +1,9 @@
 ﻿import { Injectable } from "@angular/core";
 import { Http } from '@angular/http';
-import { UserNotificationsService } from './user-notifications.service';
-
 import 'rxjs/Rx';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
+
+import { UserNotificationsService } from './user-notifications.service';
 
 @Injectable()
 export class DevicesService {
@@ -12,9 +12,10 @@ export class DevicesService {
         private http: Http,
         private userNotifications: UserNotificationsService) { }
 
-    startDeviceMonitor(): Promise<any> {
-        var promise = this.http.post(this.startDeviceMonitorUrl, {}).toPromise().then(
+    startDeviceMonitor(): Observable<any> {
+        var observable = this.http.post(this.startDeviceMonitorUrl, {}).map(
             response => response.json() as any);
-        return this.userNotifications.wrapPromise(promise, "Device monitor started!", "Could not start device monitor.");
+        return this.userNotifications.wrapObservable(observable,
+            "Device monitor started!", "Could not start device monitor.");
     }
 }

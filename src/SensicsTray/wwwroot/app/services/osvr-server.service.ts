@@ -1,9 +1,9 @@
 ﻿import { Injectable } from "@angular/core";
 import { Http } from '@angular/http';
-import { UserNotificationsService } from './user-notifications.service';
-
 import 'rxjs/Rx';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
+
+import { UserNotificationsService } from './user-notifications.service';
 
 @Injectable()
 export class OSVRServerService {
@@ -14,19 +14,19 @@ export class OSVRServerService {
         private http: Http,
         private userNotifications: UserNotificationsService) { }
 
-    startServer(): Promise<any> {
-        var promise = this.http.post(this.startServerURL, {}).toPromise().then(
-            response => response.json() as any);
+    startServer(): Observable<void> {
+        var observable = this.http.post(this.startServerURL, {}).map(
+            response => { });
 
-        return this.userNotifications.wrapPromise(promise,
-            "OSVRServerService.startServer() - success!", "Could not start the OSVR server.");
+        return this.userNotifications.wrapObservable(observable,
+            "OSVR server started successfully!", "Could not start the OSVR server.");
     }
 
-    stopServer(): Promise<any> {
-        var promise = this.http.post(this.stopServerURL, {}).toPromise().then(
-            response => response.json() as any);
+    stopServer(): Observable<void> {
+        var observable = this.http.post(this.stopServerURL, {}).map(
+            response => { });
 
-        return this.userNotifications.wrapPromise(promise,
-            "OSVRServerService.stopServer() - success!", "Could not stop the OSVR server.");
+        return this.userNotifications.wrapObservable(observable,
+            "OSVR server stopped successfully!", "Could not stop the OSVR server.");
     }
 }

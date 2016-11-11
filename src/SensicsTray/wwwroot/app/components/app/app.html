@@ -43,11 +43,11 @@
 <div class="container-fluid">
 	<div class="row" *ngIf="showMessages()">
 		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="alert alert-info" role="alert" *ngIf="showStatusMessage()">
+			<div class="alert alert-info" role="alert" *ngIf="showStatusMessage">
 				<button type="button" class="btn btn-link"(click)="closeNotifications()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 				{{statusMessage()}}
 			</div>
-			<div class="alert alert-danger" role="alert" *ngIf="showErrorMessage()">
+			<div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
 				<button type="button" class="btn btn-link" (click)="closeNotifications()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 				{{errorMessage()}}
 			</div>
