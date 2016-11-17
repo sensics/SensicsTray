@@ -31,7 +31,7 @@ export class TrackerViewerService {
             params.set("paths", paths.join(','));
         }
 
-        var observable = this.http.post(this.startTrackerViewerURL, { search: params })
+        var observable = this.http.post(this.startTrackerViewerURL, {}, { search: params })
             .map(response => { });
         return this.userNotifications.wrapObservable(observable,
             "Tracker Viewer started successfully!", "Could not start Tracker Viewer");

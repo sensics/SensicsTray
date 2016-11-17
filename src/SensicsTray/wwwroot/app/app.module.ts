@@ -30,6 +30,7 @@ import { OSVRConfigService } from './services/osvr-config.service';
 import { PluginsService } from './services/plugins.service';
 import { HelpService } from './services/help.service';
 import { DevicesService } from './services/devices.service';
+import { DirectModeService } from './services/direct-mode.service';
 
 @NgModule({
     imports: [ 
@@ -88,6 +89,7 @@ import { DevicesService } from './services/devices.service';
         PluginsService,
         HelpService,
         DevicesService,
+        DirectModeService,
         { provide: LocationStrategy, useClass: HashLocationStrategy}
     ]
 })
