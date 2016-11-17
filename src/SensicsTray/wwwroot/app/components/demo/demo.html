@@ -23,6 +23,48 @@
 	</div>
 </div>
 
+<!-- Direct Mode -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" i18n>Direct Mode</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p i18n>Enable or disable direct mode.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="threeLetterVendorPNPIDInput" i18n>Vendor ID (optional)</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="threeLetterVendorPNPIDInput"
+									   placeholder="Optional 3-letter vendor ID for HMD monitor."
+									   [(ngModel)]="threeLetterVendorPNPID" />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-primary"
+											(click)="enableDirectMode()"
+											i18n>
+										Enable Direct Mode
+									</button>
+									<button type="button" class="btn btn-primary"
+											(click)="disableDirectMode()"
+											i18n>
+										Disable Direct Mode
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Tracker viewer -->
 <div class="row">
 	<div class="col-md-12">
