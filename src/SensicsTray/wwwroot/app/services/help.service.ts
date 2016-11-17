@@ -1,9 +1,9 @@
 ﻿import { Injectable } from "@angular/core";
 import { Http } from '@angular/http';
-import { UserNotificationsService } from './user-notifications.service';
-
 import 'rxjs/Rx';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
+
+import { UserNotificationsService } from './user-notifications.service';
 
 @Injectable()
 export class HelpService {
@@ -15,21 +15,24 @@ export class HelpService {
         private http: Http,
         private userNotifications: UserNotificationsService) { }
 
-    openDocs(): Promise<any> {
-        var promise = this.http.post(this.openDocsUrl, {}).toPromise().then(
+    openDocs(): Observable<any> {
+        var observable = this.http.post(this.openDocsUrl, {}).map(
             response => response.json() as any);
-        return this.userNotifications.wrapPromise(promise, "Docs opened!", "Could not open docs.");
+        return this.userNotifications.wrapObservable(observable,
+            "Docs opened!", "Could not open docs.");
     }
 
-    createSysReport(): Promise<any> {
-        var promise = this.http.post(this.createSysReportUrl, {}).toPromise().then(
+    createSysReport(): Observable<any> {
+        var observable = this.http.post(this.createSysReportUrl, {}).map(
             response => response.json() as any);
-        return this.userNotifications.wrapPromise(promise, "System report created!", "Could not create system report.");
+        return this.userNotifications.wrapObservable(observable,
+            "System report created!", "Could not create system report.");
     }
 
-    openSupportTicket() {
-        var promise = this.http.post(this.openSupportTicketUrl, {}).toPromise().then(
+    openSupportTicket(): Observable<any> {
+        var observable = this.http.post(this.openSupportTicketUrl, {}).map(
             response => response.json() as any);
-        return this.userNotifications.wrapPromise(promise, "Support ticket opened!", "Could not open support ticket.");
+        return this.userNotifications.wrapObservable(observable,
+            "Support ticket opened!", "Could not open support ticket.");
     }
 }

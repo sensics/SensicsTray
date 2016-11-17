@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from "@angular/http"
+import { Http, URLSearchParams } from "@angular/http";
 import 'rxjs/Rx';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 
 import { UserNotificationsService } from './user-notifications.service';
 
@@ -14,19 +14,26 @@ export class TrackerViewerService {
         private http: Http)
     { }
 
-    startTrackerViewer(paths: string[] | string): Promise<any> {
+    startTrackerViewer(paths: string[] | string): Observable<void> {
         if (typeof paths === 'undefined' || paths === null) {
             paths = [];
         }
         if (typeof paths === 'string') {
-            paths = (<string>paths).split(" ");
+            if (paths.length === 0) {
+                paths = [];
+            } else {
+                paths = (<string>paths).split(" ");
+            }
         }
 
-        var promise = this.http.post(
-            this.startTrackerViewerURL + `?paths=${paths.join(',')}`, {}).toPromise()
-            .then(response => response.json() as any);
+        var params = new URLSearchParams();
+        if (paths.length > 0) {
+            params.set("paths", paths.join(','));
+        }
 
-        return this.userNotifications.wrapPromise(promise,
-            "TrackerViewerService.startTrackerViewer() - success!");
+        var observable = this.http.post(this.startTrackerViewerURL, { search: params })
+            .map(response => { });
+        return this.userNotifications.wrapObservable(observable,
+            "Tracker Viewer started successfully!", "Could not start Tracker Viewer");
     }
 }

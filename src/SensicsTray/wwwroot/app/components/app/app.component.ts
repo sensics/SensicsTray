@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
@@ -8,14 +9,27 @@ import { UserNotificationsService } from '../../services/user-notifications.serv
 })
 export class AppComponent {
     title = 'Sensics Tray';
-    showNotification = false;
-    constructor(private userNotifications: UserNotificationsService) {
-        this.userNotifications.getErrorMessages().subscribe(_ => this.showNotification = true);
-        this.userNotifications.getStatusMessages().subscribe(_ => this.showNotification = false);
+    showStatusMessage = false;
+    showErrorMessage = false;
+    constructor(private userNotifications: UserNotificationsService, private router: Router) {
+        this.userNotifications.getErrorMessages().subscribe(_ => {
+            this.showErrorMessage = this.showMsg(this.userNotifications.getCurrentErrorMessage());
+            this.showStatusMessage = false;
+        });
+
+        this.userNotifications.getStatusMessages().subscribe(_ => {
+            this.showStatusMessage = this.showMsg(this.userNotifications.getCurrentStatusMessage());
+            this.showErrorMessage = false;
+        });
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.closeNotifications();
+            }
+        });
     }
 
     private showMsg(msg: string): boolean {
-        return this.showNotification && typeof msg !== 'undefined' && msg !== null && msg.length > 0;
+        return typeof msg !== 'undefined' && msg !== null && msg.length > 0;
     }
 
     statusMessage() {
@@ -26,19 +40,11 @@ export class AppComponent {
         return this.userNotifications.getCurrentErrorMessage();
     }
 
-    showStatusMessage() {
-        return this.showMsg(this.statusMessage());
-    }
-
-    showErrorMessage() {
-        return this.showMsg(this.errorMessage())
-    }
-
     showMessages() {
-        return this.showStatusMessage() || this.showErrorMessage();
+        return this.showStatusMessage || this.showErrorMessage;
     }
 
     closeNotifications() {
-        this.showNotification = false;
+        this.showStatusMessage = this.showErrorMessage = false;
     }
 }

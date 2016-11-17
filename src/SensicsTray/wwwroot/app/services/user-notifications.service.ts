@@ -1,4 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
+import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -60,7 +61,7 @@ export class UserNotificationsService {
         }
         return promise.then(
             value => {
-                if (typeof successMessage !== 'undefined' && successMessage !== null) {
+                if (typeof successMessage === 'string' && successMessage.length > 0) {
                     this.showStatus(successMessage);
                 }
                 return value;
@@ -80,5 +81,26 @@ export class UserNotificationsService {
                 // unless they pass true for throwError
                 return Promise.resolve();
             });
+    }
+
+    wrapObservable<T>(observable: Observable<T>, successMessage: string = null, errorMessage: string = null, subscribe: boolean = true): Observable<T> {
+        var ret = observable.do(
+            next => {
+                if (typeof successMessage === 'string' && successMessage.length > 0) {
+                    this.showStatus(successMessage);
+                }
+            },
+            error => {
+                if (typeof errorMessage === 'string' && errorMessage.length > 0) {
+                    error = errorMessage;
+                } else if (typeof error !== 'string' || error.length === 0) {
+                    error = "An unknown error occurred.";
+                }
+                this.showError(error.toString());
+            });
+        if (subscribe) {
+            ret.subscribe();
+        }
+        return ret;
     }
 }

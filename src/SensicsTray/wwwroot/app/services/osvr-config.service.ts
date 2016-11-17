@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http } from "@angular/http"
+import { Http } from "@angular/http";
 import 'rxjs/Rx';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 
 import * as OSVRConfig from '../models/osvr-config.model';
 import { UserNotificationsService } from './user-notifications.service';
@@ -13,39 +13,33 @@ export class OSVRConfigService  {
         private userNotifications: UserNotificationsService)
     { }
 
-    getCurrent(): Promise<OSVRConfig.IOSVRConfig> {
-        var promise = this.http.get("/api/currentconfig").toPromise().then(
+    getCurrent(): Observable<OSVRConfig.IOSVRConfig> {
+        var observable = this.http.get("/api/currentconfig").map(
             response => response.json() as OSVRConfig.IOSVRConfig);
-        return this.userNotifications.wrapPromise(promise, null, "Could not get the current OSVR server configuration.");
+        return this.userNotifications.wrapObservable(observable, null, "Could not get the current OSVR server configuration.");
     }
 
-    setCurrent(newConfig: OSVRConfig.IOSVRConfig): Promise<OSVRConfig.ISetCurrentConfigResponse> {
-        var promise = this.http.post("/api/currentconfig", newConfig).toPromise().then(
+    setCurrent(newConfig: OSVRConfig.IOSVRConfig): Observable<OSVRConfig.ISetCurrentConfigResponse> {
+        var observable = this.http.post("/api/currentconfig", newConfig).map(
             response => response.json() as OSVRConfig.ISetCurrentConfigResponse);
-        return this.userNotifications.wrapPromise(promise, null, "Could not set the current OSVR server configuration.");
+        return this.userNotifications.wrapObservable(observable, null, "Could not set the current OSVR server configuration.");
     }
 
-    getAvailableManualLoadPlugins(): Promise<OSVRConfig.IOSVRPlugin[]> {
-        var promise = this.http.get("/api/availablemanualloadplugins").toPromise().then(
+    getAvailableManualLoadPlugins(): Observable<OSVRConfig.IOSVRPlugin[]> {
+        var observable = this.http.get("/api/availablemanualloadplugins").map(
             response => response.json() as OSVRConfig.IOSVRPlugin[]);
-        return this.userNotifications.wrapPromise(promise, null, "Could not get the list of available manually loaded plugins.");
+        return this.userNotifications.wrapObservable(observable, null, "Could not get the list of available manually loaded plugins.");
     }
 
-    getAvailableDisplays(): Promise<OSVRConfig.IOSVRDisplay[]> {
-        var promise = this.http.get("/api/availabledisplays").toPromise().then(
+    getAvailableDisplays(): Observable<OSVRConfig.IOSVRDisplay[]> {
+        var observable = this.http.get("/api/availabledisplays").map(
             response => response.json() as OSVRConfig.IOSVRDisplay[]);
-        return this.userNotifications.wrapPromise(promise, null, "Could not get the list of available displays.");
+        return this.userNotifications.wrapObservable(observable, null, "Could not get the list of available displays.");
     }
 
-    getCurrentServerRoot(): Promise<string> {
-        var promise = this.http.get("/api/serverroot").toPromise().then(
+    getCurrentServerRoot(): Observable<string> {
+        var observable = this.http.get("/api/serverroot").map(
             response => response.text());
-        return this.userNotifications.wrapPromise(promise, null, "Could not get the current osvr server root directory.");
-    }
-
-    keepAlive(): Promise<void> {
-        var promise = this.http.post("/api/keepAlive", {}).toPromise().then(
-            (response) => { });
-        return this.userNotifications.wrapPromise(promise);
+        return this.userNotifications.wrapObservable(observable, null, "Could not get the current osvr server root directory.");
     }
 }
