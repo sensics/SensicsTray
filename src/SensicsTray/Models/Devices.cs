@@ -3,21 +3,29 @@ using System;
 
 namespace TrayApp.Devices
 {
-    public class OSVRDevice
+    public class USBDevice
     {
-        public OSVRDevice(string deviceID, string pnpDeviceID, string description, string name, name manufacturer)
+        public USBDevice(uint vendorID, uint productID)
         {
-            this.DeviceID = deviceID;
-            this.PnpDeviceID = pnpDeviceID;
-            this.Description = description;
-            this.Name = name;
-            this.Manufacturer = manufacturer;
+            this.VendorID = vendorID;
+            this.ProductID = productID;
         }
+        public USBDevice() { }
         
-        public string DeviceID {get; set;}
-        public string PnpDeviceID {get; set;}
-        public string Description {get; set;}
-        public string Name {get; set;}
-        public string Manufacturer {get; set;}
+        public uint VendorID { get; set; }
+        public uint ProductID { get; set; }
+    }
+
+    public enum EventCode { USB_DEVICE_NO_STATUS_CHANGE, USB_DEVICE_ADDED, USB_DEVICE_REMOVED};
+
+    public class USBEvent
+    {
+        public USBEvent(EventCode eventCode, USBDevice dev) {
+            this.USBDeviceEvent = eventCode;
+            this.Device = dev;
+        }
+
+        public USBDevice Device;
+        public EventCode USBDeviceEvent;
     }
 }
