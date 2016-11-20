@@ -1,6 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { DevicesService } from '../../services/devices.service';
+import { Observable } from 'rxjs/Rx';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 export interface IOSVRDevice {
     id: number;
@@ -22,20 +24,27 @@ export interface IOSVRDevice {
 })
 export class DevicesComponent implements OnInit {
     constructor(private devService: DevicesService) { }
-    //startDeviceMonitor() {
-    //    this.devService.startDeviceMonitor();
-    //}
 
     private usbDevices: IOSVRDevice[];
 
     ngOnInit() {
         this.devService.getDevices().subscribe(
             (response: Response) => {
-                console.log("Received devices");
+                console.log("DevicesComponent: Received devices");
                 this.usbDevices = response.json();
             },
             (error: any) => {
-                console.log("Got an error");
+                console.log("DevicesComponent: Got an error instead of device list");
+            });
+
+        this.devService.getUSBEevent().subscribe(
+            (response: Response) => {
+                console.log("DevicesComponent: Received new event");
+            },
+            (error: any) => {
+                console.log("DevicesComponent: Got an error instead of event")
             });
     }
+
+
 }
