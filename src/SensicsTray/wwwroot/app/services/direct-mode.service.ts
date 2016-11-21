@@ -36,6 +36,6 @@ export class DirectModeService {
         var observable = this.http.post(this.enableDirectModeURL, {}, { search: params })
             .map(response => { });
         return this.userNotifications.wrapObservable(observable,
-            "Enabled direct mode successfully!", "Could not enable direct mode.");
+            "Enabled direct mode successfully!", "Could not disable direct mode.");
     }
 }
