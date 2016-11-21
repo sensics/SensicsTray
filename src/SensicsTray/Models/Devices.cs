@@ -14,6 +14,12 @@ namespace TrayApp.Devices
         
         public uint VendorID { get; set; }
         public uint ProductID { get; set; }
+        public string FriendlyName { get; set; }
+        public string ModelName { get; set; }
+        public string VendorName { get; set; }
+        public string FirmwareVersion { get; set; }
+        public string DeviceType { get; set; }
+
     }
 
     public enum EventCode { USB_DEVICE_NO_STATUS_CHANGE, USB_DEVICE_ADDED, USB_DEVICE_REMOVED};

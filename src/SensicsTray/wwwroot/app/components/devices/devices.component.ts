@@ -5,14 +5,12 @@ import { Observable } from 'rxjs/Rx';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 export interface IOSVRDevice {
-    id: number;
-    path: string;
-    vid: string;
-    pid: string;
+    vendorID: string;
+    productID: string;
     friendlyName: string;
     modelName: string;
     vendorName: string;
-    version: string;
+    firmwareVersion: string;
     deviceType: string;
     enabled: boolean;
 }
