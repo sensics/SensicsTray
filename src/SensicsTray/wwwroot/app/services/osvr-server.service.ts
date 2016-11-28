@@ -9,6 +9,7 @@ import { UserNotificationsService } from './user-notifications.service';
 export class OSVRServerService {
     private startServerURL = "/api/startserver";
     private stopServerURL = "/api/stopserver";
+    private restartServerURL = "/api/restartserver";
 
     constructor(
         private http: Http,
@@ -28,5 +29,13 @@ export class OSVRServerService {
 
         return this.userNotifications.wrapObservable(observable,
             "OSVR server stopped successfully!", "Could not stop the OSVR server.");
+    }
+
+    restartServer(): Observable<void> {
+        var observable = this.http.post(this.restartServerURL, {}).map(
+            response => { });
+
+        return this.userNotifications.wrapObservable(observable,
+            "OSVR server restarted successfully!", "Could not restart the OSVR server.");
     }
 }

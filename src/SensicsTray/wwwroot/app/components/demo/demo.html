@@ -3,19 +3,29 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title" i18n>Launch OSVR Server</h3>
+				<h3 class="panel-title" i18n>OSVR Server</h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-md-12">
-						<p i18n>Launch the OSVR Server on this machine, if not already running.</p>
+						<p i18n>Start, Stop, or Restart the OSVR Server on this machine.</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<button type="button" class="btn btn-primary"
 								(click)="startServer()"
-								i18n>Launch Server</button>
+								i18n>Start Server</button>
+						<button type="button" class="btn btn-primary"
+								(click)="stopServer()"
+								i18n>
+							Stop Server
+						</button>
+						<button type="button" class="btn btn-primary"
+								(click)="restartServer()"
+								i18n>
+							Restart Server
+						</button>
 					</div>
 				</div>
 			</div>
