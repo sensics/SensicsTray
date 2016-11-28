@@ -26,6 +26,14 @@ export class DemoComponent {
         this.osvrServer.startServer();
     }
 
+    stopServer() {
+        this.osvrServer.stopServer();
+    }
+
+    restartServer() {
+        this.osvrServer.restartServer();
+    }
+
     enableDirectMode() {
         this.directMode.enableDirectMode(this.threeLetterVendorPNPID);
     }
