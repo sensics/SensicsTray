@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OSVRServerService } from '../../services/osvr-server.service';
 import { TrackerViewerService } from '../../services/tracker-viewer.service';
 import { DirectModeService } from '../../services/direct-mode.service';
+import { OSVRConfigService } from '../../services/osvr-config.service';
 
 @Component({
     moduleId: module.id,
@@ -11,27 +12,84 @@ import { DirectModeService } from '../../services/direct-mode.service';
 export class DemoComponent {
     trackerViewerPath = "";
     threeLetterVendorPNPID = "";
+    runningServers: string[] = [];
+    showServerRootNotDefined = true;
+    serverRoot: string = null;
+
+    // These will be used in the "Save config as" functionality
+    // but I'm having trouble with the HTML sanitizer, so it's disabled
+    // for now.
+    //configSaveAsURL: string;
+    //configSaveAsBlob: Blob;
 
     constructor(
         private osvrServer: OSVRServerService,
         private trackerViewer: TrackerViewerService,
-        private directMode: DirectModeService)
-    { }
+        private directMode: DirectModeService,
+        private osvrConfig: OSVRConfigService)
+    {
+        this.updateRunningServers();
+
+        this.osvrConfig.getCurrentServerRoot().subscribe(
+            serverRoot => {
+                this.serverRoot = serverRoot;
+            },
+            error => {
+                this.showServerRootNotDefined = true;
+            });
+
+        // sanitizer is ignoring our bypass, so comment this out for now
+        //this.osvrConfig.getCurrent().subscribe(config => {
+        //    var json = JSON.stringify(config.body, null, 4);
+            //this.configSaveAsBlob = new Blob([json], { type: "application/json" });
+            //this.configSaveAsURL = URL.createObjectURL(this.configSaveAsBlob);
+            //this.sanitizer.bypassSecurityTrustUrl(this.configSaveAsURL);
+        //});
+    }
+
+    private showMsg(msg: string): boolean {
+        return typeof msg !== 'undefined' && msg !== null && msg.length > 0;
+    }
+
+    showServerRoot() {
+        return this.showMsg(this.serverRoot);// && this.showMsg(this.configSaveAsURL);
+    }
+
+    updateRunningServers() {
+        this.osvrServer.getRunningServerPaths().subscribe(
+            servers => {
+                this.runningServers = servers;
+            });
+    }
+
+    currentlyRunningServer(): string {
+        if (this.runningServers.length === 0) {
+            return "No OSVR servers running.";
+        }
+
+        return this.runningServers.join(";");
+    }
 
     startTrackerViewer() {
         this.trackerViewer.startTrackerViewer(this.trackerViewerPath);
     }
 
     startServer() {
-        this.osvrServer.startServer();
+        this.osvrServer.startServer().toPromise().then(_ => {
+            this.updateRunningServers();
+        });
     }
 
     stopServer() {
-        this.osvrServer.stopServer();
+        this.osvrServer.stopServer().toPromise().then(_ => {
+            this.updateRunningServers();
+        });
     }
 
     restartServer() {
-        this.osvrServer.restartServer();
+        this.osvrServer.restartServer().toPromise().then(_ => {
+            this.updateRunningServers();
+        });
     }
 
     enableDirectMode() {

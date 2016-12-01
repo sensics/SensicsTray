@@ -1,6 +1,13 @@
-<!-- Start Server -->
+<!-- Server root not defined message -->
+<div class="row" *ngIf="showServerRootNotDefined">
+	<div class="col-md-6">
+		<ts-server-root-not-defined></ts-server-root-not-defined>
+	</div>
+</div>
+
+<!-- OSVR Server -->
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title" i18n>OSVR Server</h3>
@@ -11,6 +18,35 @@
 						<p i18n>Start, Stop, or Restart the OSVR Server on this machine.</p>
 					</div>
 				</div>
+
+				<!-- Current OSVR Server Root -->
+				<form class="form-horizontal" *ngIf="showServerRoot()">
+					<div class="form-group">
+						<label class="control-label col-sm-2" i18n>Current OSVR Server Auto-Start Directory</label>
+						<div class="col-sm-10">
+							<!-- HTML sanitizer is ignoring our whitelist that should make this work, so just display
+					the current server root for now. -->
+							<!--<p class="form-control-static"><a href="{{configSaveAsURL}}" download="osvr_server_config.json">{{serverRoot}}</a></p>-->
+							<p class="form-control-static">{{serverRoot}}</p>
+						</div>
+					</div>
+				</form>
+
+				<!-- Currently running OSVR server -->
+				<div class="row">
+					<div class="col-md-12">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label class="control-label col-sm-2" i18n>OSVR Server</label>
+								<div class="col-sm-10">
+									<p class="form-control-static">{{currentlyRunningServer()}}</p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<!-- Start/Stop/Restart server -->
 				<div class="row">
 					<div class="col-md-12">
 						<button type="button" class="btn btn-primary"
@@ -35,7 +71,7 @@
 
 <!-- Direct Mode -->
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title" i18n>Direct Mode</h3>
@@ -47,7 +83,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="form-group">
 							<label for="threeLetterVendorPNPIDInput" i18n>Vendor ID (optional)</label>
 							<div class="input-group">
@@ -77,7 +113,7 @@
 
 <!-- Tracker viewer -->
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title" i18n>Tracker Viewer</h3>

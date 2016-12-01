@@ -10,6 +10,7 @@ export class OSVRServerService {
     private startServerURL = "/api/startserver";
     private stopServerURL = "/api/stopserver";
     private restartServerURL = "/api/restartserver";
+    private runningServerPathsURL = "api/runningserverpaths";
 
     constructor(
         private http: Http,
@@ -37,5 +38,13 @@ export class OSVRServerService {
 
         return this.userNotifications.wrapObservable(observable,
             "OSVR server restarted successfully!", "Could not restart the OSVR server.");
+    }
+
+    getRunningServerPaths(): Observable<string[]> {
+        var observable = this.http.get(this.runningServerPathsURL).map(
+            response => response.json());
+
+        return this.userNotifications.wrapObservable(observable,
+            null, "Could not get the currently running server.");
     }
 }
