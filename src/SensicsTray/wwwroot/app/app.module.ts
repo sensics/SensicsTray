@@ -27,6 +27,7 @@ import { OSVRServerService } from './services/osvr-server.service';
 import { TrackerViewerService } from './services/tracker-viewer.service';
 import { UserNotificationsService } from './services/user-notifications.service';
 import { OSVRConfigService } from './services/osvr-config.service';
+import { OSVRSampleAppsService } from './services/osvr-sample-apps.service';
 import { PluginsService } from './services/plugins.service';
 import { HelpService } from './services/help.service';
 import { DevicesService } from './services/devices.service';
@@ -86,6 +87,7 @@ import { DirectModeService } from './services/direct-mode.service';
         TrackerViewerService,
         UserNotificationsService,
         OSVRConfigService,
+        OSVRSampleAppsService,
         PluginsService,
         HelpService,
         DevicesService,

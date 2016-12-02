@@ -143,3 +143,35 @@
 		</div>
 	</div>
 </div>
+
+<!-- Sample Apps -->
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" i18n>Sample OSVR Applications</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p i18n>Sample applications that use OSVR.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<form class="form-horizontal" 
+							  *ngFor="let sampleApp of sampleApps">
+							<div class="form-group">
+								<label class="control-label col-sm-2" i18n>{{sampleApp.name}}</label>
+								<div class="col-sm-10">
+									<p class="form-control-static">{{sampleApp.description}}</p>
+									<button class="btn btn-primary" (click)="launchSampleApp(sampleApp)" i18n>Launch</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
