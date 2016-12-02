@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserNotificationsService } from '../../services/user-notifications.service';
+import { OSVRServerService } from '../../services/osvr-server.service';
 
 @Component({
     moduleId: module.id,
@@ -11,7 +12,11 @@ export class AppComponent {
     title = 'Sensics Tray';
     showStatusMessage = false;
     showErrorMessage = false;
-    constructor(private userNotifications: UserNotificationsService, private router: Router) {
+    constructor(
+        private userNotifications: UserNotificationsService,
+        private router: Router,
+        private osvrServer: OSVRServerService
+    ) {
         this.userNotifications.getErrorMessages().subscribe(_ => {
             this.showErrorMessage = this.showMsg(this.userNotifications.getCurrentErrorMessage());
             this.showStatusMessage = false;
@@ -30,6 +35,18 @@ export class AppComponent {
 
     private showMsg(msg: string): boolean {
         return typeof msg !== 'undefined' && msg !== null && msg.length > 0;
+    }
+
+    showSuggestRestart() {
+        return this.osvrServer.getSuggestServerRestart();
+    }
+
+    closeSuggestRestart() {
+        this.osvrServer.setSuggestServerRestart(false);
+    }
+
+    restartServer() {
+        this.osvrServer.restartServer();
     }
 
     statusMessage() {

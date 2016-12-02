@@ -12,11 +12,14 @@ export class OSVRServerService {
     private restartServerURL = "/api/restartserver";
     private runningServerPathsURL = "api/runningserverpaths";
 
+    private suggestRestart = false;
+
     constructor(
         private http: Http,
         private userNotifications: UserNotificationsService) { }
 
     startServer(): Observable<void> {
+        this.suggestRestart = false;
         var observable = this.http.post(this.startServerURL, {}).map(
             response => { });
 
@@ -33,6 +36,7 @@ export class OSVRServerService {
     }
 
     restartServer(): Observable<void> {
+        this.suggestRestart = false;
         var observable = this.http.post(this.restartServerURL, {}).map(
             response => { });
 
@@ -47,4 +51,8 @@ export class OSVRServerService {
         return this.userNotifications.wrapObservable(observable,
             null, "Could not get the currently running server.");
     }
+
+    getSuggestServerRestart() { return this.suggestRestart; }
+    setSuggestServerRestart(value: boolean) { this.suggestRestart = value; }
+    
 }

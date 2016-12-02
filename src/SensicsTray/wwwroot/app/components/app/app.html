@@ -53,5 +53,16 @@
 			</div>
 		</div>
 	</div>
+	<div class="row" *ngIf="showSuggestRestart()">
+		<div class="col-md-4 col-sm-6 col-xs-12">
+			<div class="alert alert-info" role="alert" i18n>
+				The current server configuration has changed. Would you like to restart?
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="button" class="btn btn-primary" (click)="closeSuggestRestart()" i18n>Cancel</button>
+					<button type="button" class="btn btn-primary" (click)="restartServer()" i18n>Restart Server</button>
+				</div>				
+			</div>
+		</div>
+	</div>
 	<router-outlet></router-outlet>
 </div>

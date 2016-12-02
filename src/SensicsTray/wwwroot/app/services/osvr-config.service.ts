@@ -5,13 +5,15 @@ import { Observable } from 'rxjs/Observable';
 
 import * as OSVRConfig from '../models/osvr-config.model';
 import { UserNotificationsService } from './user-notifications.service';
+import { OSVRServerService } from './osvr-server.service';
 
 @Injectable()
 export class OSVRConfigService  {
     constructor(
         private http: Http,
-        private userNotifications: UserNotificationsService)
-    { }
+        private userNotifications: UserNotificationsService,
+        private osvrServer: OSVRServerService
+    ) { }
 
     getCurrent(): Observable<OSVRConfig.IOSVRConfig> {
         var observable = this.http.get("/api/currentconfig").map(
@@ -22,6 +24,7 @@ export class OSVRConfigService  {
     setCurrent(newConfig: OSVRConfig.IOSVRConfig): Observable<OSVRConfig.ISetCurrentConfigResponse> {
         var observable = this.http.post("/api/currentconfig", newConfig).map(
             response => response.json() as OSVRConfig.ISetCurrentConfigResponse);
+        this.osvrServer.setSuggestServerRestart(true);
         return this.userNotifications.wrapObservable(observable, null, "Could not set the current OSVR server configuration.");
     }
 
