@@ -15,6 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SensicsTray", "src\SensicsTray\SensicsTray.xproj", "{B2D61055-0BB3-46DE-80F2-17EF716B8746}"
+	ProjectSection(ProjectDependencies) = postProject
+		{50310BC2-5505-34F2-A0AE-0A4677921363} = {50310BC2-5505-34F2-A0AE-0A4677921363}
+	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "electron-app", "src\electron-app\", "{5A355C5D-B879-4E31-9FDB-C7A073010206}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -36,6 +39,13 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "electron-app", "src\electro
 		VWDPort = "59386"
 		SlnRelativePath = "src\electron-app\"
 	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{B2D61055-0BB3-46DE-80F2-17EF716B8746} = {B2D61055-0BB3-46DE-80F2-17EF716B8746}
+		{50310BC2-5505-34F2-A0AE-0A4677921363} = {50310BC2-5505-34F2-A0AE-0A4677921363}
+		{DCA309D3-AFAF-4C03-8AA0-2F29A5F09842} = {DCA309D3-AFAF-4C03-8AA0-2F29A5F09842}
+		{9AEE08DE-4CE5-453B-8AFC-0F091AC808DB} = {9AEE08DE-4CE5-453B-8AFC-0F091AC808DB}
+		{95D4F0E6-AC01-4D72-9155-C3CD84EF6D09} = {95D4F0E6-AC01-4D72-9155-C3CD84EF6D09}
+	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OSVR.Config", "src\osvr-config\src\OSVR.Config\OSVR.Config.xproj", "{DCA309D3-AFAF-4C03-8AA0-2F29A5F09842}"
 EndProject
@@ -44,6 +54,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osvrUSBDetection", "src\OSVR-USB-Monitor\build\osvrUSBDetection.vcxproj", "{50310BC2-5505-34F2-A0AE-0A4677921363}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OSVR.UsbDetection", "src\OSVR.UsbDetection\OSVR.UsbDetection.xproj", "{95D4F0E6-AC01-4D72-9155-C3CD84EF6D09}"
+	ProjectSection(ProjectDependencies) = postProject
+		{50310BC2-5505-34F2-A0AE-0A4677921363} = {50310BC2-5505-34F2-A0AE-0A4677921363}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

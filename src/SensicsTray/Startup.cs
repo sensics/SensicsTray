@@ -79,7 +79,7 @@ namespace Sensics.Tray
             });
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            loggerFactory.AddDebug(LogLevel.Warning);
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

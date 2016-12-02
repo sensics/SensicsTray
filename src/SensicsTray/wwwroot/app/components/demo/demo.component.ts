@@ -3,6 +3,8 @@ import { OSVRServerService } from '../../services/osvr-server.service';
 import { TrackerViewerService } from '../../services/tracker-viewer.service';
 import { DirectModeService } from '../../services/direct-mode.service';
 import { OSVRConfigService } from '../../services/osvr-config.service';
+import { OSVRSampleAppsService } from '../../services/osvr-sample-apps.service';
+import { ISampleApp } from '../../models/osvr-sample-apps.model';
 
 @Component({
     moduleId: module.id,
@@ -15,6 +17,7 @@ export class DemoComponent {
     runningServers: string[] = [];
     showServerRootNotDefined = true;
     serverRoot: string = null;
+    sampleApps: ISampleApp[] = [];
 
     // These will be used in the "Save config as" functionality
     // but I'm having trouble with the HTML sanitizer, so it's disabled
@@ -26,7 +29,8 @@ export class DemoComponent {
         private osvrServer: OSVRServerService,
         private trackerViewer: TrackerViewerService,
         private directMode: DirectModeService,
-        private osvrConfig: OSVRConfigService)
+        private osvrConfig: OSVRConfigService,
+        private osvrSampleApps: OSVRSampleAppsService)
     {
         this.updateRunningServers();
 
@@ -37,6 +41,9 @@ export class DemoComponent {
             error => {
                 this.showServerRootNotDefined = true;
             });
+
+        this.osvrSampleApps.getSampleApps().subscribe(
+            sampleApps => this.sampleApps = sampleApps);
 
         // sanitizer is ignoring our bypass, so comment this out for now
         //this.osvrConfig.getCurrent().subscribe(config => {
@@ -98,5 +105,9 @@ export class DemoComponent {
 
     disableDirectMode() {
         this.directMode.disableDirectMode(this.threeLetterVendorPNPID);
+    }
+
+    launchSampleApp(sampleApp: ISampleApp) {
+        this.osvrSampleApps.runSampleApp(sampleApp);
     }
 }
