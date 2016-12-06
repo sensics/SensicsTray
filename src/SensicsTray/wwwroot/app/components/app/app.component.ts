@@ -26,6 +26,7 @@ export class AppComponent {
             this.showStatusMessage = this.showMsg(this.userNotifications.getCurrentStatusMessage());
             this.showErrorMessage = false;
         });
+
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this.closeNotifications();
@@ -46,7 +47,7 @@ export class AppComponent {
     }
 
     restartServer() {
-        this.osvrServer.restartServer();
+        this.osvrServer.restartServer().subscribe();
     }
 
     statusMessage() {

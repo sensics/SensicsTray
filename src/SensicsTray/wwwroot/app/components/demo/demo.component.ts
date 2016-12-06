@@ -78,7 +78,7 @@ export class DemoComponent {
     }
 
     startTrackerViewer() {
-        this.trackerViewer.startTrackerViewer(this.trackerViewerPath);
+        this.trackerViewer.startTrackerViewer(this.trackerViewerPath).subscribe();
     }
 
     startServer() {
@@ -100,14 +100,14 @@ export class DemoComponent {
     }
 
     enableDirectMode() {
-        this.directMode.enableDirectMode(this.threeLetterVendorPNPID);
+        this.directMode.enableDirectMode(this.threeLetterVendorPNPID).subscribe();
     }
 
     disableDirectMode() {
-        this.directMode.disableDirectMode(this.threeLetterVendorPNPID);
+        this.directMode.disableDirectMode(this.threeLetterVendorPNPID).subscribe();
     }
 
     launchSampleApp(sampleApp: ISampleApp) {
-        this.osvrSampleApps.runSampleApp(sampleApp);
+        this.osvrSampleApps.runSampleApp(sampleApp).subscribe();
     }
 }

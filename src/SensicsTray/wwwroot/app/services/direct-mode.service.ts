@@ -33,7 +33,7 @@ export class DirectModeService {
 
     disableDirectMode(threeLetterVendorPNPID: string = null): Observable<void> {
         var params = this.getParams(threeLetterVendorPNPID);
-        var observable = this.http.post(this.enableDirectModeURL, {}, { search: params })
+        var observable = this.http.post(this.disableDirectModeURL, {}, { search: params })
             .map(response => { });
         return this.userNotifications.wrapObservable(observable,
             "Enabled direct mode successfully!", "Could not disable direct mode.");

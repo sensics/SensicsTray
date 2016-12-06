@@ -9,6 +9,6 @@ import { PluginsService } from '../../services/plugins.service';
 export class PluginsComponent {
     constructor(private plugins: PluginsService) { }
     downloadPlugins() {
-        this.plugins.downloadPlugins();
+        this.plugins.downloadPlugins().subscribe();
     }
 }
