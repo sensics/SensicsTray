@@ -83,7 +83,7 @@ export class UserNotificationsService {
             });
     }
 
-    wrapObservable<T>(observable: Observable<T>, successMessage: string = null, errorMessage: string = null, subscribe: boolean = true): Observable<T> {
+    wrapObservable<T>(observable: Observable<T>, successMessage: string = null, errorMessage: string = null): Observable<T> {
         var ret = observable.do(
             next => {
                 if (typeof successMessage === 'string' && successMessage.length > 0) {
@@ -98,9 +98,6 @@ export class UserNotificationsService {
                 }
                 this.showError(error.toString());
             });
-        if (subscribe) {
-            ret.subscribe();
-        }
         return ret;
     }
 }

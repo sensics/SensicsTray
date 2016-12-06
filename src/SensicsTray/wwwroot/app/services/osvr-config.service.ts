@@ -21,9 +21,9 @@ export class OSVRConfigService  {
         return this.userNotifications.wrapObservable(observable, null, "Could not get the current OSVR server configuration.");
     }
 
-    setCurrent(newConfig: OSVRConfig.IOSVRConfig): Observable<OSVRConfig.ISetCurrentConfigResponse> {
+    setCurrent(newConfig: OSVRConfig.IOSVRConfig): Observable<void> {
         var observable = this.http.post("/api/currentconfig", newConfig).map(
-            response => response.json() as OSVRConfig.ISetCurrentConfigResponse);
+            response => { });
         this.osvrServer.setSuggestServerRestart(true);
         return this.userNotifications.wrapObservable(observable, null, "Could not set the current OSVR server configuration.");
     }

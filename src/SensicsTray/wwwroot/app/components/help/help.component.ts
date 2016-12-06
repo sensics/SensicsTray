@@ -10,14 +10,14 @@ export class HelpComponent {
     constructor(private help: HelpService) { }
 
     openDocs() {
-        this.help.openDocs();
+        this.help.openDocs().subscribe();
     }
 
     createSysReport() {
-        this.help.createSysReport();
+        this.help.createSysReport().subscribe();
     }
 
     openSupportTicket() {
-        this.help.openSupportTicket();
+        this.help.openSupportTicket().subscribe();
     }
 }

@@ -3,5 +3,3 @@
     fileName: string;
     description: string;
 }
-
-export interface IRunSampleAppResponse { }
