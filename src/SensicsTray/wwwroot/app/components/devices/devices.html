@@ -26,3 +26,36 @@
 <h1>Unknown USB Devices</h1>
 
 <hr />
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title" i18n>Sample Configurations</h3>
+	</div>
+	<div class="panel-body" i18n>
+		Select one of the following sample configurations to save it as the default configuration.
+		<div class="alert alert-danger" role="alert" i18n>Note: This will overwrite the current configuration.</div>
+		<ul class="list-group">
+			<li class="list-group-item" *ngFor="let sampleConfig of sampleConfigs">
+				<div class="row">
+					<div class="col-md-12">
+						<h3>{{sampleConfig.fileName}}</h3>
+						<p class="help-block">{{sampleConfig.body.body.description}}</p>
+					</div>
+				</div>
+
+				<div class="row" *ngIf="sampleConfig.showDetail">
+					<div class="col-md-12">
+						<pre>{{sampleConfig.body | json}}</pre>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" class="btn btn-primary" (click)="clickSampleConfig(sampleConfig)" i18n="button text to use the sample in the current row">Use</button>
+						<button type="button" class="btn btn-default" (click)="viewSampleConfig(sampleConfig)" i18n="button text to view the sample in the current row">View</button>
+					</div>
+				</div>
+
+			</li>
+		</ul>
+	</div>
+</div>

@@ -40,6 +40,13 @@ export class OSVRConfigService  {
         return this.userNotifications.wrapObservable(observable, null, "Could not get the list of available displays.");
     }
 
+    getSampleConfigs(): Observable<OSVRConfig.IOSVRSampleConfig[]> {
+        var observable = this.http.get("/api/sampleConfigs").map(
+            response => response.json() as OSVRConfig.IOSVRSampleConfig[]);
+        return this.userNotifications.wrapObservable(
+            observable, null, "Could nto get the list of available sample configurations.");
+    }
+
     getCurrentServerRoot(): Observable<string> {
         var observable = this.http.get("/api/serverroot").map(
             response => response.text());
