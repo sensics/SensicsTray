@@ -5,17 +5,7 @@ import { OSVRConfigService } from '../../services/osvr-config.service';
 import { Observable } from 'rxjs/Rx';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { IOSVRSampleConfig } from '../../models/osvr-config.model';
-
-export interface IOSVRDevice {
-    vendorID: string;
-    productID: string;
-    friendlyName: string;
-    modelName: string;
-    vendorName: string;
-    firmwareVersion: string;
-    deviceType: string;
-    enabled: boolean;
-}
+import { IUSBDevice } from '../../models/usb-devices.model';
 
 @Component({
     moduleId: module.id,
@@ -28,22 +18,17 @@ export class DevicesComponent implements OnInit {
         private osvrConfig: OSVRConfigService
     ) { }
 
-    private usbDevices: IOSVRDevice[];
+    private usbDevices: IUSBDevice[];
     private sampleConfigs: IOSVRSampleConfig[];
 
     ngOnInit() {
-        this.devService.getDevices().subscribe(
-            (response: Response) => {
-                console.log("DevicesComponent: Received devices");
-                this.usbDevices = response.json();
-            },
-            (error: any) => {
-                console.log("DevicesComponent: Got an error instead of device list");
-            });
+        this.refreshDevicesList();
 
         this.devService.getUSBEevent().subscribe(
-            (response: Response) => {
-                console.log("DevicesComponent: Received new event");
+            event => {
+                if (event.statusCode !== "NoStatusChange") {
+                    this.refreshDevicesList();
+                }
             },
             (error: any) => {
                 console.log("DevicesComponent: Got an error instead of event")
@@ -53,6 +38,10 @@ export class DevicesComponent implements OnInit {
             configs => this.sampleConfigs = configs);
     }
 
+    refreshDevicesList() {
+        this.devService.getDevices().subscribe(
+            devices => this.usbDevices = devices);
+    }
     clickSampleConfig(sampleConfig: IOSVRSampleConfig) {
         this.osvrConfig.setCurrent(sampleConfig.body).subscribe();
     }
