@@ -19,3 +19,9 @@ export interface IOSVRDisplay {
     body: any;
     showDetail?: boolean;
 }
+
+export interface IOSVRSampleConfig {
+    fileName: string;
+    body: IOSVRConfig;
+    showDetail?: boolean;
+}
