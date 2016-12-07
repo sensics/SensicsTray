@@ -32,6 +32,7 @@ import { PluginsService } from './services/plugins.service';
 import { HelpService } from './services/help.service';
 import { DevicesService } from './services/devices.service';
 import { DirectModeService } from './services/direct-mode.service';
+import { ResetYawService } from './services/reset-yaw.service';
 
 @NgModule({
     imports: [ 
@@ -92,6 +93,7 @@ import { DirectModeService } from './services/direct-mode.service';
         HelpService,
         DevicesService,
         DirectModeService,
+        ResetYawService,
         { provide: LocationStrategy, useClass: HashLocationStrategy}
     ]
 })
