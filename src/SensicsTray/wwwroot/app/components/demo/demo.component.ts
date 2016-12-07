@@ -4,6 +4,7 @@ import { TrackerViewerService } from '../../services/tracker-viewer.service';
 import { DirectModeService } from '../../services/direct-mode.service';
 import { OSVRConfigService } from '../../services/osvr-config.service';
 import { OSVRSampleAppsService } from '../../services/osvr-sample-apps.service';
+import { ResetYawService } from '../../services/reset-yaw.service';
 import { ISampleApp } from '../../models/osvr-sample-apps.model';
 
 @Component({
@@ -18,6 +19,7 @@ export class DemoComponent {
     showServerRootNotDefined = true;
     serverRoot: string = null;
     sampleApps: ISampleApp[] = [];
+    resetYawPath: string = null;
 
     // These will be used in the "Save config as" functionality
     // but I'm having trouble with the HTML sanitizer, so it's disabled
@@ -30,8 +32,9 @@ export class DemoComponent {
         private trackerViewer: TrackerViewerService,
         private directMode: DirectModeService,
         private osvrConfig: OSVRConfigService,
-        private osvrSampleApps: OSVRSampleAppsService)
-    {
+        private osvrSampleApps: OSVRSampleAppsService,
+        private resetYaw: ResetYawService
+    ) {
         this.updateRunningServers();
 
         this.osvrConfig.getCurrentServerRoot().subscribe(
@@ -97,6 +100,10 @@ export class DemoComponent {
         this.osvrServer.restartServer().toPromise().then(_ => {
             this.updateRunningServers();
         });
+    }
+
+    callResetYaw() {
+        this.resetYaw.resetYaw(this.resetYawPath).subscribe();
     }
 
     enableDirectMode() {

@@ -144,6 +144,41 @@
 	</div>
 </div>
 
+<!-- Reset Yaw -->
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" i18n>Reset Yaw</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p i18n>Reset Yaw adds a transformation to the specified OSVR path (/me/head by default) to reset the forward direction to the current direction.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								   placeholder="OSVR Path to reset yaw for (leave blank to use /me/head)."
+								   i18n-placeholder="Optional input placeholder to tell reset-yaw utility which OSVR path to reset."
+								   [(ngModel)]="resetYawPath" />
+							<span class="input-group-btn">
+								<button class="btn btn-primary" type="button"
+										(click)="callResetYaw()"
+										i18n="Button text to reset the yaw orientation for a given OSVR path.">
+									Reset Yaw
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Sample Apps -->
 <div class="row">
 	<div class="col-md-6">
