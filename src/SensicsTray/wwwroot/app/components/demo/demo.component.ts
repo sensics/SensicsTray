@@ -16,7 +16,7 @@ export class DemoComponent {
     trackerViewerPath = "";
     threeLetterVendorPNPID = "";
     runningServers: string[] = [];
-    showServerRootNotDefined = true;
+    showServerRootNotDefined = false;
     serverRoot: string = null;
     sampleApps: ISampleApp[] = [];
     resetYawPath: string = null;
