@@ -24,7 +24,7 @@ function startBackend(next) {
         backendProcess.on("close", function(code) {
             console.log("Closing code: " + code);
         })
-        setTimeout(next, 2000);
+        setTimeout(next, 5000);
     } else {
         next();
     }

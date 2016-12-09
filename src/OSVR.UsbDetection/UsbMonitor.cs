@@ -175,8 +175,10 @@ namespace OSVR.UsbDetection
             {
                 for (uint i = 0; i < size; i++)
                 {
-                    ret.Add(Marshal.PtrToStructure<UsbDeviceDescriptor>(ptr));
-                    ptr = (ptr + structSize);
+                    IntPtr structPtr = Marshal.PtrToStructure<IntPtr>(ptr);
+                    var value = Marshal.PtrToStructure<UsbDeviceDescriptor>(structPtr);
+                    ret.Add(value);
+                    ptr = (ptr + Marshal.SizeOf<IntPtr>());
                 }
             }
             finally
