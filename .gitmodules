@@ -4,3 +4,6 @@
 [submodule "src/OSVR-USB-Monitor"]
 	path = src/OSVR-USB-Monitor
 	url = https://github.com/sensics/OSVR-USB-Monitor.git
+[submodule "src/managed-osvr"]
+	path = src/managed-osvr
+	url = https://github.com/osvr/managed-osvr
