@@ -18,6 +18,7 @@ import { DevicesComponent } from './components/devices/devices.component';
 import { PluginsComponent } from './components/plugins/plugins.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HelpComponent } from './components/help/help.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 // not yet used
 import { ServerRootNotDefinedComponent } from './components/server-root-not-defined/server-root-not-defined.component';
@@ -66,6 +67,10 @@ import { ResetYawService } from './services/reset-yaw.service';
                 component: HelpComponent
             },
             {
+                path: 'profile',
+                component: ProfileComponent
+            },
+            {
                 path: '',
                 redirectTo: '/home',
                 pathMatch: 'full'
@@ -79,6 +84,7 @@ import { ResetYawService } from './services/reset-yaw.service';
         DevicesComponent,
         PluginsComponent,
         HelpComponent,
+        ProfileComponent,
         SettingsComponent,
         ServerRootNotDefinedComponent // not yet used
     ],

@@ -12,6 +12,14 @@ export class AppComponent {
     title = 'Sensics Tray';
     showStatusMessage = false;
     showErrorMessage = false;
+
+    demoActive = false;
+    devicesActive = false;
+    pluginsActive = false;
+    settingsActive = false;
+    profileActive = false;
+    helpActive = false;
+
     constructor(
         private userNotifications: UserNotificationsService,
         private router: Router,
@@ -29,7 +37,14 @@ export class AppComponent {
 
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
+                var url = event.urlAfterRedirects;
                 this.closeNotifications();
+                this.helpActive = url === "/help";
+                this.profileActive = url === "/profile";
+                this.settingsActive = url === "/settings";
+                this.pluginsActive = url === "/plugins";
+                this.devicesActive = url === "/devices";
+                this.demoActive = url === "/demo";
             }
         });
     }
