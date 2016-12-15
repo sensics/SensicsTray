@@ -32,6 +32,10 @@
 					uib-tooltip="Settings">
 					<a routerLink="/settings" i18n>Settings</a>
 				</li>
+				<li [ngClass]="{active: profileActive}"
+					uib-tooltip="Profile">
+					<a routerLink="/profile" i18n>Profile</a>
+				</li>
 				<li [ngClass]="{active: helpActive}"
 					uib-tooltip="Help">
 					<a routerLink="/help" i18n>Help</a>

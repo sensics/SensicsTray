@@ -25,3 +25,11 @@ export interface IOSVRSampleConfig {
     body: IOSVRConfig;
     showDetail?: boolean;
 }
+
+export interface IOSVRUserProfile {
+    name: string;
+    ipd: number;
+    standingEyeHeight: number;
+    seatedEyeHeight: number;
+    filePath: string;
+}

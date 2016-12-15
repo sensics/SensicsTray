@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http } from "@angular/http";
+import { Http, Headers, RequestOptions } from "@angular/http";
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
@@ -38,6 +38,26 @@ export class OSVRConfigService  {
         var observable = this.http.get("/api/availabledisplays").map(
             response => response.json() as OSVRConfig.IOSVRDisplay[]);
         return this.userNotifications.wrapObservable(observable, null, "Could not get the list of available displays.");
+    }
+
+    getAvailableUserProfiles(): Observable<OSVRConfig.IOSVRUserProfile[]> {
+        var observable = this.http.get("/api/availableuserprofiles").map(
+            response => response.json() as OSVRConfig.IOSVRUserProfile[]);
+        return this.userNotifications.wrapObservable(observable, null, "Could not get the list of available user profiles.");
+    }
+
+    saveProfile(profile: OSVRConfig.IOSVRUserProfile): Observable<void> {
+        var observable = this.http.post("/api/availableuserprofiles", profile).map(
+            response => { });
+        return this.userNotifications.wrapObservable(observable,
+            "Successfully saved user profile!", "Could not save the user profile.");
+    }
+
+    deleteProfile(profile: OSVRConfig.IOSVRUserProfile): Observable<void> {
+        var observable = this.http.delete(`/api/availableuserprofiles/${profile.name}`).map(
+            response => { });
+        return this.userNotifications.wrapObservable(observable,
+            "Successfully deleted user profile!", "Could not delete user profile.");
     }
 
     getSampleConfigs(): Observable<OSVRConfig.IOSVRSampleConfig[]> {
