@@ -51,6 +51,24 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
     }
 
+    asHex(value: number) {
+        return ("0000" + value.toString(16)).substr(-4);
+    }
+
+    vendorIDOrName(usbDevice: IUSBDevice) {
+        if (typeof usbDevice.vendorName === "string" && usbDevice.vendorName.length > 0) {
+            return `(${this.asHex(usbDevice.vendorID)}) - ${usbDevice.vendorName}`;
+        }
+        return this.asHex(usbDevice.vendorID);
+    }
+
+    productIDOrName(usbDevice: IUSBDevice) {
+        if (typeof usbDevice.productName === "string" && usbDevice.productName.length > 0) {
+            return `(${this.asHex(usbDevice.productID)}) - ${usbDevice.productName}`;
+        }
+        return this.asHex(usbDevice.productID);
+    }
+
     refreshDevicesList() {
         this.devService.getDevices().subscribe(
             devices => this.usbDevices = devices);

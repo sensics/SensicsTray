@@ -3,6 +3,7 @@
 const {app, globalShortcut, Tray, Menu, BrowserWindow} = require("electron");
 const {spawn} = require("child_process");
 const path = require('path');
+const url = require('url');
 
 const iconPath = path.join(__dirname, 'icon.ico');
 let appIcon = null;
@@ -11,12 +12,17 @@ var mainWindow = null;
 var backendProcess = null;
 
 function startBackend(next) {
+	var nextCalled = false;
     if(backendProcess == null) {
         backendProcess = spawn('SensicsTray.exe', {
             "cwd": "resources/app/bin",
         });
         backendProcess.stdout.on('data', function(data) {
-            console.log("stdout: " + data);
+        	console.log("stdout: " + data);
+        	if(!nextCalled) {
+        		nextCalled = true;
+        		next();
+        	}
         });
         backendProcess.stderr.on("data", function(data) {
             console.log("stdout: " + data);
@@ -24,7 +30,7 @@ function startBackend(next) {
         backendProcess.on("close", function(code) {
             console.log("Closing code: " + code);
         })
-        setTimeout(next, 5000);
+        //setTimeout(next, 5000);
     } else {
         next();
     }
@@ -39,12 +45,18 @@ function goToStateFunc(state) {
 }
 
 function createWindow() {
+    mainWindow = new BrowserWindow({
+        height: 800,
+        width: 1280
+    });
+
+    mainWindow.loadURL(url.format({
+    	pathname: path.join(__dirname, 'index.html'),
+    	protocol: 'file:',
+    	slashes: true
+    }));
 
     startBackend(function() {
-        mainWindow = new BrowserWindow({
-            height: 600,
-            width: 800
-        });
 
         mainWindow.loadURL("http://localhost:5000");
 

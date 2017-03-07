@@ -10,7 +10,16 @@ gulp.task('clean:dist', () => {
 
 gulp.task('clean', ['clean:dist']);
 
-gulp.task('build:electronPackage', ['clean'], (cb) => {
+gulp.task('copy:usblib', ['clean'], () => {
+	return gulp.src([
+		"../OSVR-USB-Monitor/build/RelWithDebInfo/osvrUSBDetection.dll",
+		"../OSVR-USB-Monitor/build/RelWithDebInfo/osvrUSBDetection.pdb"
+	]).pipe(gulp.dest("app/bin"));
+});
+
+gulp.task('copy', ['copy:usblib']);
+
+gulp.task('build:electronPackage', ['copy'], (cb) => {
 	builder.build({
 		targets: Platform.WINDOWS.createTarget(),
 		devMetadata: {
