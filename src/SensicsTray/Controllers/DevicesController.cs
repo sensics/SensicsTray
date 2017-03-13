@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using OSVR.UsbDetection;
+using Sensics.Tray.Models;
 
 namespace TrayApp.Controllers
 {
@@ -10,11 +12,12 @@ namespace TrayApp.Controllers
     {
         // GET: api/devices
         [HttpGet]
-        public IEnumerable<UsbDeviceDescriptor> Get()
+        public IEnumerable<UsbDevice> Get()
         {
             using (var usbMonitor = new UsbMonitor())
             {
-                return usbMonitor.GetDeviceList();
+                return from usbDeviceDescriptor in usbMonitor.GetDeviceList()
+                       select new UsbDevice(usbDeviceDescriptor);
             }
         }
     }

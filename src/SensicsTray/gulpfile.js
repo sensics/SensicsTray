@@ -7,7 +7,8 @@ var gulp = require("gulp"),
 	ts = require("gulp-typescript");
 
 var paths = {
-	webroot: "./wwwroot/"
+    webroot: "./wwwroot/",
+    nativeLibs: './artifacts/bin/'
 };
 
 paths.libs = paths.webroot + "libs/";
@@ -16,15 +17,13 @@ paths.app = paths.webroot + "app/";
 var tsProject = ts.createProject("tsconfig.json");
 
 gulp.task('tsc', function () {
-	var tsResult = tsProject.src({
-		cwd: paths.webroot,
-		rootDir: paths.webroot
-	})
-		.pipe(sourcemaps.init())
-		.pipe(tsProject());
-	return tsResult.js
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(paths.app))
+    var tsResult = tsProject.src()
+        .pipe(sourcemaps.init())
+        .pipe(tsProject());
+
+    return tsResult.js
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(paths.app));
 });
 
 gulp.task('copy:angular2', () => {
@@ -59,6 +58,14 @@ gulp.task('copy:otherDependencies', () => {
 		'node_modules/moment/moment.js'
 	])
 	.pipe(gulp.dest(paths.libs));
+});
+
+gulp.task('copy:usbLib', () => {
+    return gulp.src([
+        '../OSVR-USB-Monitor/build/RelWithDebInfo/osvrUSBDetection.dll',
+        '../OSVR-USB-Monitor/build/RelWithDebInfo/osvrUSBDetection.pdb'
+    ])
+    .pipe(gulp.dest(paths.nativeLibs));
 });
 
 // this task should only be run manually, not as part of the 'build' task

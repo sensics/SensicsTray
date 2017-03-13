@@ -1,9 +1,9 @@
 ﻿export interface IUSBDevice {
-    vendorID: string;
-    productID: string;
-    friendlyName: string;
-    modelName: string;
+    vendorID: number;
     vendorName: string;
+    productID: number;
+    productName: string;
+    modelName: string;
     firmwareVersion: string;
     deviceType: string;
     enabled: boolean;
