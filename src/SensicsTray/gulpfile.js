@@ -7,7 +7,8 @@ var gulp = require("gulp"),
 	ts = require("gulp-typescript");
 
 var paths = {
-	webroot: "./wwwroot/"
+    webroot: "./wwwroot/",
+    nativeLibs: './artifacts/bin/'
 };
 
 paths.libs = paths.webroot + "libs/";
@@ -59,6 +60,14 @@ gulp.task('copy:otherDependencies', () => {
 		'node_modules/moment/moment.js'
 	])
 	.pipe(gulp.dest(paths.libs));
+});
+
+gulp.task('copy:usbLib', () => {
+    return gulp.src([
+        '../OSVR-USB-Monitor/build/RelWithDebInfo/osvrUSBDetection.dll',
+        '../OSVR-USB-Monitor/build/RelWithDebInfo/osvrUSBDetection.pdb'
+    ])
+    .pipe(gulp.dest(paths.nativeLibs));
 });
 
 // this task should only be run manually, not as part of the 'build' task
