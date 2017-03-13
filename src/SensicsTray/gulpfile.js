@@ -17,15 +17,13 @@ paths.app = paths.webroot + "app/";
 var tsProject = ts.createProject("tsconfig.json");
 
 gulp.task('tsc', function () {
-	var tsResult = tsProject.src({
-		cwd: paths.webroot,
-		rootDir: paths.webroot
-	})
-		.pipe(sourcemaps.init())
-		.pipe(tsProject());
-	return tsResult.js
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(paths.app))
+    var tsResult = tsProject.src()
+        .pipe(sourcemaps.init())
+        .pipe(tsProject());
+
+    return tsResult.js
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(paths.app));
 });
 
 gulp.task('copy:angular2', () => {
