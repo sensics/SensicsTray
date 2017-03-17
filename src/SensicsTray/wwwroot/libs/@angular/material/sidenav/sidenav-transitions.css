@@ -1,0 +1,10 @@
+.mat-sidenav-transition .mat-sidenav {
+  transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1); }
+
+.mat-sidenav-transition .mat-sidenav-content {
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-property: transform, margin-left, margin-right; }
+
+.mat-sidenav-transition .mat-sidenav-backdrop.mat-sidenav-shown {
+  transition: background-color 400ms cubic-bezier(0.25, 0.8, 0.25, 1); }

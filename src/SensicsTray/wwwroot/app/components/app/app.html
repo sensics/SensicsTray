@@ -1,72 +1,24 @@
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button"
-					class="navbar-toggle collapsed"
-					data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1"
-					area-expanded="false">
-				<span class="sr-only" i18n>Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#/" i18n>Sensics Tray</a>
-		</div>
+﻿<md-sidenav-container >
+	<nav md-tab-nav-bar>
+		<!--<a md-tab-link
+		   [routerLink]="link"
+		   routerLinkActive #rla="routerLinkActive"
+		   [active]="true">
+			Link1
+		</a>
+		<a md-tab-link
+		   [routerLink]="link"
+		   routerLinkActive #rla="routerLinkActive"
+		   [active]="true">
+			Link2
+		</a>-->
+		<a routerLink="/demo" [active]="demoActive" md-tab-link i18n>Demo</a>
+		<a routerLink="/devices" [active]="devicesActive" md-tab-link i18n>Devices</a>
+		<a routerLink="/plugins" [active]="pluginsActive" md-tab-link i18n>Plugins</a>
+		<a routerLink="/settings" [active]="settingsActive" md-tab-link i18n>Settings</a>
+		<a routerLink="/profile" [active]="profileActive" md-tab-link i18n>Profile</a>
+		<a routerLink="/help" [active]="helpActive" md-tab-link i18n>Help</a>
+	</nav>
 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li [ngClass]="{active: demoActive}"
-					uib-tooltip="Demo">
-					<a routerLink="/demo" i18n>Demo</a>
-				</li>
-				<li [ngClass]="{active: devicesActive}"
-					uib-tooltip="Devices">
-					<a routerLink="/devices" i18n>Devices</a>
-				</li>
-				<li [ngClass]="{active: pluginsActive}"
-					uib-tooltip="Plugins">
-					<a routerLink="/plugins" i18n>Plugins</a>
-				</li>
-				<li [ngClass]="{active: settingsActive}"
-					uib-tooltip="Settings">
-					<a routerLink="/settings" i18n>Settings</a>
-				</li>
-				<li [ngClass]="{active: profileActive}"
-					uib-tooltip="Profile">
-					<a routerLink="/profile" i18n>Profile</a>
-				</li>
-				<li [ngClass]="{active: helpActive}"
-					uib-tooltip="Help">
-					<a routerLink="/help" i18n>Help</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</nav>
-<div class="container-fluid">
-	<div class="row" *ngIf="showMessages()">
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="alert alert-info" role="alert" *ngIf="showStatusMessage">
-				<button type="button" class="btn btn-link"(click)="closeNotifications()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-				{{statusMessage()}}
-			</div>
-			<div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
-				<button type="button" class="btn btn-link" (click)="closeNotifications()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-				{{errorMessage()}}
-			</div>
-		</div>
-	</div>
-	<div class="row" *ngIf="showSuggestRestart()">
-		<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="alert alert-info" role="alert" i18n>
-				The current server configuration has changed. Would you like to restart?
-				<div class="btn-group" role="group" aria-label="...">
-					<button type="button" class="btn btn-primary" (click)="closeSuggestRestart()" i18n>Cancel</button>
-					<button type="button" class="btn btn-primary" (click)="restartServer()" i18n>Restart Server</button>
-				</div>				
-			</div>
-		</div>
-	</div>
-	<router-outlet></router-outlet>
-</div>
+	<router-outlet style="padding: 20px"></router-outlet>
+</md-sidenav-container>

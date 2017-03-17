@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <title></title>
+	<link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css" />
+</head>
+<body>
+	<ts-app>Please wait while Sensics Tray™ loads...</ts-app>
+	<script src="libs/shim.min.js"></script>
+	<script src="libs/system.js"></script>
+	<script src="libs/zone.min.js"></script>
+	<script src="libs/Reflect.js"></script>
+	<script src="systemjs.config.js"></script>
+	<script>
+            System.import('app/boot').catch(function (err) {
+                console.error(err);
+            });
+	</script>
+</body>
+</html>

@@ -4,7 +4,8 @@
 var gulp = require("gulp"),
 	sourcemaps = require("gulp-sourcemaps"),
     rimraf = require("rimraf"),
-	ts = require("gulp-typescript");
+    ts = require("gulp-typescript"),
+    sass = require('gulp-sass');
 
 var paths = {
     webroot: "./wwwroot/",
@@ -15,6 +16,12 @@ paths.libs = paths.webroot + "libs/";
 paths.app = paths.webroot + "app/";
 
 var tsProject = ts.createProject("tsconfig.json");
+
+gulp.task('sass', () => {
+    return gulp.src(paths.webroot + '**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(paths.webroot));
+});
 
 gulp.task('tsc', function () {
     var tsResult = tsProject.src()
@@ -27,7 +34,12 @@ gulp.task('tsc', function () {
 });
 
 gulp.task('copy:angular2', () => {
-	return gulp.src('./node_modules/@angular/**/*.umd.min.js')
+    return gulp.src([
+        './node_modules/@angular/**/*.umd.min.js',
+        './node_modules/@angular/**/*.scss',
+        './node_modules/@angular/**/*.css',
+        './node_modules/@angular/**/*.umd.js'
+    ])
         .pipe(gulp.dest(paths.libs + '@angular'));
 });
 
@@ -74,7 +86,7 @@ gulp.task('copy', [
 	'copy:angular2',
 	'copy:rxjs',
 	'copy:bootstrap',
-	'copy:otherDependencies'
+    'copy:otherDependencies'
 ]);
 
 // This task should only be run manually, not as part of the 'clean' task
@@ -84,4 +96,4 @@ gulp.task('clean:libs', (cb) => {
 
 gulp.task('clean', []);
 
-gulp.task('build', ['tsc']);
+gulp.task('build', ['tsc', 'sass']);

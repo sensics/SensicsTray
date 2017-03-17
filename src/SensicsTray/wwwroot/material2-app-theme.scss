@@ -1,0 +1,32 @@
+﻿@import './libs/@angular/material/core/theming/all-theme';
+
+@include mat-core();
+
+$dark-primary: mat-palette($mat-cyan, 700, 500, 900);
+$dark-accent: mat-palette($mat-blue-grey, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+@include angular-material-theme($dark-theme);
+
+.ts-highlight-section {
+    font-size: 40px;
+    font-weight: bold;
+    color: #46ddc8;
+    margin: 20px 20px 0px 20px;
+}
+
+.ts-subtitle-section {
+    font-size: 22px;
+    font-weight: lighter;
+    color: #b3b3b3;
+    margin: 0px 20px 20px 20px;
+}
+
+.ts-subhighlight-section {
+    border-bottom-style: dotted;
+    color: white;
+    font-size: 26px;
+    margin: 20px;
+}

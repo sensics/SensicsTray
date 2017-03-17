@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  line-height: 20px;
+  font-size: 14px;
+  font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-simple-snackbar-message {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis; }
+
+.mat-simple-snackbar-action {
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  border: none;
+  background: none;
+  margin: -5px 0 0;
+  padding: 5px;
+  text-transform: uppercase;
+  color: inherit;
+  line-height: inherit;
+  flex-shrink: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600; }

@@ -4,8 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // third party imports
 //import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
@@ -40,6 +41,8 @@ import { ResetYawService } from './services/reset-yaw.service';
         BrowserModule,
         FormsModule,
         HttpModule,
+        MaterialModule.forRoot(),
+        FlexLayoutModule.forRoot(),
         //Ng2BootstrapModule,
         RouterModule.forRoot([
             {
