@@ -13,7 +13,8 @@ export class AppComponent {
     showStatusMessage = false;
     showErrorMessage = false;
 
-    demoActive = false;
+    playActive = false;
+    storeActive = false;
     devicesActive = false;
     pluginsActive = false;
     settingsActive = false;
@@ -40,11 +41,12 @@ export class AppComponent {
                 var url = event.urlAfterRedirects;
                 this.closeNotifications();
                 this.helpActive = url === "/help";
+                this.storeActive = url === "/store";
                 this.profileActive = url === "/profile";
                 this.settingsActive = url === "/settings";
                 this.pluginsActive = url === "/plugins";
                 this.devicesActive = url === "/devices";
-                this.demoActive = url === "/demo";
+                this.playActive = url === "/play";
             }
         });
     }

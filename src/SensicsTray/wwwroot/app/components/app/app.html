@@ -12,12 +12,27 @@
 		   [active]="true">
 			Link2
 		</a>-->
-		<a routerLink="/demo" [active]="demoActive" md-tab-link i18n>Demo</a>
-		<a routerLink="/devices" [active]="devicesActive" md-tab-link i18n>Devices</a>
-		<a routerLink="/plugins" [active]="pluginsActive" md-tab-link i18n>Plugins</a>
-		<a routerLink="/settings" [active]="settingsActive" md-tab-link i18n>Settings</a>
-		<a routerLink="/profile" [active]="profileActive" md-tab-link i18n>Profile</a>
-		<a routerLink="/help" [active]="helpActive" md-tab-link i18n>Help</a>
+		<a routerLink="/play" [active]="playActive" md-tab-link i18n
+		   [ngClass]="{'ts-tab-text-active': playActive, 'ts-tab-text-inactive': !playActive}" style="height:auto">
+			<md-icon style="width:100%;display:block">games</md-icon><span>PLAY</span></a>
+		<a routerLink="/store" [active]="storeActive" md-tab-link i18n
+		   [ngClass]="{'ts-tab-text-active': storeActive, 'ts-tab-text-inactive': !storeActive}" style="height:auto">
+			<md-icon style="width:100%;display:block">shopping_basket</md-icon>STORE</a>
+		<a routerLink="/devices" [active]="devicesActive" md-tab-link i18n
+		   [ngClass]="{'ts-tab-text-active': devicesActive, 'ts-tab-text-inactive': !devicesActive}" style="height:auto">
+			<md-icon style="width:100%;display:block">videogame_asset</md-icon>DEVICES</a>
+		<a routerLink="/plugins" [active]="pluginsActive" md-tab-link i18n
+		   [ngClass]="{'ts-tab-text-active': pluginsActive, 'ts-tab-text-inactive': !pluginsActive}" style="height:auto">
+			<md-icon style="width:100%;display:block">power</md-icon>PLUGINS</a>
+		<a routerLink="/settings" [active]="settingsActive" md-tab-link i18n
+		   [ngClass]="{'ts-tab-text-active': settingsActive, 'ts-tab-text-inactive': !settingsActive}" style="height:auto">
+			<md-icon style="width:100%;display:block">build</md-icon>SETTINGS</a>
+		<a routerLink="/profile" [active]="profileActive" md-tab-link i18n
+		   [ngClass]="{'ts-tab-text-active': profileActive, 'ts-tab-text-inactive': !profileActive}" style="height:auto">
+			<md-icon style="width:100%;display:block">person_outline</md-icon>PROFILE</a>
+		<a routerLink="/help" [active]="helpActive" md-tab-link i18n
+		   [ngClass]="{'ts-tab-text-active': helpActive, 'ts-tab-text-inactive': !helpActive}" style="height:auto">
+			<md-icon style="width:100%;display:block">help_outline</md-icon>HELP</a>
 	</nav>
 
 	<router-outlet style="padding: 20px"></router-outlet>

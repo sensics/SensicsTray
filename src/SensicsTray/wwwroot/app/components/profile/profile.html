@@ -1,119 +1,112 @@
-﻿<div class="row">
-	<div class="col-md-12">
-		<button type="button" class="btn btn-link" (click)="createNewProfile()" i18n="Button text to create a new profile.">Create New Profile</button>
-	</div>
-</div>
-<div class="row" *ngIf="showEditProfile()">
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title" i18n="Title of the current user profile being edited">Edit Profile</h3>
-			</div>
-			<div class="panel-body">
-				<form name="profileForm">
-					<div class="form-group">
-						<label for="nameInput" i18n="label for name field">Name (required)</label>
-						<input type="text"
-							   class="form-control"
-							   id="nameInput" name="nameInput"
-							   required
-							   placeholder-i18n="" placeholder="The unique name for the profile."
-							   [(ngModel)]="currentProfile.name" />
-					</div>
-					<div class="form-group">
-						<label for="ipdInput" i18n="label for IPD field">IPD (in meters)</label>
-						<input type="number" min="0" step="0.00001"
-							   class="form-control"
-							   id="ipdInput" name="ipdInput"
-							   placeholder-i18n="" placeholder="The IPD value (in meters)."
-							   [(ngModel)]="currentProfile.ipd" />
-					</div>
-					<div class="form-group">
-						<label for="standingEyeHeightInput" i18n="label for standing eye height field">Standing Eye Height (in meters)</label>
-						<input type="number" min="0" step="0.01"
-							   class="form-control"
-							   id="standingEyeHeightInput" name="standingEyeHeightInput"
-							   placeholder-i18n="" placeholder="The standing eye height (in meters)."
-							   [(ngModel)]="currentProfile.standingEyeHeight" />
-					</div>
-					<div class="form-group">
-						<label for="seatedEyeHeightInput" i18n="label for seated eye height field">Seated Eye Height (in meters)</label>
-						<input type="number" min="0" step="0.01"
-							   class="form-control"
-							   id="seatedEyeHeightInput" name="idInput"
-							   placeholder-i18n="" placeholder="The seated eye height (in meters)."
-							   [(ngModel)]="currentProfile.seatedEyeHeight" />
-					</div>
-					<div class="form-group">
-						<label class="control-label" i18n="Label for the file path static value">File Path</label>
-						<p class="form-control-static">{{currentProfile.filePath}}</p>
-					</div>
-					<div class="btn-group" role="group" aria-label="...">
-						<button type="button" class="btn btn-default" i18n="Button to save profile"
-								[disabled]="!canSave()"
-								(click)="saveProfile()">
-							Save
-						</button>
-						<button type="button" class="btn btn-default" i18n="Button to cancel editing profile"
-								(click)="cancelProfile()">
-							Cancel
-						</button>
-					</div>
-				</form>
+﻿<button type="button" md-raised-button (click)="createNewProfile()" 
+		style="margin:20px"
+		i18n="Button text to create a new profile.">Create New Profile</button>
+<md-card *ngIf="showEditProfile()" style="margin:20px">
+	<md-card-title>
+		<p class="ts-highlight-text" i18n="Title of the current user profile being edited">Edit Profile</p>
+	</md-card-title>
+	<md-card-content>
+		<div fxLayout="row" style="margin-bottom:20px">
+			<div fxFlex="100" style="margin-right:5px">
+				<md-input-container style="width:100%">
+					<input type="text"
+						   mdInput
+						   
+						   id="nameInput" name="nameInput"
+						   required
+						   placeholder-i18n="label for name field" placeholder="Name (required)"
+						   [(ngModel)]="currentProfile.name" />
+					<md-hint i18n="hint for name field">The unique name for the profile.</md-hint>
+				</md-input-container>
 			</div>
 		</div>
-	</div>
-</div>
+		<div fxLayout="row">
+			<div fxFlex="33">
+				<md-input-container style="width:100%">
+					<input type="number" min="0" step="0.00001"
+						   mdInput
+						   style="width:100%"
+						   id="ipdInput" name="ipdInput"
+						   placeholder-i18n="label for IPD field" placeholder="IPD (in meters)"
+						   [(ngModel)]="currentProfile.ipd" />
+					<!--<md-hint i18n="hint for ipd field">The IPD value (in meters).</md-hint>-->
+				</md-input-container>
+			</div>
+			<div fxFlex="33">
+				<md-input-container style="width:100%">
+					<input type="number" min="0" step="0.01"
+						   mdInput
+						   style="width:100%"
+						   id="standingEyeHeightInput" name="standingEyeHeightInput"
+						   placeholder-i18n="label for standing eye height field" placeholder="Standing Eye Height (in meters)"
+						   [(ngModel)]="currentProfile.standingEyeHeight" />
+					<!--<md-hint i18n="hint for the standing eye height field">The standing eye height (in meters).</md-hint>-->
+				</md-input-container>
+			</div>
+			<div fxFlex="33">
+				<md-input-container style="width:100%">
+					<input type="number" min="0" step="0.01"
+						   mdInput
+						   id="seatedEyeHeightInput" name="idInput"
+						   placeholder-i18n="label for seated eye height field" placeholder="Seated Eye Height (in meters)"
+						   [(ngModel)]="currentProfile.seatedEyeHeight" />
+				</md-input-container>
+			</div>
+		</div>
+	</md-card-content>
+	<md-card-actions>
+		<button type="button" md-raised-button color="primary" i18n="Button to save profile"
+				[disabled]="!canSave()"
+				(click)="saveProfile()">
+			Save
+		</button>
+		<button type="button" md-raised-button i18n="Button to cancel editing profile"
+				(click)="cancelProfile()">
+			Cancel
+		</button>
+	</md-card-actions>
+</md-card>
 
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title" i18n>Available User Profiles</h3>
-	</div>
-	<div class="panel-body" i18n>
-		Select one of the following user profiles to save it as the current profile.
-		<div class="alert alert-danger" role="alert" i18n>Note: This will overwrite the current configuration.</div>
-		<table class="table table-condensed table-striped">
-			<thead>
-				<tr>
-					<th i18n="Table header for the user profile name column.">Name</th>
-					<th i18n="Table header for the user profile IPD column.">IPD</th>
-					<th i18n="Table header for the user profile Standing Eye Height column.">Standing Eye Height</th>
-					<th i18n="Table header for the user profile Seated Eye Height column.">Seated Eye Height</th>
-					<th i18n="Table header for the user profile File Path column.">File Path</th>
-					<th></th>
-					<!--<th></th>-->
-				</tr>
-			</thead>
-			<tbody>
-				<ng-container *ngFor="let userProfile of userProfiles">
-					<tr [ngClass]="{'success': isCurrentProfile(userProfile)}">
-						<td>{{userProfile.name}}</td>
-						<td>{{userProfile.ipd}}</td>
-						<td>{{userProfile.standingEyeHeight}}</td>
-						<td>{{userProfile.seatedEyeHeight}}</td>
-						<td>{{userProfile.filePath}}</td>
-						<td>
-							<div class="btn-group" role="group" aria-label="...">
-								<button type="button" class="btn btn-default"
-										(click)="editProfile(userProfile)"
-										i18n="button text to edit a profile.">
-									Edit
-								</button>
-								<button type="button" class="btn btn-default"
-										[ngClass]="{'btn-default': !isCurrentProfile(userProfile), 'btn-success': isCurrentProfile(userProfile)}"
-										(click)="clickUserProfile(userProfile)"
-										[disabled]="isCurrentProfile(userProfile)">
-									{{useButtonText(userProfile)}}
-								</button>
-								<button type="button" class="btn btn-default"
-										(click)="deleteProfile(userProfile)">
-									Delete
-								</button>
-							</div>
-						</td>
-					</tr>
-				</ng-container>
-			</tbody>
-		</table>
-	</div>
-</div>
+<table style="width:100%">
+	<thead>
+		<tr>
+			<th class="ts-table-header-text" i18n="Table header for the user profile name column.">Name</th>
+			<th class="ts-table-header-text" i18n="Table header for the user profile IPD column.">IPD</th>
+			<th class="ts-table-header-text" i18n="Table header for the user profile Standing Eye Height column.">Standing Eye Height</th>
+			<th class="ts-table-header-text" i18n="Table header for the user profile Seated Eye Height column.">Seated Eye Height</th>
+			<th class="ts-table-header-text" i18n="Table header for the user profile File Path column.">File Path</th>
+			<th></th>
+			<!--<th></th>-->
+		</tr>
+	</thead>
+	<tbody>
+		<ng-container *ngFor="let userProfile of userProfiles">
+			<tr [ngClass]="{'success': isCurrentProfile(userProfile)}">
+				<td class="ts-table-cell-text">{{userProfile.name}}</td>
+				<td class="ts-table-cell-text">{{userProfile.ipd}}</td>
+				<td class="ts-table-cell-text">{{userProfile.standingEyeHeight}}</td>
+				<td class="ts-table-cell-text">{{userProfile.seatedEyeHeight}}</td>
+				<td class="ts-table-cell-text">{{userProfile.filePath}}</td>
+				<td>
+					<div class="btn-group" role="group" aria-label="...">
+						<button type="button" md-raised-button
+								(click)="editProfile(userProfile)"
+								i18n="button text to edit a profile.">
+							Edit
+						</button>
+						<button type="button" md-raised-button
+								[ngClass]="{'btn-default': !isCurrentProfile(userProfile), 'btn-success': isCurrentProfile(userProfile)}"
+								(click)="clickUserProfile(userProfile)"
+								[disabled]="isCurrentProfile(userProfile)">
+							{{useButtonText(userProfile)}}
+						</button>
+						<button type="button" md-raised-button
+								(click)="deleteProfile(userProfile)">
+							Delete
+						</button>
+					</div>
+				</td>
+			</tr>
+		</ng-container>
+	</tbody>
+</table>

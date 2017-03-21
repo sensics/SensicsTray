@@ -9,10 +9,10 @@ import { ISampleApp } from '../../models/osvr-sample-apps.model';
 
 @Component({
     moduleId: module.id,
-    selector: 'ts-demo',
-    templateUrl: 'demo.html'
+    selector: 'ts-play',
+    templateUrl: 'play.html'
 })
-export class DemoComponent {
+export class PlayComponent {
     trackerViewerPath = "";
     threeLetterVendorPNPID = "";
     runningServers: string[] = [];

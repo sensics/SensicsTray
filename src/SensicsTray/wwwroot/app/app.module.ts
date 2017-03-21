@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdIconModule, MdIconRegistry, MdDialogModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // third party imports
@@ -14,12 +14,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // Application component imports
 import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
-import { DemoComponent } from './components/demo/demo.component';
+import { PlayComponent } from './components/play/play.component';
 import { DevicesComponent } from './components/devices/devices.component';
 import { PluginsComponent } from './components/plugins/plugins.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HelpComponent } from './components/help/help.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { StoreComponent } from './components/store/store.component';
+import { ViewConfigDialogComponent } from './components/devices/view-config-dialog.component';
 
 // not yet used
 import { ServerRootNotDefinedComponent } from './components/server-root-not-defined/server-root-not-defined.component';
@@ -37,12 +39,17 @@ import { DirectModeService } from './services/direct-mode.service';
 import { ResetYawService } from './services/reset-yaw.service';
 
 @NgModule({
+    entryComponents: [
+        ViewConfigDialogComponent
+    ],
     imports: [ 
         BrowserModule,
         FormsModule,
         HttpModule,
+        MdIconModule.forRoot(),
         MaterialModule.forRoot(),
         FlexLayoutModule.forRoot(),
+        MdDialogModule.forRoot(),
         //Ng2BootstrapModule,
         RouterModule.forRoot([
             {
@@ -50,8 +57,12 @@ import { ResetYawService } from './services/reset-yaw.service';
                 component: HomeComponent
             },
             {
-                path: 'demo',
-                component: DemoComponent
+                path: 'store',
+                component: StoreComponent
+            },
+            {
+                path: 'play',
+                component: PlayComponent
             },
             {
                 path: 'devices',
@@ -83,12 +94,14 @@ import { ResetYawService } from './services/reset-yaw.service';
     declarations: [
         AppComponent,
         HomeComponent,
-        DemoComponent,
+        PlayComponent,
         DevicesComponent,
         PluginsComponent,
         HelpComponent,
         ProfileComponent,
         SettingsComponent,
+        StoreComponent,
+        ViewConfigDialogComponent,
         ServerRootNotDefinedComponent // not yet used
     ],
     bootstrap: [ AppComponent ],
@@ -103,6 +116,7 @@ import { ResetYawService } from './services/reset-yaw.service';
         DevicesService,
         DirectModeService,
         ResetYawService,
+        MdIconRegistry,
         { provide: LocationStrategy, useClass: HashLocationStrategy}
     ]
 })

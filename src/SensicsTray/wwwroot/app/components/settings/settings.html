@@ -1,44 +1,22 @@
 ﻿<!-- Save Settings -->
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title" i18n>Current configuration</h3>
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-12" *ngIf="!canSaveSettings()">
-						<p i18n>No current configuration.</p>
-					</div>
-					<div class="col-md-12" *ngIf="canSaveSettings()">
-						<pre>{{config | json}}</pre>
-					</div>
-				</div>
-			</div>
-		</div>
+<div fxLayout="row">
+	<div class="ts-section-margin">
+		<p class="ts-highlight-text">Current configuration</p>
+		<p class="ts-subtitle-text">Start, Stop, or Restart the OSVR Server on this machine</p>
+		<p *ngIf="!canSaveSettings()" i18n>No current configuration.</p>
+		<pre *ngIf="canSaveSettings()"
+			 style="overflow-x:auto;overflow-y:auto;max-width:1000px;max-height:400px;">{{config | json}}</pre>
 	</div>
 </div>
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title" i18n>Saves the OSVR global settings</h3>
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-12">
-						<p i18n>Edit and save global settings</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<button type="button" class="btn btn-primary"
-								(click)="saveSettings()"
-								[disabled]="!canSaveSettings()"
-								i18n>Save Changes</button>
-					</div>
-				</div>
-			</div>
-		</div>
+<div fxLayout="row">
+	<div class="ts-section-margin">
+		<p class="ts-highlight-text" i18n>Saves the OSVR global settings</p>
+		<p class="ts-subtitle-text" i18n>Edit and save global settings</p>
+		<button type="button" md-raised-button
+				(click)="saveSettings()"
+				[disabled]="!canSaveSettings()"
+				i18n>
+			Save Changes
+		</button>
 	</div>
 </div>

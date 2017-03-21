@@ -1,24 +1,10 @@
 ﻿<!-- Download plugins -->
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title" i18n>Downloads selected plugins</h3>
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-12">
-						<p i18n>Downloads plugins that were selected</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<button type="button" class="btn btn-primary"
-								(click)="downloadPlugins()"
-								i18n>Download Manager</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="ts-section-margin">
+	<p class="ts-highlight-text" i18n>Downloads selected plugins</p>
+	<p class="ts-subtitle-text" i18n>Downloads plugins that were selected</p>
+	<button type="button" md-raised-button
+			(click)="downloadPlugins()"
+			i18n>
+		Download Manager
+	</button>
 </div>
