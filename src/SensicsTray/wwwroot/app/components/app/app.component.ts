@@ -55,6 +55,10 @@ export class AppComponent {
         return typeof msg !== 'undefined' && msg !== null && msg.length > 0;
     }
 
+    navIconRef(active: boolean, name: string) {
+        return `icons/navigation/${active ? 'active' : 'inactive'}/${name}.png`;
+    }
+
     showSuggestRestart() {
         return this.osvrServer.getSuggestServerRestart();
     }

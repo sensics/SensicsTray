@@ -13,7 +13,7 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 a.ts-tab-text-active {
     font-size: 26px;
     font-weight: bold;
-    color: #0097a7;
+    color: #46ddc8;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
@@ -27,7 +27,7 @@ a.ts-tab-text-inactive {
 .ts-highlight-text {
     font-size: 40px;
     font-weight: bold;
-    color: #0097a7;
+    color: #46ddc8;
     margin: 0px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
@@ -56,7 +56,7 @@ a.ts-tab-text-inactive {
 }
 
 .ts-table-header-text {
-    color: #0097a7;
+    color: #46ddc8;
     text-align: left;
     font-size: 12px;
     font-weight: bold;
@@ -82,3 +82,13 @@ a.ts-tab-text-inactive {
     margin: 20px 0px 40px 0px;
 }
 
+.ts-nav-icon {
+    display: block;
+    margin-left: 15px;
+    margin-bottom: -15px;
+}
+
+.ts-app-background {
+    background: url("icons/Tray-01_BG.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
