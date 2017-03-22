@@ -22,18 +22,16 @@ gulp.task('copy', ['copy:usblib']);
 gulp.task('build:electronPackage', ['copy'], (cb) => {
 	builder.build({
 		targets: Platform.WINDOWS.createTarget(),
-		devMetadata: {
+		config: {
 			"directories": {
 				"app": "app",
 				"output": "dist"
 			},
-			"build": {
-				"appId": "com.sensics.sensicsTray",
-				"asar": false,
-				"win": {
-					"target": "zip",
-					"iconUrl": "https://github.com/OSVR/OSVR-Config/blob/master/src/Launcher/assets/osvrconfig.ico?raw=true"
-				}
+			"appId": "com.sensics.sensicsTray",
+			"asar": false,
+			"win": {
+				"target": "zip",
+				"icon": "build/icon.ico"
 			}
 		}
 	})
