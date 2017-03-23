@@ -1,39 +1,51 @@
 ﻿<md-sidenav-container class="ts-app-background">
-	<nav md-tab-nav-bar>
-		<!--<a md-tab-link
-		   [routerLink]="link"
-		   routerLinkActive #rla="routerLinkActive"
-		   [active]="true">
-			Link1
-		</a>
-		<a md-tab-link
-		   [routerLink]="link"
-		   routerLinkActive #rla="routerLinkActive"
-		   [active]="true">
-			Link2
-		</a>-->
-		<a routerLink="/play" [active]="playActive" md-tab-link i18n
-		   [ngClass]="{'ts-tab-text-active': playActive, 'ts-tab-text-inactive': !playActive}" style="height:auto">
-			<img class="ts-nav-icon" src="{{navIconRef(playActive, 'PLAY')}}" />PLAY</a>
-		<a routerLink="/store" [active]="storeActive" md-tab-link i18n
-		   [ngClass]="{'ts-tab-text-active': storeActive, 'ts-tab-text-inactive': !storeActive}" style="height:auto">
-			<img class="ts-nav-icon" src="{{navIconRef(storeActive, 'Store')}}" />STORE</a>
-		<a routerLink="/devices" [active]="devicesActive" md-tab-link i18n
-		   [ngClass]="{'ts-tab-text-active': devicesActive, 'ts-tab-text-inactive': !devicesActive}" style="height:auto">
-			<img class="ts-nav-icon" src="{{navIconRef(devicesActive, 'Devices')}}" />DEVICES</a>
-		<a routerLink="/plugins" [active]="pluginsActive" md-tab-link i18n
-		   [ngClass]="{'ts-tab-text-active': pluginsActive, 'ts-tab-text-inactive': !pluginsActive}" style="height:auto">
-			<img class="ts-nav-icon" src="{{navIconRef(pluginsActive, 'Plugin')}}" />PLUGINS</a>
-		<a routerLink="/settings" [active]="settingsActive" md-tab-link i18n
-		   [ngClass]="{'ts-tab-text-active': settingsActive, 'ts-tab-text-inactive': !settingsActive}" style="height:auto">
-			<img class="ts-nav-icon" src="{{navIconRef(settingsActive, 'Settings')}}" />SETTINGS</a>
-		<a routerLink="/profile" [active]="profileActive" md-tab-link i18n
-		   [ngClass]="{'ts-tab-text-active': profileActive, 'ts-tab-text-inactive': !profileActive}" style="height:auto">
-			<img class="ts-nav-icon" src="{{navIconRef(profileActive, 'Profile')}}" />PROFILE</a>
-		<a routerLink="/help" [active]="helpActive" md-tab-link i18n
-		   [ngClass]="{'ts-tab-text-active': helpActive, 'ts-tab-text-inactive': !helpActive}" style="height:auto">
-			<img class="ts-nav-icon" src="{{navIconRef(helpActive, 'Help')}}" />HELP</a>
-	</nav>
-
+	<div fxLayout="column" fxLayoutAlign="start center">
+		<a routerLink="/home" i18n><img src="icons/LOGO.png" /></a>
+		<nav md-tab-nav-bar>
+			<!--<a md-tab-link
+			   [routerLink]="link"
+			   routerLinkActive #rla="routerLinkActive"
+			   [active]="true">
+				Link1
+			</a>
+			<a md-tab-link
+			   [routerLink]="link"
+			   routerLinkActive #rla="routerLinkActive"
+			   [active]="true">
+				Link2
+			</a>-->
+			<a routerLink="/play" [active]="playActive" md-tab-link i18n
+			   [ngClass]="{'ts-tab-text-active': playActive, 'ts-tab-text-inactive': !playActive}" style="height:auto">
+				<img class="ts-nav-icon" src="{{navIconRef(playActive, 'PLAY')}}" />PLAY
+			</a>
+			<a routerLink="/store" [active]="storeActive" md-tab-link i18n
+			   [ngClass]="{'ts-tab-text-active': storeActive, 'ts-tab-text-inactive': !storeActive}" style="height:auto">
+				<img class="ts-nav-icon" src="{{navIconRef(storeActive, 'Store')}}" />STORE
+			</a>
+			<a routerLink="/devices" [active]="devicesActive" md-tab-link i18n
+			   [ngClass]="{'ts-tab-text-active': devicesActive, 'ts-tab-text-inactive': !devicesActive}" style="height:auto">
+				<img class="ts-nav-icon" src="{{navIconRef(devicesActive, 'Devices')}}" />DEVICES
+			</a>
+			<a routerLink="/plugins" [active]="pluginsActive" md-tab-link i18n
+			   [ngClass]="{'ts-tab-text-active': pluginsActive, 'ts-tab-text-inactive': !pluginsActive}" style="height:auto">
+				<img class="ts-nav-icon" src="{{navIconRef(pluginsActive, 'Plugin')}}" />PLUGINS
+			</a>
+			<a routerLink="/settings" [active]="settingsActive" md-tab-link i18n
+			   [ngClass]="{'ts-tab-text-active': settingsActive, 'ts-tab-text-inactive': !settingsActive}" style="height:auto">
+				<img class="ts-nav-icon" src="{{navIconRef(settingsActive, 'Settings')}}" />SETTINGS
+			</a>
+			<a routerLink="/profile" [active]="profileActive" md-tab-link i18n
+			   [ngClass]="{'ts-tab-text-active': profileActive, 'ts-tab-text-inactive': !profileActive}" style="height:auto">
+				<img class="ts-nav-icon" src="{{navIconRef(profileActive, 'Profile')}}" />PROFILE
+			</a>
+			<a routerLink="/help" [active]="helpActive" md-tab-link i18n
+			   [ngClass]="{'ts-tab-text-active': helpActive, 'ts-tab-text-inactive': !helpActive}" style="height:auto">
+				<img class="ts-nav-icon" src="{{navIconRef(helpActive, 'Help')}}" />HELP
+			</a>
+		</nav>
+	</div>
 	<router-outlet style="padding: 20px"></router-outlet>
+	<div fxLayout="column" fxLayoutAlign="start center">
+		<p i18n><span class="ts-copyright-logo-text">sensics</span><span class="ts-copyright-text">tray ©copyright 2017 sensics, inc. version 0.0.1 (2017-02-25)</span></p>
+	</div>
 </md-sidenav-container>
