@@ -1,4 +1,11 @@
 ﻿<md-sidenav-container class="ts-app-background">
+	<div fxLayout="row">
+		<div fxFlex="75"></div>
+		<div fxFlex="25">
+			<button type="button" md-button i18n style="color: black; margin: -5px -5px 0px 0px" [ngStyle]="{'background-color': basicButtonColor()}" (click)="clickBasic()">Basic</button>
+			<button type="button" md-button i18n style="color: black; margin: -5px 5px 0px 0px" [ngStyle]="{'background-color': expertButtonColor()}" (click)="clickExpert()">Expert</button>
+		</div>
+	</div>
 	<div fxLayout="column" fxLayoutAlign="start center">
 		<a routerLink="/home" i18n><img src="icons/LOGO.png" /></a>
 		<nav md-tab-nav-bar>

@@ -21,6 +21,8 @@ export class AppComponent {
     profileActive = false;
     helpActive = false;
 
+    expertMode = false;
+
     constructor(
         private userNotifications: UserNotificationsService,
         private router: Router,
@@ -53,6 +55,22 @@ export class AppComponent {
 
     private showMsg(msg: string): boolean {
         return typeof msg !== 'undefined' && msg !== null && msg.length > 0;
+    }
+
+    basicButtonColor() {
+        return this.expertMode ? '#666666' : '#46ddc8';
+    }
+
+    expertButtonColor() {
+        return this.expertMode ? '#46ddc8' : '#666666';
+    }
+
+    clickBasic() {
+        this.expertMode = false;
+    }
+
+    clickExpert() {
+        this.expertMode = true;
     }
 
     navIconRef(active: boolean, name: string) {
