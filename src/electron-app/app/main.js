@@ -46,8 +46,8 @@ function goToStateFunc(state) {
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        height: 800,
-        width: 1280
+        height: 900,
+        width: 1500
     });
 
     mainWindow.loadURL(url.format({
