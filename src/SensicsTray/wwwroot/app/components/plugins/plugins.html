@@ -1,10 +1,22 @@
-﻿<!-- Download plugins -->
-<div class="ts-section-margin">
-	<p class="ts-highlight-text" i18n>Downloads selected plugins</p>
-	<p class="ts-subtitle-text" i18n>Downloads plugins that were selected</p>
-	<button type="button" md-raised-button
-			(click)="downloadPlugins()"
-			i18n>
-		Download Manager
-	</button>
+﻿<div class="ts-section-margin">
+	<p class="ts-highlight-text" i18n>Installed plugins</p>
+	<p class="ts-subtitle-text" i18n>Installed plugins for the current OSVR server.</p>
+	<table style="width:100%">
+		<thead>
+			<tr>
+				<th class="ts-table-header-text" i18n="Table header for the user profile name column.">Name</th>
+				<th class="ts-table-header-text" i18n="Table header for the user profile Auto-loaded column.">Auto-loaded</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor="let plugin of plugins">
+				<tr>
+					<td class="ts-table-cell-text">{{plugin.name}}</td>
+					<td class="ts-table-cell-text">{{plugin.manualLoad ? "no" : "yes"}}</td>
+					<td style="width:75%"></td>
+				</tr>
+			</ng-container>
+		</tbody>
+	</table>
 </div>

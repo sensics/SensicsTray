@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { PluginsService } from '../../services/plugins.service';
+import { Plugin } from '../../models/osvr-plugin.model';
 
 @Component({
     moduleId: module.id,
@@ -7,8 +8,14 @@ import { PluginsService } from '../../services/plugins.service';
     templateUrl: 'plugins.html'
 })
 export class PluginsComponent {
-    constructor(private plugins: PluginsService) { }
+    plugins: Plugin[];
+    constructor(private pluginsService: PluginsService) {
+        this.downloadPlugins();
+    }
+
     downloadPlugins() {
-        this.plugins.downloadPlugins().subscribe();
+        this.pluginsService.getPluginsPromise().then(result => {
+            this.plugins = result;
+        });
     }
 }
