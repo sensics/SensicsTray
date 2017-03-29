@@ -1,11 +1,12 @@
 ﻿<div class="ts-section-margin">
 	<p class="ts-highlight-text" i18n>Installed plugins</p>
 	<p class="ts-subtitle-text" i18n>Installed plugins for the current OSVR server.</p>
-	<table style="width:100%">
+	<table style="width:100%; margin:20px;">
 		<thead>
 			<tr>
-				<th class="ts-table-header-text" i18n="Table header for the user profile name column.">Name</th>
-				<th class="ts-table-header-text" i18n="Table header for the user profile Auto-loaded column.">Auto-loaded</th>
+				<th class="ts-table-header-text" i18n="Table header for the plugin name column.">Name</th>
+				<th class="ts-table-header-text" i18n="Table header for the uplugin Auto-loaded column.">Auto-loaded</th>
+				<th class="ts-table-header-text" i18n="Table header for the plugin Enabled column.">Enabled</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -14,9 +15,11 @@
 				<tr>
 					<td class="ts-table-cell-text">{{plugin.name}}</td>
 					<td class="ts-table-cell-text">{{plugin.manualLoad ? "no" : "yes"}}</td>
+					<td ><md-checkbox [(ngModel)]="plugin.enabled" [disabled]="!plugin.manualLoad"></md-checkbox></td>
 					<td style="width:75%"></td>
 				</tr>
 			</ng-container>
 		</tbody>
 	</table>
+	<button md-raised-button type="button" (click)="saveChanges()" i18n>Save changes</button>
 </div>
