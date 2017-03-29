@@ -36,7 +36,7 @@
 	<div fxFlex="50" class="ts-section-margin">
 		<p class="ts-highlight-text">Direct mode</p>
 		<p class="ts-subtitle-text">Enable or disable direct mode, with optional vendor ID</p>
-		<md-input-container style="width: 100%">
+		<md-input-container style="width: 100%" *ngIf="appSettingsService.expertMode">
 			<input mdInput
 				   type="text"
 				   placeholder="Optional 3-letter vendor ID for HMD monitor."
@@ -66,7 +66,7 @@
 			<div class="ts-subsection-margin">
 				<p class="ts-list-item-title-text" i18n>Tracker Viewer</p>
 				<p class="ts-subtitle-text" i18n>The Tracker Viewer utility visualizes OSVR trackers and can be useful to check if an OSVR device is working properly.</p>
-				<md-input-container style="width: 100%">
+				<md-input-container style="width: 100%" *ngIf="appSettingsService.expertMode">
 					<input mdInput
 						   type="text"
 						   placeholder="OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each."
@@ -84,7 +84,7 @@
 			<div class="ts-subsection-margin">
 				<p class="ts-list-item-title-text" i18n>Reset Yaw</p>
 				<p class="ts-subtitle-text" i18n>Reset Yaw adds a transformation to the specified OSVR path (/me/head by default) to reset the forward direction to the current direction.</p>
-				<md-input-container style="width: 100%">
+				<md-input-container style="width: 100%" *ngIf="appSettingsService.expertMode">
 					<input mdInput
 						   type="text"
 						   placeholder="OSVR Path to reset yaw for (leave blank to use /me/head)."

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { OSVRServerService } from '../../services/osvr-server.service';
+import { AppSettingsService } from '../../services/app-settings.service';
 import { TrackerViewerService } from '../../services/tracker-viewer.service';
 import { DirectModeService } from '../../services/direct-mode.service';
 import { OSVRConfigService } from '../../services/osvr-config.service';
@@ -33,7 +34,8 @@ export class PlayComponent {
         private directMode: DirectModeService,
         private osvrConfig: OSVRConfigService,
         private osvrSampleApps: OSVRSampleAppsService,
-        private resetYaw: ResetYawService
+        private resetYaw: ResetYawService,
+        public appSettingsService: AppSettingsService
     ) {
         this.updateRunningServers();
 

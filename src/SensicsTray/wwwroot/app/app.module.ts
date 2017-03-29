@@ -37,6 +37,7 @@ import { HelpService } from './services/help.service';
 import { DevicesService } from './services/devices.service';
 import { DirectModeService } from './services/direct-mode.service';
 import { ResetYawService } from './services/reset-yaw.service';
+import { AppSettingsService } from './services/app-settings.service';
 
 @NgModule({
     entryComponents: [
@@ -107,6 +108,7 @@ import { ResetYawService } from './services/reset-yaw.service';
     bootstrap: [ AppComponent ],
     providers: [
         OSVRServerService,
+        AppSettingsService,
         TrackerViewerService,
         UserNotificationsService,
         OSVRConfigService,

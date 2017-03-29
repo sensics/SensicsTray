@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserNotificationsService } from '../../services/user-notifications.service';
 import { OSVRServerService } from '../../services/osvr-server.service';
+import { AppSettingsService } from '../../services/app-settings.service';
 
 @Component({
     moduleId: module.id,
@@ -21,12 +22,11 @@ export class AppComponent {
     profileActive = false;
     helpActive = false;
 
-    expertMode = false;
-
     constructor(
         private userNotifications: UserNotificationsService,
         private router: Router,
-        private osvrServer: OSVRServerService
+        private osvrServer: OSVRServerService,
+        public appSettings: AppSettingsService
     ) {
         this.userNotifications.getErrorMessages().subscribe(_ => {
             this.showErrorMessage = this.showMsg(this.userNotifications.getCurrentErrorMessage());
@@ -58,19 +58,19 @@ export class AppComponent {
     }
 
     basicButtonColor() {
-        return this.expertMode ? '#666666' : '#46ddc8';
+        return this.appSettings.expertMode ? '#666666' : '#46ddc8';
     }
 
     expertButtonColor() {
-        return this.expertMode ? '#46ddc8' : '#666666';
+        return this.appSettings.expertMode ? '#46ddc8' : '#666666';
     }
 
     clickBasic() {
-        this.expertMode = false;
+        this.appSettings.expertMode = false;
     }
 
     clickExpert() {
-        this.expertMode = true;
+        this.appSettings.expertMode = true;
     }
 
     navIconRef(active: boolean, name: string) {
