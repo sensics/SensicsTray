@@ -16,16 +16,19 @@
 			<input mdInput type="text" placeholder="OSVR Server" disabled value="{{currentlyRunningServer()}}" />
 		</md-input-container>
 		<button md-raised-button type="button"
+				*ngIf="showStartServer()"
 				(click)="startServer()"
 				i18n>
 			Start Server
 		</button>
 		<button md-raised-button type="button"
+				*ngIf="showStopServer()"
 				(click)="stopServer()"
 				i18n>
 			Stop Server
 		</button>
 		<button md-raised-button type="button"
+				*ngIf="showRestartServer()"
 				(click)="restartServer()"
 				i18n>
 			Restart Server

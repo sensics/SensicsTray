@@ -74,6 +74,18 @@ export class PlayComponent {
             });
     }
 
+    showStartServer() {
+        return this.runningServers.length === 0;
+    }
+
+    showStopServer() {
+        return !this.showStartServer();
+    }
+
+    showRestartServer() {
+        return this.showStopServer();
+    }
+
     currentlyRunningServer(): string {
         if (this.runningServers.length === 0) {
             return "No OSVR servers running.";
@@ -88,19 +100,25 @@ export class PlayComponent {
 
     startServer() {
         this.osvrServer.startServer().toPromise().then(_ => {
-            this.updateRunningServers();
+            setTimeout(() => {
+                this.updateRunningServers();
+            }, 1000);
         });
     }
 
     stopServer() {
         this.osvrServer.stopServer().toPromise().then(_ => {
-            this.updateRunningServers();
+            setTimeout(() => {
+                this.updateRunningServers();
+            }, 1000);
         });
     }
 
     restartServer() {
         this.osvrServer.restartServer().toPromise().then(_ => {
-            this.updateRunningServers();
+            setTimeout(() => {
+                this.updateRunningServers();
+            }, 1000);
         });
     }
 
