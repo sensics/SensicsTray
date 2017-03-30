@@ -22,6 +22,7 @@ import { HelpComponent } from './components/help/help.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { StoreComponent } from './components/store/store.component';
 import { ViewConfigDialogComponent } from './components/devices/view-config-dialog.component';
+import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog.component';
 
 // not yet used
 import { ServerRootNotDefinedComponent } from './components/server-root-not-defined/server-root-not-defined.component';
@@ -41,7 +42,8 @@ import { AppSettingsService } from './services/app-settings.service';
 
 @NgModule({
     entryComponents: [
-        ViewConfigDialogComponent
+        ViewConfigDialogComponent,
+        ConfirmationDialogComponent
     ],
     imports: [ 
         BrowserModule,
@@ -103,6 +105,7 @@ import { AppSettingsService } from './services/app-settings.service';
         SettingsComponent,
         StoreComponent,
         ViewConfigDialogComponent,
+        ConfirmationDialogComponent,
         ServerRootNotDefinedComponent // not yet used
     ],
     bootstrap: [ AppComponent ],

@@ -47,64 +47,78 @@ function goToStateFunc(state) {
 function createWindow() {
     mainWindow = new BrowserWindow({
         height: 900,
-        width: 1500
+        width: 1500,
+        minWidth: 1500,
+        minHeight: 900,
+        show: false,
+        backgroundColor: '#000000'
     });
 
-    mainWindow.loadURL(url.format({
-    	pathname: path.join(__dirname, 'index.html'),
-    	protocol: 'file:',
-    	slashes: true
-    }));
+    globalShortcut.register('CmdOrCtrl+Shift+D', ()=> {
+        mainWindow.webContents.toggleDevTools();
+    });
+
+    mainWindow.on("closed", () => {
+        mainWindow = null;
+        console.log("Killing process from mainWindow.on('closed')");
+        if(backendProcess !== null) {
+            backendProcess.kill();
+            backendProcess = null;
+        }
+    });
+    
+    appIcon = new Tray(iconPath);
+    var contextMenu = Menu.buildFromTemplate([
+    {
+        label: 'Play',
+        click: goToStateFunc('play')
+    },
+    {   
+         label: 'Devices',
+         click: goToStateFunc('devices')
+    },
+    // {
+    //     label: 'Create System Report'
+    // },
+    {
+        label: 'Store',
+        click: goToStateFunc('store')
+    },
+    {
+        label: 'Plugins',
+        click: goToStateFunc('plugins')
+    },
+    {
+        label: 'Settings',
+        click: goToStateFunc('settings')
+    },
+    {
+        label: 'Help',
+        click: goToStateFunc('help')
+        //submenu: [
+        //{ label: 'Open Support Ticket' },
+        //{ label: 'OSVR Documentation' },
+        //{ label: 'About OSVR'}
+        //]
+    },
+    {   label: 'Quit',
+        accelerator : 'Command+Q',
+        selector: 'terminate:'
+    }
+    ]);
+    appIcon.setToolTip('OSVR Tray App');
+    appIcon.setContextMenu(contextMenu);
 
     startBackend(function() {
 
         mainWindow.loadURL("http://localhost:5000");
 
-        globalShortcut.register('CmdOrCtrl+Shift+D', ()=> {
-        	mainWindow.webContents.toggleDevTools();
-    	});
-
-        mainWindow.on("closed", () => {
-            mainWindow = null;
-            console.log("Killing process from mainWindow.on('closed')");
-            if(backendProcess !== null) {
-                backendProcess.kill();
-                backendProcess = null;
-            }
+        mainWindow.once('ready-to-show', () => {
+            setTimeout(() => { mainWindow.show(); }, 2000);
+            //mainWindow.show();
         });
-        
-        appIcon = new Tray(iconPath);
-        var contextMenu = Menu.buildFromTemplate([
-        {   
-        	label: 'Devices',
-        	click: goToStateFunc('devices')
-        },
-        {
-            label: 'Create System Report'
-        },
-		{
-			label: 'Plugins',
-			click: goToStateFunc('plugins')
-		},
-        {
-        	label: 'Settings',
-		    click: goToStateFunc('settings')
-        },
-        {
-            label: 'Help',
-            submenu: [
-            { label: 'Open Support Ticket' },
-            { label: 'OSVR Documentation' },
-            { label: 'About OSVR'}
-            ]
-        },
-        {   label: 'Quit',
-            accelerator : 'Command+Q',
-            selector: 'terminate:'
-        }
-        ]);
-        appIcon.setToolTip('OSVR Tray App');
-        appIcon.setContextMenu(contextMenu);
+
+
     });
 }
 

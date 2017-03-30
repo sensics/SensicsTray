@@ -29,10 +29,10 @@
 			   [ngClass]="{'ts-tab-text-active': storeActive, 'ts-tab-text-inactive': !storeActive}" style="height:auto">
 				<img class="ts-nav-icon" src="{{navIconRef(storeActive, 'Store')}}" />STORE
 			</a>
-			<!--<a routerLink="/devices" [active]="devicesActive" md-tab-link i18n
+			<a routerLink="/devices" [active]="devicesActive" md-tab-link i18n
 			   [ngClass]="{'ts-tab-text-active': devicesActive, 'ts-tab-text-inactive': !devicesActive}" style="height:auto">
 				<img class="ts-nav-icon" src="{{navIconRef(devicesActive, 'Devices')}}" />DEVICES
-			</a>-->
+			</a>
 			<a routerLink="/plugins" [active]="pluginsActive" md-tab-link i18n
 			   [ngClass]="{'ts-tab-text-active': pluginsActive, 'ts-tab-text-inactive': !pluginsActive}" style="height:auto">
 				<img class="ts-nav-icon" src="{{navIconRef(pluginsActive, 'Plugin')}}" />PLUGINS
@@ -53,6 +53,6 @@
 	</div>
 	<router-outlet style="padding: 20px"></router-outlet>
 	<div fxLayout="column" fxLayoutAlign="start center">
-		<p i18n><span class="ts-copyright-logo-text">sensics</span><span class="ts-copyright-text">tray ©copyright 2017 sensics, inc. version 0.0.1 (2017-02-25)</span></p>
+		<p i18n><span class="ts-copyright-logo-text">sensics</span><span class="ts-copyright-text">tray ©Copyright 2017 Sensics, Inc. version 0.0.1 (2017-02-25)</span></p>
 	</div>
 </md-sidenav-container>
