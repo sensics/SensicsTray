@@ -13,7 +13,7 @@ import * as OSVRConfig from '../../models/osvr-config.model';
 export class SettingsComponent {
     public configRoot: OSVRConfig.IOSVRConfig = null;
     @ViewChild('settingsForm') settingsForm: NgForm;
-    rmConfig: any = { timeWarp: {}, window: {}, display: {} };
+    rmConfig: any = null;
     constructor(
         private osvrConfig: OSVRConfigService,
         private userNotifications: UserNotificationsService,
@@ -74,5 +74,9 @@ export class SettingsComponent {
         } else {
             this.osvrConfig.setCurrent(this.configRoot).toPromise().then(_ => this.refreshConfiguration());
         }
+    }
+
+    showSettings() {
+        return typeof this.configRoot !== 'undefined' && this.configRoot !== null;
     }
 }

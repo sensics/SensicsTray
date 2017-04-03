@@ -2,8 +2,9 @@
 	<!-- USB devices -->
 	<div class="ts-section-margin" fxFlex="50">
 		<p class="ts-highlight-text">Detected USB Devices</p>
-		<p class="ts-subtitle-text" *ngIf="usbDevices?.length === 0" i18n>No data to display</p>
-		<md-list *ngIf="usbDevices?.length > 0">
+		<p class="ts-subtitle-text" *ngIf="!showUSBDevicesList()" i18n>Analyzing devices...</p>
+		<p class="ts-subtitle-text" *ngIf="showUSBDevicesList() && usbDevices?.length === 0" i18n>No data to display</p>
+		<md-list *ngIf="showUSBDevicesList() && usbDevices?.length > 0">
 			<md-list-item *ngFor="let device of usbDevices">
 				<p class="ts-subtitle-text" md-line>Vender ID/Name: {{vendorIDOrName(device)}}</p>
 				<p class="ts-subtitle-text" md-line>Product ID/Name: {{productIDOrName(device)}}</p>
@@ -14,8 +15,9 @@
 	<!-- Sample configurations-->
 	<div class="ts-section-margin" fxFlex="50">
 		<p class="ts-highlight-text" i18n>Sample Configurations</p>
-		<p class="ts-subtitle-text" i18n>Select one of the following sample configurations to save it as the default configuration. Note: this will overwrite the current configuration.</p>
-		<md-list>
+		<p class="ts-subtitle-text" i18n *ngIf="showSampleConfigList()">Select one of the following sample configurations to save it as the default configuration. Note: this will overwrite the current configuration.</p>
+		<p class="ts-subtitle-text" i18n *ngIf="!showSampleConfigList()">Analyzing configurations...</p>
+		<md-list *ngIf="showSampleConfigList()">
 			<md-list-item *ngFor="let sampleConfig of sampleConfigs">
 				<p class="ts-list-item-title-text" md-line>{{sampleConfig.fileName}}</p>
 				<p class="ts-subtitle-text" md-line>{{sampleConfig.body.body.description}}</p>

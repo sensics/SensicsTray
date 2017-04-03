@@ -1,7 +1,8 @@
 ﻿<div class="ts-section-margin">
 	<p class="ts-highlight-text" i18n>Installed plugins</p>
-	<p class="ts-subtitle-text" i18n>Installed plugins for the current OSVR server.</p>
-	<table style="width:100%; margin:20px;">
+	<p class="ts-subtitle-text" i18n *ngIf="!showPluginsList()">Loading plugins...</p>
+	<p class="ts-subtitle-text" i18n *ngIf="showPluginsList()">Installed plugins for the current OSVR server.</p>
+	<table style="width:100%; margin:20px;" *ngIf="showPluginsList()">
 		<thead>
 			<tr>
 				<th class="ts-table-header-text" i18n="Table header for the plugin name column.">Name</th>
@@ -21,5 +22,6 @@
 			</ng-container>
 		</tbody>
 	</table>
-	<button md-raised-button type="button" (click)="saveChanges()" i18n>Save changes</button>
+	<button md-raised-button *ngIf="showPluginsList()" type="button" color="primary" 
+			(click)="saveChanges()" i18n>Save changes</button>
 </div>

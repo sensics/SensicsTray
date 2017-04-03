@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OSVRServerService } from '../../services/osvr-server.service';
 import { AppSettingsService } from '../../services/app-settings.service';
 import { TrackerViewerService } from '../../services/tracker-viewer.service';
@@ -7,20 +7,23 @@ import { OSVRConfigService } from '../../services/osvr-config.service';
 import { OSVRSampleAppsService } from '../../services/osvr-sample-apps.service';
 import { ResetYawService } from '../../services/reset-yaw.service';
 import { ISampleApp } from '../../models/osvr-sample-apps.model';
+import { Observable, Subscription } from 'rxjs/rx';
 
 @Component({
     moduleId: module.id,
     selector: 'ts-play',
     templateUrl: 'play.html'
 })
-export class PlayComponent {
+export class PlayComponent implements OnInit, OnDestroy {
     trackerViewerPath = "";
     threeLetterVendorPNPID = "";
     runningServers: string[] = [];
     showServerRootNotDefined = false;
     serverRoot: string = null;
-    sampleApps: ISampleApp[] = [];
+    sampleApps: ISampleApp[] = null;
     resetYawPath: string = null;
+
+    private serverSubscription: Subscription = null;
 
     // These will be used in the "Save config as" functionality
     // but I'm having trouble with the HTML sanitizer, so it's disabled
@@ -59,6 +62,23 @@ export class PlayComponent {
         //});
     }
 
+    ngOnInit() {
+        this.serverSubscription = this.osvrServer.getRunningServerPaths().subscribe(
+            runningServers => {
+                this.runningServers = runningServers;
+            },
+            (error: any) => {
+                console.log("PlayComponent: got an error instead of the running servers.");
+            });
+    }
+
+    ngOnDestroy() {
+        if (this.serverSubscription !== null) {
+            this.serverSubscription.unsubscribe();
+            this.serverSubscription = null;
+        }
+    }
+
     private showMsg(msg: string): boolean {
         return typeof msg !== 'undefined' && msg !== null && msg.length > 0;
     }
@@ -68,10 +88,10 @@ export class PlayComponent {
     }
 
     updateRunningServers() {
-        this.osvrServer.getRunningServerPaths().subscribe(
-            servers => {
-                this.runningServers = servers;
-            });
+        //this.osvrServer.getRunningServerPaths().subscribe(
+        //    servers => {
+        //        this.runningServers = servers;
+        //    });
     }
 
     showStartServer() {
@@ -100,25 +120,16 @@ export class PlayComponent {
 
     startServer() {
         this.osvrServer.startServer().toPromise().then(_ => {
-            setTimeout(() => {
-                this.updateRunningServers();
-            }, 1000);
         });
     }
 
     stopServer() {
         this.osvrServer.stopServer().toPromise().then(_ => {
-            setTimeout(() => {
-                this.updateRunningServers();
-            }, 1000);
         });
     }
 
     restartServer() {
         this.osvrServer.restartServer().toPromise().then(_ => {
-            setTimeout(() => {
-                this.updateRunningServers();
-            }, 1000);
         });
     }
 
@@ -132,6 +143,11 @@ export class PlayComponent {
 
     disableDirectMode() {
         this.directMode.disableDirectMode(this.threeLetterVendorPNPID).subscribe();
+    }
+
+    showSampleAppList() {
+        return typeof this.sampleApps !== 'undefined' &&
+            this.sampleApps !== null;
     }
 
     launchSampleApp(sampleApp: ISampleApp) {

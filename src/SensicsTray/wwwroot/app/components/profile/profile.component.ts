@@ -10,7 +10,7 @@ import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog.comp
     templateUrl: 'profile.html'
 })
 export class ProfileComponent {
-    userProfiles: IOSVRUserProfile[] = [];
+    userProfiles: IOSVRUserProfile[] = null;
     currentProfileName: string = null;
     currentProfile: IOSVRUserProfile = null;
     configRoot: IOSVRConfig = null;
@@ -117,5 +117,9 @@ export class ProfileComponent {
             }
             closedSub.unsubscribe();
         });
+    }
+
+    showProfilesList() {
+        return typeof this.userProfiles !== 'undefined' && this.userProfiles !== null;
     }
 }

@@ -15,23 +15,23 @@
 		<md-input-container style="width: 100%">
 			<input mdInput type="text" placeholder="OSVR Server" disabled value="{{currentlyRunningServer()}}" />
 		</md-input-container>
-		<button md-raised-button type="button"
+		<button md-fab type="button" color="primary"
 				*ngIf="showStartServer()"
 				(click)="startServer()"
 				i18n>
-			Start Server
+			Start
 		</button>
-		<button md-raised-button type="button"
+		<button md-fab type="button" color="warn"
 				*ngIf="showStopServer()"
 				(click)="stopServer()"
 				i18n>
-			Stop Server
+			Stop
 		</button>
-		<button md-raised-button type="button"
+		<button md-fab type="button" color="primary"
 				*ngIf="showRestartServer()"
 				(click)="restartServer()"
 				i18n>
-			Restart Server
+			Restart
 		</button>
 	</div>
 
@@ -45,15 +45,15 @@
 				   placeholder="Optional 3-letter vendor ID for HMD monitor."
 				   [(ngModel)]="threeLetterVendorPNPID" />
 		</md-input-container>
-		<button md-raised-button type="button"
+		<button md-fab type="button" color="primary"
 				(click)="enableDirectMode()"
 				i18n>
-			Enable Direct Mode
+			Enable
 		</button>
-		<button md-raised-button type="button"
+		<button md-fab type="button" color="primary"
 				(click)="disableDirectMode()"
 				i18n>
-			Disable Direct Mode
+			Disable
 		</button>
 	</div>
 </div>
@@ -122,21 +122,24 @@
 		<div fxFlex="50" class="ts-midsection-margin">
 			<p class="ts-subhighlight-text">DEMOS</p>
 			<!-- Sample Apps -->
-			<div class="ts-subsection-margin" style="border-bottom-style:dotted"
-				 *ngFor="let sampleApp of sampleApps">
-				<p class="ts-list-item-title-text" i18n>{{sampleApp.name}}</p>
-				<div fxLayout="row" fxLayoutAlign="start center" style="width:100%;margin-bottom:20px">
-					<div fxFlex="100">
-						<p class="ts-subtitle-text" i18n>{{sampleApp.description}}</p>
-					</div>
-					<div fxFlex="auto">
-						<button md-fab type="button"
-								color="primary"
-								style="margin-right: 20px"
-								(click)="launchSampleApp(sampleApp)"
-								i18n>
-							Launch
-						</button>
+			<p *ngIf="!showSampleAppList()" class="ts-subtitle-text" i18n>Loading sample application list...</p>
+			<div *ngIf="showSampleAppList()">
+				<div class="ts-subsection-margin" style="border-bottom-style:dotted"
+					 *ngFor="let sampleApp of sampleApps">
+					<p class="ts-list-item-title-text" i18n>{{sampleApp.name}}</p>
+					<div fxLayout="row" fxLayoutAlign="start center" style="width:100%;margin-bottom:20px">
+						<div fxFlex="100">
+							<p class="ts-subtitle-text" i18n>{{sampleApp.description}}</p>
+						</div>
+						<div fxFlex="auto">
+							<button md-fab type="button"
+									color="primary"
+									style="margin-right: 20px"
+									(click)="launchSampleApp(sampleApp)"
+									i18n>
+								Launch
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

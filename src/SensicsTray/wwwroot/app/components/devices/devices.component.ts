@@ -88,4 +88,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
             width: "600"
         });
     }
+
+    showUSBDevicesList() {
+        return typeof this.usbDevices !== 'undefined' && this.usbDevices !== null;
+    }
+
+    showSampleConfigList() {
+        return typeof this.sampleConfigs !== 'undefined' && this.sampleConfigs !== null;
+    }
 }

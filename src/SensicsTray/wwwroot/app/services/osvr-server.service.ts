@@ -45,8 +45,13 @@ export class OSVRServerService {
     }
 
     getRunningServerPaths(): Observable<string[]> {
-        var observable = this.http.get(this.runningServerPathsURL).map(
-            response => response.json());
+        var observable = Observable
+            .interval(2000)
+            .switchMap(() => this.http.get(this.runningServerPathsURL))
+            .map(response => response.json() as string[]);
+
+        //var observable = this.http.get(this.runningServerPathsURL).map(
+        //    response => response.json());
 
         return this.userNotifications.wrapObservable(observable,
             null, "Could not get the currently running server.");

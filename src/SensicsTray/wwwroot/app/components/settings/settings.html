@@ -1,4 +1,7 @@
-﻿<form #settingsForm="ngForm" novalidate>
+﻿<div class="ts-section-margin" *ngIf="!showSettings()">
+	<p class="ts-subtitle-text" i18n>Loading settings...</p>
+</div>
+<form #settingsForm="ngForm" novalidate *ngIf="showSettings()">
 	<div fxLayout="column" *ngIf="rmConfig !== null">
 		<div fxLayout="row">
 			<div fxFlex="50">

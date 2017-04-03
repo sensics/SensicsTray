@@ -54,4 +54,8 @@ export class PluginsComponent {
         }
         this.osvrConfigService.setCurrent(this.config).toPromise();
     }
+
+    showPluginsList() {
+        return typeof this.plugins !== 'undefined' && this.plugins !== null;
+    }
 }
