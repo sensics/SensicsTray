@@ -1,0 +1,114 @@
+﻿@import './libs/@angular/material/core/theming/all-theme';
+
+@include mat-core();
+
+$dark-primary: mat-palette($mat-cyan, 700, 500, 900);
+$dark-accent: mat-palette($mat-blue-grey, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+@include angular-material-theme($dark-theme);
+
+$ts-highlight-text-color: #46ddc8;
+$ts-gray-text-color: #b3b3b3;
+$ts-main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+a.ts-tab-text-active {
+    font-size: 26px;
+    font-weight: bold;
+    color: $ts-highlight-text-color;
+    font-family: $ts-main-font;
+}
+
+a.ts-tab-text-inactive {
+    font-size: 26px;
+    font-weight: bold;
+    color: $ts-gray-text-color;
+    font-family: $ts-main-font;
+}
+
+.ts-highlight-text {
+    font-size: 40px;
+    font-weight: bold;
+    color: $ts-highlight-text-color;
+    margin: 0px;
+    font-family: $ts-main-font;
+}
+
+.ts-list-item-title-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: $ts-gray-text-color;
+    margin: 0px 20px 0px 0px;
+    font-family: $ts-main-font;
+}
+
+.ts-subtitle-text {
+    font-size: 22px;
+    font-weight: lighter;
+    color: $ts-gray-text-color;
+    margin: 0px 20px 20px 0px;
+    font-family: $ts-main-font;
+}
+
+.ts-subhighlight-text {
+    border-bottom-style: dotted;
+    color: white;
+    font-size: 26px;
+    font-family: $ts-main-font;
+}
+
+.ts-table-header-text {
+    color: $ts-highlight-text-color;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: $ts-main-font;
+}
+
+.ts-table-cell-text {
+    color: $ts-gray-text-color;
+    font-size: 12px;
+    font-weight: lighter;
+    font-family: $ts-main-font;
+}
+
+$ts-copyright-text-color: #666666;
+
+.ts-copyright-logo-text {
+    font-family: $ts-main-font;
+    color: $ts-copyright-text-color;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.ts-copyright-text {
+    font-family: $ts-main-font;
+    color: $ts-copyright-text-color;
+    font-size: 22px;
+    font-weight: lighter;
+}
+
+.ts-section-margin {
+    margin: 20px;
+}
+
+.ts-midsection-margin {
+    margin: 0px 20px 0px 0px;
+}
+
+.ts-subsection-margin {
+    margin: 20px 0px 40px 0px;
+}
+
+.ts-nav-icon {
+    display: block;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.ts-app-background {
+    background: url("icons/Tray-01_BG.jpg") no-repeat center center fixed;
+    background-size: cover;
+}

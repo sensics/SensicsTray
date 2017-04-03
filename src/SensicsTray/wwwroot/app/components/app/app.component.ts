@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserNotificationsService } from '../../services/user-notifications.service';
 import { OSVRServerService } from '../../services/osvr-server.service';
+import { AppSettingsService } from '../../services/app-settings.service';
 
 @Component({
     moduleId: module.id,
@@ -13,7 +14,8 @@ export class AppComponent {
     showStatusMessage = false;
     showErrorMessage = false;
 
-    demoActive = false;
+    playActive = false;
+    storeActive = false;
     devicesActive = false;
     pluginsActive = false;
     settingsActive = false;
@@ -23,7 +25,8 @@ export class AppComponent {
     constructor(
         private userNotifications: UserNotificationsService,
         private router: Router,
-        private osvrServer: OSVRServerService
+        private osvrServer: OSVRServerService,
+        public appSettings: AppSettingsService
     ) {
         this.userNotifications.getErrorMessages().subscribe(_ => {
             this.showErrorMessage = this.showMsg(this.userNotifications.getCurrentErrorMessage());
@@ -40,17 +43,38 @@ export class AppComponent {
                 var url = event.urlAfterRedirects;
                 this.closeNotifications();
                 this.helpActive = url === "/help";
+                this.storeActive = url === "/store";
                 this.profileActive = url === "/profile";
                 this.settingsActive = url === "/settings";
                 this.pluginsActive = url === "/plugins";
                 this.devicesActive = url === "/devices";
-                this.demoActive = url === "/demo";
+                this.playActive = url === "/play";
             }
         });
     }
 
     private showMsg(msg: string): boolean {
         return typeof msg !== 'undefined' && msg !== null && msg.length > 0;
+    }
+
+    basicButtonColor() {
+        return this.appSettings.expertMode ? '#666666' : '#46ddc8';
+    }
+
+    expertButtonColor() {
+        return this.appSettings.expertMode ? '#46ddc8' : '#666666';
+    }
+
+    clickBasic() {
+        this.appSettings.expertMode = false;
+    }
+
+    clickExpert() {
+        this.appSettings.expertMode = true;
+    }
+
+    navIconRef(active: boolean, name: string) {
+        return `icons/navigation/${active ? 'active' : 'inactive'}/${name}.png`;
     }
 
     showSuggestRestart() {

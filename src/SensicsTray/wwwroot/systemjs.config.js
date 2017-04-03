@@ -20,7 +20,10 @@
 			'@angular/platform-browser-dynamic': 'lib:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.min.js',
 			'@angular/http': 'lib:@angular/http/bundles/http.umd.min.js',
 			'@angular/router': 'lib:@angular/router/bundles/router.umd.min.js',
-			'@angular/forms': 'lib:@angular/forms/bundles/forms.umd.min.js',
+            '@angular/forms': 'lib:@angular/forms/bundles/forms.umd.min.js',
+            '@angular/material': 'lib:@angular/material/bundles/material.umd.js',
+            '@angular/flex-layout': 'lib:@angular/flex-layout/bundles/flex-layout.umd.js',
+
 			// other libraries
 			'rxjs': 'lib:rxjs',
 			'ng2-bootstrap/ng2-bootstrap': 'lib:ng2-bootstrap.umd.min.js',

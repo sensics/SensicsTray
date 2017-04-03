@@ -1,6 +1,8 @@
 ﻿import { Component } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
 import { OSVRConfigService } from '../../services/osvr-config.service';
 import { IOSVRUserProfile, IOSVRConfig } from '../../models/osvr-config.model';
+import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog.component';
 
 @Component({
     moduleId: module.id,
@@ -13,7 +15,7 @@ export class ProfileComponent {
     currentProfile: IOSVRUserProfile = null;
     configRoot: IOSVRConfig = null;
 
-    constructor(private osvrConfig: OSVRConfigService) {
+    constructor(private osvrConfig: OSVRConfigService, private dialog: MdDialog) {
         this.refreshAvailableProfiles();
         this.osvrConfig.getCurrent().subscribe(config => {
             this.configRoot = config;
@@ -97,8 +99,23 @@ export class ProfileComponent {
     }
 
     deleteProfile(userProfile: IOSVRUserProfile) {
-        this.osvrConfig.deleteProfile(userProfile).subscribe(_ => {
-            this.refreshAvailableProfiles();
+        let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            data: {
+                title: "Delete Profile",
+                description: "Are you sure you want to delete this user profile?",
+                okButtonText: "Delete",
+                cancelButtonText: "Cancel"
+            },
+            height: "600",
+            width: "600"
+        });
+        let closedSub = dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.osvrConfig.deleteProfile(userProfile).subscribe(_ => {
+                    this.refreshAvailableProfiles();
+                });
+            }
+            closedSub.unsubscribe();
         });
     }
 }

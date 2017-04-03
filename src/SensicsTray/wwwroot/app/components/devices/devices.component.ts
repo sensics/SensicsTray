@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
 import { Response } from '@angular/http';
 import { Subscription } from 'rxjs/rx';
 import { DevicesService } from '../../services/devices.service';
@@ -7,6 +8,8 @@ import { Observable } from 'rxjs/Rx';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { IOSVRSampleConfig } from '../../models/osvr-config.model';
 import { IUSBDevice } from '../../models/usb-devices.model';
+import { ViewConfigDialogComponent } from './view-config-dialog.component';
+
 
 @Component({
     moduleId: module.id,
@@ -15,6 +18,7 @@ import { IUSBDevice } from '../../models/usb-devices.model';
 })
 export class DevicesComponent implements OnInit, OnDestroy {
     constructor(
+        private dialog: MdDialog,
         private devService: DevicesService,
         private osvrConfig: OSVRConfigService
     ) { }
@@ -56,16 +60,16 @@ export class DevicesComponent implements OnInit, OnDestroy {
     }
 
     vendorIDOrName(usbDevice: IUSBDevice) {
-        if (typeof usbDevice.vendorName === "string" && usbDevice.vendorName.length > 0) {
-            return `(${this.asHex(usbDevice.vendorID)}) - ${usbDevice.vendorName}`;
-        }
+        //if (typeof usbDevice.vendorName === "string" && usbDevice.vendorName.length > 0) {
+        //    return `(${this.asHex(usbDevice.vendorID)}) - ${usbDevice.vendorName}`;
+        //}
         return this.asHex(usbDevice.vendorID);
     }
 
     productIDOrName(usbDevice: IUSBDevice) {
-        if (typeof usbDevice.productName === "string" && usbDevice.productName.length > 0) {
-            return `(${this.asHex(usbDevice.productID)}) - ${usbDevice.productName}`;
-        }
+        //if (typeof usbDevice.productName === "string" && usbDevice.productName.length > 0) {
+        //    return `(${this.asHex(usbDevice.productID)}) - ${usbDevice.productName}`;
+        //}
         return this.asHex(usbDevice.productID);
     }
 
@@ -78,9 +82,10 @@ export class DevicesComponent implements OnInit, OnDestroy {
     }
 
     viewSampleConfig(sampleConfig: IOSVRSampleConfig) {
-        for (let i = 0; i < this.sampleConfigs.length; i++) {
-            this.sampleConfigs[i].showDetail = false;
-        }
-        sampleConfig.showDetail = true;
+        let dialogRef = this.dialog.open(ViewConfigDialogComponent, {
+            data: sampleConfig,
+            height: "600",
+            width: "600"
+        });
     }
 }

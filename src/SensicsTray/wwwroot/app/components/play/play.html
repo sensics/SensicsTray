@@ -1,0 +1,145 @@
+﻿<!-- Server root not defined message -->
+<md-card style="margin: 20px" *ngIf="showServerRootNotDefined">
+	<md-card-content>
+		<ts-server-root-not-defined></ts-server-root-not-defined>
+	</md-card-content>
+</md-card>
+<div fxLayout="row" style="border-bottom-style:inset">
+	<!-- OSVR Server -->
+	<div fxFlex="50" class="ts-section-margin">
+		<p class="ts-highlight-text">OSVR server</p>
+		<p class="ts-subtitle-text">Start, Stop, or Restart the OSVR Server on this machine</p>
+		<md-input-container style="width: 100%">
+			<input mdInput type="text" placeholder="Current OSVR Server Auto-Start Directory" disabled value="{{serverRoot}}">
+		</md-input-container>
+		<md-input-container style="width: 100%">
+			<input mdInput type="text" placeholder="OSVR Server" disabled value="{{currentlyRunningServer()}}" />
+		</md-input-container>
+		<button md-raised-button type="button"
+				*ngIf="showStartServer()"
+				(click)="startServer()"
+				i18n>
+			Start Server
+		</button>
+		<button md-raised-button type="button"
+				*ngIf="showStopServer()"
+				(click)="stopServer()"
+				i18n>
+			Stop Server
+		</button>
+		<button md-raised-button type="button"
+				*ngIf="showRestartServer()"
+				(click)="restartServer()"
+				i18n>
+			Restart Server
+		</button>
+	</div>
+
+	<!-- Direct Mode -->
+	<div fxFlex="50" class="ts-section-margin">
+		<p class="ts-highlight-text">Direct mode</p>
+		<p class="ts-subtitle-text">Enable or disable direct mode, with optional vendor ID</p>
+		<md-input-container style="width: 100%" *ngIf="appSettingsService.expertMode">
+			<input mdInput
+				   type="text"
+				   placeholder="Optional 3-letter vendor ID for HMD monitor."
+				   [(ngModel)]="threeLetterVendorPNPID" />
+		</md-input-container>
+		<button md-raised-button type="button"
+				(click)="enableDirectMode()"
+				i18n>
+			Enable Direct Mode
+		</button>
+		<button md-raised-button type="button"
+				(click)="disableDirectMode()"
+				i18n>
+			Disable Direct Mode
+		</button>
+	</div>
+</div>
+
+<div class="ts-section-margin">
+	<p class="ts-highlight-text">OSVR applications</p>
+	<p class="ts-subtitle-text">OSVR utilities and demo applications</p>
+
+	<div fxLayout="row">
+		<div fxFlex="50" class="ts-midsection-margin">
+			<p class="ts-subhighlight-text">UTILITIES</p>
+			<!-- Tracker Viewer -->
+			<div class="ts-subsection-margin" style="border-bottom-style:dotted">
+				<p class="ts-list-item-title-text" i18n>Tracker Viewer</p>
+				<div fxLayout="row" fxLayoutAlign="start center" style="width:100%">
+					<div fxFlex="100">
+						<p class="ts-subtitle-text" i18n>The Tracker Viewer utility visualizes OSVR trackers and can be useful to check if an OSVR device is working properly.</p>
+					</div>
+					<div fxFlex="auto">
+						<button md-fab type="button"
+								style="margin-right: 20px"
+								color="primary"
+								(click)="startTrackerViewer()"
+								i18n>
+							Launch
+						</button>
+					</div>
+				</div>
+				<md-input-container style="width: 100%" *ngIf="appSettingsService.expertMode">
+					<input mdInput
+							type="text"
+							placeholder="OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each."
+							i18n-placeholder="Optional input placeholder to tell Tracker Viewer program which OSVR paths to track."
+							[(ngModel)]="trackerViewerPath" />
+				</md-input-container>
+			</div>
+
+			<!-- Reset Yaw -->
+			<div class="ts-subsection-margin" style="border-bottom-style:dotted">
+				<p class="ts-list-item-title-text" i18n>Reset Yaw</p>
+				<div fxLayout="row" fxLayoutAlign="start center" style="width:100%">
+					<div fxFlex="100">
+						<p class="ts-subtitle-text" i18n>Reset Yaw adds a transformation to the specified OSVR path (/me/head by default) to reset the forward direction to the current direction.</p>
+					</div>
+					<div fxFlex="auto">
+						<button md-fab type="button"
+								color="primary"
+								style="margin-right: 20px"
+								(click)="callResetYaw()"
+								i18n="Button text to reset the yaw orientation for a given OSVR path.">
+							Launch
+						</button>
+					</div>
+				</div>
+				<md-input-container style="width: 100%" *ngIf="appSettingsService.expertMode">
+					<input mdInput
+						   type="text"
+						   placeholder="OSVR Path to reset yaw for (leave blank to use /me/head)."
+						   i18n-placeholder="Optional input placeholder to tell reset-yaw utility which OSVR path to reset."
+						   [(ngModel)]="resetYawPath" />
+				</md-input-container>
+
+			</div>
+		</div>
+
+		<div fxFlex="50" class="ts-midsection-margin">
+			<p class="ts-subhighlight-text">DEMOS</p>
+			<!-- Sample Apps -->
+			<div class="ts-subsection-margin" style="border-bottom-style:dotted"
+				 *ngFor="let sampleApp of sampleApps">
+				<p class="ts-list-item-title-text" i18n>{{sampleApp.name}}</p>
+				<div fxLayout="row" fxLayoutAlign="start center" style="width:100%;margin-bottom:20px">
+					<div fxFlex="100">
+						<p class="ts-subtitle-text" i18n>{{sampleApp.description}}</p>
+					</div>
+					<div fxFlex="auto">
+						<button md-fab type="button"
+								color="primary"
+								style="margin-right: 20px"
+								(click)="launchSampleApp(sampleApp)"
+								i18n>
+							Launch
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
