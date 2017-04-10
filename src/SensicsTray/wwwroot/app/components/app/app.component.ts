@@ -21,6 +21,7 @@ export class AppComponent {
     settingsActive = false;
     profileActive = false;
     helpActive = false;
+    homeActive = false;
 
     constructor(
         private userNotifications: UserNotificationsService,
@@ -49,6 +50,7 @@ export class AppComponent {
                 this.pluginsActive = url === "/plugins";
                 this.devicesActive = url === "/devices";
                 this.playActive = url === "/play";
+                this.homeActive = url === "/home";
             }
         });
     }

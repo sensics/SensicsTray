@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	<div fxLayout="column" fxLayoutAlign="start center">
-		<a routerLink="/home" i18n><img src="icons/LOGO.png" /></a>
+		<a routerLink="/home" i18n *ngIf="homeActive"><img src="icons/LOGO.png" /></a>
 		<nav md-tab-nav-bar>
 			<!--<a md-tab-link
 			   [routerLink]="link"

@@ -32,12 +32,14 @@
 								Edit
 							</button>
 							<button type="button" md-raised-button
+									color="accent"
 									[ngClass]="{'btn-default': !isCurrentProfile(userProfile), 'btn-success': isCurrentProfile(userProfile)}"
 									(click)="clickUserProfile(userProfile)"
 									[disabled]="isCurrentProfile(userProfile)">
 								{{useButtonText(userProfile)}}
 							</button>
 							<button type="button" md-raised-button
+									color="warn"
 									(click)="deleteProfile(userProfile)">
 								Delete
 							</button>
@@ -108,7 +110,7 @@
 			</div>
 		</md-card-content>
 		<md-card-actions>
-			<button type="button" md-raised-button color="primary" i18n="Button to save profile"
+			<button type="button" md-raised-button color="accent" i18n="Button to save profile"
 					[disabled]="!canSave()"
 					(click)="saveProfile()">
 				Save

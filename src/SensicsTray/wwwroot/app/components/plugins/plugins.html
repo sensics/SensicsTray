@@ -16,12 +16,12 @@
 				<tr>
 					<td class="ts-table-cell-text">{{plugin.name}}</td>
 					<td class="ts-table-cell-text">{{plugin.manualLoad ? "no" : "yes"}}</td>
-					<td ><md-checkbox [(ngModel)]="plugin.enabled" [disabled]="!plugin.manualLoad"></md-checkbox></td>
+					<td ><md-checkbox [(ngModel)]="plugin.enabled" [disabled]="!plugin.manualLoad" color="accent"></md-checkbox></td>
 					<td style="width:75%"></td>
 				</tr>
 			</ng-container>
 		</tbody>
 	</table>
-	<button md-raised-button *ngIf="showPluginsList()" type="button" color="primary" 
+	<button md-raised-button *ngIf="showPluginsList()" type="button" color="accent" 
 			(click)="saveChanges()" i18n>Save changes</button>
 </div>

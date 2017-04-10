@@ -12,7 +12,7 @@
     stroke-width: 10px; }
   :host[mode='indeterminate'] svg {
     animation-duration: 5250ms, 2887.5ms;
-    animation-name: mat-progress-spinner-sporadic-rotate, mat-progress-spinner-linear-rotate;
+    animation-name: mat-progress-spinner-sporadic-rotate, mat-progress-spinner-linear-rotate;
     animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1), linear;
     animation-iteration-count: infinite;
     transition: none; }

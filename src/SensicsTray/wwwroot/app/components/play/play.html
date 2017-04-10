@@ -15,7 +15,7 @@
 		<md-input-container style="width: 100%">
 			<input mdInput type="text" placeholder="OSVR Server" disabled value="{{currentlyRunningServer()}}" />
 		</md-input-container>
-		<button md-fab type="button" color="primary"
+		<button md-fab type="button" color="accent"
 				*ngIf="showStartServer()"
 				(click)="startServer()"
 				i18n>
@@ -27,7 +27,7 @@
 				i18n>
 			Stop
 		</button>
-		<button md-fab type="button" color="primary"
+		<button md-fab type="button" color="accent"
 				*ngIf="showRestartServer()"
 				(click)="restartServer()"
 				i18n>
@@ -45,12 +45,12 @@
 				   placeholder="Optional 3-letter vendor ID for HMD monitor."
 				   [(ngModel)]="threeLetterVendorPNPID" />
 		</md-input-container>
-		<button md-fab type="button" color="primary"
+		<button md-fab type="button" color="accent"
 				(click)="enableDirectMode()"
 				i18n>
 			Enable
 		</button>
-		<button md-fab type="button" color="primary"
+		<button md-fab type="button" color="accent"
 				(click)="disableDirectMode()"
 				i18n>
 			Disable
@@ -75,7 +75,7 @@
 					<div fxFlex="auto">
 						<button md-fab type="button"
 								style="margin-right: 20px"
-								color="primary"
+								color="accent"
 								(click)="startTrackerViewer()"
 								i18n>
 							Launch
@@ -100,7 +100,7 @@
 					</div>
 					<div fxFlex="auto">
 						<button md-fab type="button"
-								color="primary"
+								color="accent"
 								style="margin-right: 20px"
 								(click)="callResetYaw()"
 								i18n="Button text to reset the yaw orientation for a given OSVR path.">
@@ -133,7 +133,7 @@
 						</div>
 						<div fxFlex="auto">
 							<button md-fab type="button"
-									color="primary"
+									color="accent"
 									style="margin-right: 20px"
 									(click)="launchSampleApp(sampleApp)"
 									i18n>

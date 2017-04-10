@@ -2,9 +2,10 @@
 
 @include mat-core();
 
-$dark-primary: mat-palette($mat-cyan, 700, 500, 900);
-$dark-accent: mat-palette($mat-blue-grey, A200, A100, A400);
-$dark-warn: mat-palette($mat-deep-orange);
+/*$dark-primary: mat-palette($mat-cyan, 700, 500, 900);*/
+$dark-primary: mat-palette($mat-cyan);
+$dark-accent: mat-palette($mat-cyan, A200, A100, A400);
+$dark-warn: mat-palette($mat-red);
 
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
