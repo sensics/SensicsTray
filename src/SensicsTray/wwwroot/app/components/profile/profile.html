@@ -29,19 +29,19 @@
 							<button type="button" md-raised-button
 									(click)="editProfile(userProfile)"
 									i18n="button text to edit a profile.">
-								Edit
+								<span class="ts-bold-font">Edit</span>
 							</button>
 							<button type="button" md-raised-button
 									color="accent"
 									[ngClass]="{'btn-default': !isCurrentProfile(userProfile), 'btn-success': isCurrentProfile(userProfile)}"
 									(click)="clickUserProfile(userProfile)"
 									[disabled]="isCurrentProfile(userProfile)">
-								{{useButtonText(userProfile)}}
+								<span class="ts-bold-font">{{useButtonText(userProfile)}}</span>
 							</button>
 							<button type="button" md-raised-button
 									color="warn"
 									(click)="deleteProfile(userProfile)">
-								Delete
+								<span class="ts-bold-font">Delete</span>
 							</button>
 						</div>
 					</td>
@@ -113,11 +113,11 @@
 			<button type="button" md-raised-button color="accent" i18n="Button to save profile"
 					[disabled]="!canSave()"
 					(click)="saveProfile()">
-				Save
+				<span class="ts-bold-font">Save</span>
 			</button>
 			<button type="button" md-raised-button i18n="Button to cancel editing profile"
 					(click)="cancelProfile()">
-				Cancel
+				<span class="ts-bold-font">Cancel</span>
 			</button>
 		</md-card-actions>
 	</md-card>

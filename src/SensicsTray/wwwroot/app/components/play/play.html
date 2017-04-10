@@ -19,19 +19,19 @@
 				*ngIf="showStartServer()"
 				(click)="startServer()"
 				i18n>
-			Start
+			<span class="ts-bold-font">Start</span>
 		</button>
 		<button md-fab type="button" color="warn"
 				*ngIf="showStopServer()"
 				(click)="stopServer()"
 				i18n>
-			Stop
+			<span class="ts-bold-font">Stop</span>
 		</button>
 		<button md-fab type="button" color="accent"
 				*ngIf="showRestartServer()"
 				(click)="restartServer()"
 				i18n>
-			Restart
+			<span class="ts-bold-font">Restart</span>
 		</button>
 	</div>
 
@@ -48,12 +48,12 @@
 		<button md-fab type="button" color="accent"
 				(click)="enableDirectMode()"
 				i18n>
-			Enable
+			<span class="ts-bold-font">Enable</span>
 		</button>
 		<button md-fab type="button" color="accent"
 				(click)="disableDirectMode()"
 				i18n>
-			Disable
+			<span class="ts-bold-font">Disable</span>
 		</button>
 	</div>
 </div>
@@ -78,7 +78,7 @@
 								color="accent"
 								(click)="startTrackerViewer()"
 								i18n>
-							Launch
+							<span class="ts-bold-font">Launch</span>
 						</button>
 					</div>
 				</div>
@@ -104,7 +104,7 @@
 								style="margin-right: 20px"
 								(click)="callResetYaw()"
 								i18n="Button text to reset the yaw orientation for a given OSVR path.">
-							Launch
+							<span class="ts-bold-font">Launch</span>
 						</button>
 					</div>
 				</div>
@@ -137,7 +137,7 @@
 									style="margin-right: 20px"
 									(click)="launchSampleApp(sampleApp)"
 									i18n>
-								Launch
+								<span class="ts-bold-font">Launch</span>
 							</button>
 						</div>
 					</div>

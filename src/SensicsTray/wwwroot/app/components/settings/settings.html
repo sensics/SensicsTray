@@ -8,22 +8,22 @@
 				<div class="ts-section-margin">
 					<p class="ts-highlight-text" i18n>General rendering settings</p>
 					<md-slide-toggle name="directModeEnabled" color="accent" [(ngModel)]="rmConfig.directModeEnabled" i18n>
-						Run OSVR applications in direct mode
+						<span class="ts-regular-font">Run OSVR applications in direct mode</span>
 					</md-slide-toggle>
 					<md-slide-toggle name="directHighPriorityEnabled" color="accent" [(ngModel)]="rmConfig.directHighPriorityEnabled" i18n
 									 *ngIf="appSettings.expertMode && rmConfig.directModeEnabled"
 									 mdTooltip="RenderManager will use a high-priority graphics device to render distortion and time-warp, if available." i18n-mdTooltip>
-						High priority context in direct mode enabled
+						<span class="ts-regular-font">High priority context in direct mode enabled</span>
 					</md-slide-toggle>
 
 					<md-slide-toggle name="verticalSyncEnabled" color="accent" [(ngModel)]="rmConfig.verticalSyncEnabled" i18n
 									 *ngIf="appSettings.expertMode && rmConfig.directModeEnabled">
-						Vertical sync enabled
+						<span class="ts-regular-font">Vertical sync enabled</span>
 					</md-slide-toggle>
 
 					<md-slide-toggle name="verticalSyncBlockRenderingEnabled" color="accent" [(ngModel)]="rmConfig.verticalSyncBlockRenderingEnabled" i18n
 									 *ngIf="appSettings.expertMode && rmConfig.directModeEnabled">
-						Vertical sync block rendering enabled
+						<span class="ts-regular-font">Vertical sync block rendering enabled</span>
 					</md-slide-toggle>
 
 					<div fxLayout="row">
@@ -68,12 +68,12 @@
 				</div>
 				<div class="ts-section-margin">
 					<p class="ts-highlight-text" i18n>Timewarp settings</p>
-					<md-slide-toggle name="timeWarpEnabled" color="accent" i18n [(ngModel)]="rmConfig.timeWarp.enabled">Time warp enabled</md-slide-toggle>
+					<md-slide-toggle name="timeWarpEnabled" color="accent" i18n [(ngModel)]="rmConfig.timeWarp.enabled"><span class="ts-regular-font">Time warp enabled</span></md-slide-toggle>
 					<md-slide-toggle name="timeWarpAsynchronous" color="accent" i18n
 									 *ngIf="appSettings.expertMode && rmConfig.timeWarp.enabled"
 									 [(ngModel)]="rmConfig.timeWarp.asynchronous"
 									 mdTooltip="Asynchronous Time-Warp performs the time-warp operation in a separate thread, rendering the time-warped image just prior to vsync even if the next frame has not completed rendering in time." i18n-tooltip>
-						Asynchronous
+						<span class="ts-regular-font">Asynchronous</span>
 					</md-slide-toggle>
 					<div fxLayout="row" *ngIf="appSettings.expertMode && rmConfig.timeWarp.enabled">
 						<div fxFlex="50">
@@ -91,7 +91,7 @@
 			<div fxFlex="50">
 				<div class="ts-section-margin" *ngIf="!rmConfig.directModeEnabled">
 					<p class="ts-highlight-text" i18n>Window settings</p>
-					<md-slide-toggle name="fullScreenEnabled" color="accent" i18n [(ngModel)]="rmConfig.window.fullScreenEnabled">Fullscreen enabled</md-slide-toggle>
+					<md-slide-toggle name="fullScreenEnabled" color="accent" i18n [(ngModel)]="rmConfig.window.fullScreenEnabled"><span class="ts-regular-font">Fullscreen enabled</span></md-slide-toggle>
 					<md-input-container style="width:100%"
 										*ngIf="!rmConfig.window.fullScreenEnabled">
 						<input mdInput type="text" placeholder="Window title" name="windowTitle"
@@ -135,7 +135,7 @@
 						(click)="saveSettings()"
 						[disabled]="!canSaveSettings()"
 						i18n>
-					Save Changes
+					<span class="ts-bold-font">Save Changes</span>
 				</button>
 			</div>
 		</div>
