@@ -1,18 +1,14 @@
-﻿<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title" i18n>Could not find your OSVR Server directory.</h3>
-			</div>
-			<div class="panel-body">
-				<p class="help-block" i18n>Could not find the OSVR Server directory. Typically this is configured when you run the OSVR SDK or Runtime installers, but can be configured manually by setting the OSVR_SERVER_ROOT environment variable.</p>
-				<a href="http://access.osvr.com/binary/osvr-runtime-installer" target="_blank"
-				   class="btn btn-primary"
-				   i18n>Download OSVR Runtime</a>
-				<a href="http://access.osvr.com/binary/osvr-sdk-installer" target="_blank"
-				   class="btn btn-default"
-				   i18n>Download OSVR SDK</a>
-			</div>
-		</div>
-	</div>
-</div>
+﻿<md-card>
+	<md-card-title>
+		<p class="ts-highlight-text" i18n>Could not find your OSVR Server directory.</p>
+	</md-card-title>
+	<md-card-content>
+		<p class="ts-subtitle-text" i18n>Could not find the OSVR Server directory. Typically this is configured when you run the OSVR SDK or Runtime installers, but can be configured manually by setting the OSVR_SERVER_ROOT environment variable.</p>
+	</md-card-content>
+	<md-card-actions>
+		<a md-raised-button color="accent" href="http://access.osvr.com/binary/osvr-runtime-installer" target="_blank"
+		   i18n>Download OSVR Runtime</a>
+		<a md-raised-button color="accent" href="http://access.osvr.com/binary/osvr-sdk-installer" target="_blank"
+		   i18n>Download OSVR SDK</a>
+	</md-card-actions>
+</md-card>

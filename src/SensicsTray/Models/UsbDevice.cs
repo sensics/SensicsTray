@@ -6,6 +6,52 @@ using System.Threading.Tasks;
 
 namespace Sensics.Tray.Models
 {
+    internal static class KnownUsbDevices
+    {
+        static readonly UsbDevice[] knownDevices =
+        {
+            new UsbDevice()
+            {
+                ProductID = 0x0b00,
+                VendorID = 0x1532,
+                ProductName = "OSVR Hacker Dev Kit (version 1.3/1.4/2.0)",
+                VendorName = "OSVR",
+            },
+            new UsbDevice()
+            {
+                ProductID = 0x2421,
+                VendorID = 0x03eb,
+                ProductName = "OSVR Hacker Dev Kit",
+                VendorName = "OSVR",
+            },
+            new UsbDevice()
+            {
+                ProductID = 0x0300,
+                VendorID = 0x1532,
+                ProductName = "Razer Hydra",
+                VendorName = "Razer",
+            },
+            new UsbDevice()
+            {
+                ProductID = 0x0001,
+                VendorID = 0x2833,
+                ProductName = "Laputa VR Hero",
+                VendorName = "Laputa VR",
+            },
+        };
+
+        internal static void FillInInfoFromWhitelist(UsbDevice device)
+        {
+            var knownDevice = knownDevices.FirstOrDefault(
+                d => d.VendorID == device.VendorID && d.ProductID == device.ProductID);
+
+            if(knownDevice != null)
+            {
+                device.VendorName = knownDevice.VendorName;
+                device.ProductName = knownDevice.ProductName;
+            }
+        }
+    }
     public class UsbDevice
     {
         public UInt16 ProductID;
@@ -18,9 +64,7 @@ namespace Sensics.Tray.Models
         {
             ProductID = usbDeviceDescriptor.ProductID;
             VendorID = usbDeviceDescriptor.VendorID;
-            // @todo: fill in ProductName/VendorName from whitelist?
-            ProductName = "Static Placeholder Product Name";
-            VendorName = "Static Placeholder Vendor Name";
+            KnownUsbDevices.FillInInfoFromWhitelist(this);
         }
     }
 }

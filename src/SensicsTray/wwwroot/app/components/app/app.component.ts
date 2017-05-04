@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { UserNotificationsService } from '../../services/user-notifications.service';
 import { OSVRServerService } from '../../services/osvr-server.service';
 import { AppSettingsService } from '../../services/app-settings.service';
+import { OSVRConfigService } from '../../services/osvr-config.service';
 
 @Component({
     moduleId: module.id,
@@ -13,6 +14,7 @@ export class AppComponent {
     title = 'Sensics Tray';
     showStatusMessage = false;
     showErrorMessage = false;
+    showServerRootNotDefined = false;
 
     playActive = false;
     storeActive = false;
@@ -27,8 +29,20 @@ export class AppComponent {
         private userNotifications: UserNotificationsService,
         private router: Router,
         private osvrServer: OSVRServerService,
+        private osvrConfig: OSVRConfigService,
         public appSettings: AppSettingsService
     ) {
+        this.osvrConfig.getCurrentServerRoot().toPromise().then(
+            serverRoot => {
+                this.showServerRootNotDefined =
+                    typeof serverRoot === "undefined" ||
+                    serverRoot === null ||
+                    serverRoot.length === 0;
+            },
+            error => {
+                this.showServerRootNotDefined = true;
+            });
+
         this.userNotifications.getErrorMessages().subscribe(_ => {
             this.showErrorMessage = this.showMsg(this.userNotifications.getCurrentErrorMessage());
             this.showStatusMessage = false;

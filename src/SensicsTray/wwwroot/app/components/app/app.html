@@ -6,7 +6,7 @@
 			<button type="button" md-button i18n style="color: black; margin: -5px 5px 0px 0px" [ngStyle]="{'background-color': expertButtonColor()}" (click)="clickExpert()">Expert</button>
 		</div>
 	</div>
-	<div fxLayout="column" fxLayoutAlign="start center">
+	<div fxLayout="column" fxLayoutAlign="start center" *ngIf="!showServerRootNotDefined">
 		<a routerLink="/home" i18n *ngIf="homeActive"><img src="icons/LOGO.png" /></a>
 		<nav md-tab-nav-bar>
 			<!--<a md-tab-link
@@ -51,7 +51,9 @@
 			</a>
 		</nav>
 	</div>
-	<router-outlet style="padding: 20px"></router-outlet>
+	<router-outlet style="padding: 20px" *ngIf="!showServerRootNotDefined"></router-outlet>
+	<!-- Server root not defined message -->
+	<ts-server-root-not-defined *ngIf="showServerRootNotDefined"></ts-server-root-not-defined>
 	<div fxLayout="column" fxLayoutAlign="start center">
 		<p i18n><span class="ts-copyright-logo-text">sensics</span><span class="ts-copyright-text">tray ©Copyright 2017 <a href="http://www.sensics.com" target="_blank" i18n style="color:#666666">Sensics, Inc.</a> version 0.0.1 (2017-02-25)</span></p>
 	</div>

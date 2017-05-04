@@ -46,7 +46,7 @@ export class OSVRServerService {
 
     getRunningServerPaths(): Observable<string[]> {
         var observable = Observable
-            .interval(2000)
+            .interval(500)
             .switchMap(() => this.http.get(this.runningServerPathsURL))
             .map(response => response.json() as string[]);
 

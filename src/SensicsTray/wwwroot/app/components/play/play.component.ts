@@ -18,7 +18,6 @@ export class PlayComponent implements OnInit, OnDestroy {
     trackerViewerPath = "";
     threeLetterVendorPNPID = "";
     runningServers: string[] = [];
-    showServerRootNotDefined = false;
     serverRoot: string = null;
     sampleApps: ISampleApp[] = null;
     resetYawPath: string = null;
@@ -45,9 +44,6 @@ export class PlayComponent implements OnInit, OnDestroy {
         this.osvrConfig.getCurrentServerRoot().subscribe(
             serverRoot => {
                 this.serverRoot = serverRoot;
-            },
-            error => {
-                this.showServerRootNotDefined = true;
             });
 
         this.osvrSampleApps.getSampleApps().subscribe(
