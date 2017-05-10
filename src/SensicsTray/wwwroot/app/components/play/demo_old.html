@@ -1,0 +1,212 @@
+<!-- Server root not defined message -->
+<div class="row" *ngIf="showServerRootNotDefined">
+	<div class="col-md-6">
+		<ts-server-root-not-defined></ts-server-root-not-defined>
+	</div>
+</div>
+
+<!-- OSVR Server -->
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" i18n>OSVR Server</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p i18n>Start, Stop, or Restart the OSVR Server on this machine.</p>
+					</div>
+				</div>
+
+				<!-- Current OSVR Server Root -->
+				<form class="form-horizontal" *ngIf="showServerRoot()">
+					<div class="form-group">
+						<label class="control-label col-sm-2" i18n>Current OSVR Server Auto-Start Directory</label>
+						<div class="col-sm-10">
+							<!-- HTML sanitizer is ignoring our whitelist that should make this work, so just display
+					the current server root for now. -->
+							<!--<p class="form-control-static"><a href="{{configSaveAsURL}}" download="osvr_server_config.json">{{serverRoot}}</a></p>-->
+							<p class="form-control-static">{{serverRoot}}</p>
+						</div>
+					</div>
+				</form>
+
+				<!-- Currently running OSVR server -->
+				<div class="row">
+					<div class="col-md-12">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label class="control-label col-sm-2" i18n>OSVR Server</label>
+								<div class="col-sm-10">
+									<p class="form-control-static">{{currentlyRunningServer()}}</p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<!-- Start/Stop/Restart server -->
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" class="btn btn-primary"
+								(click)="startServer()"
+								i18n>Start Server</button>
+						<button type="button" class="btn btn-primary"
+								(click)="stopServer()"
+								i18n>
+							Stop Server
+						</button>
+						<button type="button" class="btn btn-primary"
+								(click)="restartServer()"
+								i18n>
+							Restart Server
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Direct Mode -->
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" i18n>Direct Mode</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p i18n>Enable or disable direct mode.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="threeLetterVendorPNPIDInput" i18n>Vendor ID (optional)</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="threeLetterVendorPNPIDInput"
+									   placeholder="Optional 3-letter vendor ID for HMD monitor."
+									   [(ngModel)]="threeLetterVendorPNPID" />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-primary"
+											(click)="enableDirectMode()"
+											i18n>
+										Enable Direct Mode
+									</button>
+									<button type="button" class="btn btn-primary"
+											(click)="disableDirectMode()"
+											i18n>
+										Disable Direct Mode
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Tracker viewer -->
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" i18n>Tracker Viewer</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p i18n>The Tracker Viewer utility visualizes OSVR trackers and can be useful to check if an OSVR device is working properly.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								   placeholder="OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each."
+								   i18n-placeholder="Optional input placeholder to tell Tracker Viewer program which OSVR paths to track."
+								   [(ngModel)]="trackerViewerPath" />
+							<span class="input-group-btn">
+								<button class="btn btn-primary" type="button"
+										(click)="startTrackerViewer()"
+										i18n>Launch Tracker Viewer</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Reset Yaw -->
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" i18n>Reset Yaw</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p i18n>Reset Yaw adds a transformation to the specified OSVR path (/me/head by default) to reset the forward direction to the current direction.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								   placeholder="OSVR Path to reset yaw for (leave blank to use /me/head)."
+								   i18n-placeholder="Optional input placeholder to tell reset-yaw utility which OSVR path to reset."
+								   [(ngModel)]="resetYawPath" />
+							<span class="input-group-btn">
+								<button class="btn btn-primary" type="button"
+										(click)="callResetYaw()"
+										i18n="Button text to reset the yaw orientation for a given OSVR path.">
+									Reset Yaw
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Sample Apps -->
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" i18n>Sample OSVR Applications</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<p i18n>Sample applications that use OSVR.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<form class="form-horizontal" 
+							  *ngFor="let sampleApp of sampleApps">
+							<div class="form-group">
+								<label class="control-label col-sm-2" i18n>{{sampleApp.name}}</label>
+								<div class="col-sm-10">
+									<p class="form-control-static">{{sampleApp.description}}</p>
+									<button class="btn btn-primary" (click)="launchSampleApp(sampleApp)" i18n>Launch</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

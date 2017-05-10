@@ -1,0 +1,85 @@
+﻿{
+  "index": {
+    "toggleNavigation": "Toggle navigation",
+    "navHome": "Sensics Tray",
+    "currentServerLocation": "Config Directory",
+    "navBarItems": {
+      "demo": "Demo",
+      "devices": "Devices",
+      "plugins": "Plugins",
+      "settings": "Settings",
+      "help": "Help",
+      "demoDescription": "A proof of concept collection of OSVR tools and functionality.",
+      "devicesDescription": "Contains a list of connected and disconnected devices and available devices.",
+      "pluginsDescription": "Contains a list OSVR plugins that are installed on the system and available to download/purchase",
+      "settingsDescription": "Configuration page for users to adjust global OSVR settings",
+      "helpDescription": "A help page to get in touch with support team, open documentation, and collect system information"
+    }
+  },
+  "landingPage": {
+    "jumboTron": {
+      "title": "Sensics Tray",
+      "description": "This utility will help you configure Sensics Home.",
+      "learnMore": "Learn more",
+      "source": "Source"
+    },
+    "copyright": "Sensics Tray is Copyright 2016 Sensics, Inc."
+  },
+  "serverRootNotDefined": {
+    "panelTitle": "Could not find your OSVR Server directory.",
+    "panelDescription": "Could not find the OSVR Server directory. Typically this is configured when you run the OSVR SDK or Runtime installers, but can be configured manually by setting the OSVR_SERVER_ROOT environment variable.",
+    "downloadOSVRRuntime": "Download OSVR Runtime",
+    "downloadOSVRSDK": "Download OSVR SDK"
+  },
+  "demo": {
+    "startServer": {
+      "title": "Launch OSVR Server",
+      "description": "Launch the OSVR Server on this machine, if not already running.",
+      "launchServer": "Launch Server"
+    },
+    "trackerViewer": {
+      "title": "Tracker Viewer",
+      "description": "The Tracker Viewer utility visualizes OSVR trackers and can be useful to check if an OSVR device is working properly.",
+      "pathPlaceholder": "OSVR path to track (leave blank to track head and hands). Enter multiple paths with a space between each.",
+      "launchTrackerViewer": "Launch Tracker Viewer"
+    }
+  },
+  "devices": {
+    "startDeviceMonitor": {
+      "title": "Start Monitoring USB Devices",
+      "description": "Will start the service to monitor USB Device events",
+      "launchDeviceMonitor": "Launch USB Device Monitor"
+    }
+  },
+  "plugins": {
+    "downloadPlugins": {
+      "title": "Downloads selected plugins",
+      "description": "Downloads plugins that were selected",
+      "getPlugins": "Download Manager"
+    }
+  },
+  "settings": {
+    "saveSettings": {
+      "title": "Saves the OSVR global settings",
+      "description": "Edit and save global settings",
+      "commitSettings": "Save Changes"
+    }
+  },
+  "help": {
+    "openDocs": {
+      "title": "OSVR Documentation",
+      "description": "Opens a new page with OSVR documentation",
+      "openDocumentation": "OSVR Documentation"
+    },
+    "createSysReport": {
+      "title": "Create System Report",
+      "description": "Collects system information and saves it to a file",
+      "fileReport": "Create System Report"
+    },
+    "openSupportTicket": {
+      "title": "Open OSVR Support Ticket",
+      "description": "Files a zendesk tiket",
+      "openTicket": "Open OSVR Support Ticket"
+    }
+  }
+}

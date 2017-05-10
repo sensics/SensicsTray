@@ -1,0 +1,143 @@
+﻿<div class="ts-section-margin" *ngIf="!showSettings()">
+	<p class="ts-subtitle-text" i18n>Loading settings...</p>
+</div>
+<form #settingsForm="ngForm" novalidate *ngIf="showSettings()">
+	<div fxLayout="column" *ngIf="rmConfig !== null">
+		<div fxLayout="row">
+			<div fxFlex="50">
+				<div class="ts-section-margin">
+					<p class="ts-highlight-text" i18n>General rendering settings</p>
+					<md-slide-toggle name="directModeEnabled" color="accent" [(ngModel)]="rmConfig.directModeEnabled" i18n>
+						<span class="ts-regular-font">Run OSVR applications in direct mode</span>
+					</md-slide-toggle>
+					<md-slide-toggle name="directHighPriorityEnabled" color="accent" [(ngModel)]="rmConfig.directHighPriorityEnabled" i18n
+									 *ngIf="appSettings.expertMode && rmConfig.directModeEnabled"
+									 mdTooltip="RenderManager will use a high-priority graphics device to render distortion and time-warp, if available." i18n-mdTooltip>
+						<span class="ts-regular-font">High priority context in direct mode enabled</span>
+					</md-slide-toggle>
+
+					<md-slide-toggle name="verticalSyncEnabled" color="accent" [(ngModel)]="rmConfig.verticalSyncEnabled" i18n
+									 *ngIf="appSettings.expertMode && rmConfig.directModeEnabled">
+						<span class="ts-regular-font">Vertical sync enabled</span>
+					</md-slide-toggle>
+
+					<md-slide-toggle name="verticalSyncBlockRenderingEnabled" color="accent" [(ngModel)]="rmConfig.verticalSyncBlockRenderingEnabled" i18n
+									 *ngIf="appSettings.expertMode && rmConfig.directModeEnabled">
+						<span class="ts-regular-font">Vertical sync block rendering enabled</span>
+					</md-slide-toggle>
+
+					<div fxLayout="row">
+						<div fxFlex="50">
+							<md-input-container style="width:100%">
+								<input mdInput type="number" step="0.1" name="renderOversampleFactor"
+									   placeholder="Render oversample factor" i18n-placeholder
+									   mdTooltip="Scales the render targets by this factor to improve performance (if less than 1.0) or improve visual clarity (if greater than 1.0)." i18n-mdTooltip
+									   [(ngModel)]="rmConfig.renderOversampleFactor" />
+							</md-input-container>
+						</div>
+						<div fxFlex="50">
+							<md-input-container style="width:100%">
+								<input mdInput type="number" step="0.1" name="renderOverfillFactor"
+									   placeholder="Render overfill factor" i18n-placeholder
+									   mdTooltip="Specify a value between 1.0 and 2.0 (1.2 or lower recommended on single-GPU systems). A larger value may increase field of view slightly, at the cost of performance." i18n-mdTooltip
+									   [(ngModel)]="rmConfig.renderOverfillFactor" />
+							</md-input-container>
+						</div>
+					</div>
+
+					<div fxLayout="row">
+						<div fxFlex="50">
+							<md-input-container style="width:100%" *ngIf="appSettings.expertMode">
+								<input mdInput type="number" step="1" name="numBuffers"
+									   placeholder="Number of buffers" i18n-placeholder
+									   mdTooltip="Use 1 for front-buffer rendering or 2 for double buffering." i18n-mdTooltip
+									   [(ngModel)]="rmConfig.numBuffers" />
+							</md-input-container>
+						</div>
+						<div fxFlex="50">
+							<md-input-container style="width:100%" *ngIf="appSettings.expertMode && rmConfig.directModeEnabled">
+								<input mdInput type="number" step="1" name="directDisplayIndex"
+									   placeholder="Direct display index"
+									   i18n-placeholder
+									   mdTooltip="Use -1 to automatically find the right display index based on resolution or specify an explicit direct mode display index."
+									   i18n-mdTooltip
+									   [(ngModel)]="rmConfig.directDisplayIndex" />
+							</md-input-container>
+						</div>
+					</div>
+				</div>
+				<div class="ts-section-margin">
+					<p class="ts-highlight-text" i18n>Timewarp settings</p>
+					<md-slide-toggle name="timeWarpEnabled" color="accent" i18n [(ngModel)]="rmConfig.timeWarp.enabled"><span class="ts-regular-font">Time warp enabled</span></md-slide-toggle>
+					<md-slide-toggle name="timeWarpAsynchronous" color="accent" i18n
+									 *ngIf="appSettings.expertMode && rmConfig.timeWarp.enabled"
+									 [(ngModel)]="rmConfig.timeWarp.asynchronous"
+									 mdTooltip="Asynchronous Time-Warp performs the time-warp operation in a separate thread, rendering the time-warped image just prior to vsync even if the next frame has not completed rendering in time." i18n-tooltip>
+						<span class="ts-regular-font">Asynchronous</span>
+					</md-slide-toggle>
+					<div fxLayout="row" *ngIf="appSettings.expertMode && rmConfig.timeWarp.enabled">
+						<div fxFlex="50">
+							<md-input-container style="width:100%">
+								<input mdInput type="number" step="1" name="timeWarpMaxMsBeforeVSync"
+									   placeholder="Max ms before vertical sync" i18n-placeholder
+									   mdTooltip="The amount of time prior to VSync reserved for rendering distortion correction and time-warp." i18n-mdTooltip
+									   [(ngModel)]="rmConfig.timeWarp.maxMsBeforeVSync" />
+							</md-input-container>
+						</div>
+						<div fxFlex="50"></div>
+					</div>
+				</div>
+			</div>
+			<div fxFlex="50">
+				<div class="ts-section-margin" *ngIf="!rmConfig.directModeEnabled">
+					<p class="ts-highlight-text" i18n>Window settings</p>
+					<md-slide-toggle name="fullScreenEnabled" color="accent" i18n [(ngModel)]="rmConfig.window.fullScreenEnabled"><span class="ts-regular-font">Fullscreen enabled</span></md-slide-toggle>
+					<md-input-container style="width:100%"
+										*ngIf="!rmConfig.window.fullScreenEnabled">
+						<input mdInput type="text" placeholder="Window title" name="windowTitle"
+							   [(ngModel)]="rmConfig.window.title" />
+					</md-input-container>
+					<div fxLayout="row"
+						 mdTooltip="When fullscreen is enabled, the X and Y position determine which screen to make fullscreen in extended mode. With fullscreen disabled, X and Y position determine the precise window location in extended mode." i18n-mdTooltip>
+						<div fxFlex="50">
+							<md-input-container style="width:100%">
+								<input mdInput type="number" step="0.1" placeholder="X position" name="xPosition"
+									   [(ngModel)]="rmConfig.window.xPosition" />
+							</md-input-container>
+						</div>
+						<div fxFlex="50">
+							<md-input-container style="width:100%">
+								<input mdInput type="number" step="0.1" placeholder="Y position" name="yPosition"
+									   [(ngModel)]="rmConfig.window.yPosition" />
+							</md-input-container>
+						</div>
+					</div>
+				</div>
+				<div class="ts-section-margin">
+					<p class="ts-highlight-text" i18n>Display settings</p>
+					<div fxLayout="row">
+						<div fxFlex="50">
+							<md-input-container style="width:100%">
+								<input mdInput type="number" step="90" name="displayRotation"
+									   placeholder="Display rotation" i18n-placeholder
+									   mdTooltip="Use 0 for landscape, 90 for portrait, 180 for landscape (flipped), or 270 for portrait (flipped)" i18n-mdTooltip
+									   [(ngModel)]="rmConfig.display.rotation" />
+							</md-input-container>
+						</div>
+						<div fxFlex="50"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div fxFlex="auto">
+			<div class="ts-section-margin">
+				<button type="button" md-raised-button color="accent"
+						(click)="saveSettings()"
+						[disabled]="!canSaveSettings()"
+						i18n>
+					<span class="ts-bold-font">Save Changes</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</form>

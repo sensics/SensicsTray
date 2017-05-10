@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" href="material2-app-theme.css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link href="fonts/titillium/stylesheet.css" rel="stylesheet" />
+</head>
+<body class="ts-app-background">
+	<ts-app style="color:#666666">Please wait while Sensics Tray™ loads...</ts-app>
+	<script src="libs/shim.min.js"></script>
+	<script src="libs/system.js"></script>
+	<script src="libs/zone.min.js"></script>
+	<script src="libs/Reflect.js"></script>
+	<script src="systemjs.config.js"></script>
+	<script>
+            System.import('app/boot').catch(function (err) {
+                console.error(err);
+            });
+	</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "SensicsTray",
+  "version": "0.2.0",
+  "description": "Sensics Tray",
+  "author": "Sensics, Inc.",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "gulp default"
+  },
+  "devDependencies": {
+    "del": "^2.2.2",
+    "electron": "^1.6.0",
+    "gulp": "^3.9.1",
+    "gulp-electron": "^0.1.3",
+    "electron-builder": "^16.0.1",
+    "concurrently": "^3.4.0",
+    "live-server": "^1.2.0"
+  }
+}
